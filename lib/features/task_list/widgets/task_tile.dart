@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
+import 'package:simplify_the_task/features/task_list/widgets/dismiss_background.dart';
 import 'package:simplify_the_task/models/task_model.dart';
 
 enum TaskEvent { complete }
 
 class TaskTile extends StatefulWidget {
-  final Function(int, TaskEvent)? callback;
   final TaskModel task;
 
   const TaskTile({
     super.key,
     required this.task,
-    this.callback,
   });
 
   @override
@@ -62,43 +61,46 @@ class _TaskState extends State<TaskTile> {
     }
     const Icon iconCheck = Icon(Icons.check_box, color: Colors.green);
 
-    const dismissCheckboxBlank = DismissBackgroundWidget(
+    const dismissCheckboxBlank = DismissBackground(
       color: Colors.green,
       icon: Icon(Icons.check, color: Colors.white),
     );
-    const dismissCheckboxChecked = DismissBackgroundWidget(
+    const dismissCheckboxChecked = DismissBackground(
       color: Colors.amber,
       icon: Icon(Icons.check_box_outline_blank, color: Colors.white),
     );
-    const dismissDelete = DismissBackgroundWidget(
+    const dismissDelete = DismissBackground(
       color: Colors.red,
       icon: Icon(Icons.delete, color: Colors.white),
       alignment: Alignment.centerRight,
     );
 
-    return Dismissible(
-      key: UniqueKey(),
-      background:
-          widget.task.completed ? dismissCheckboxChecked : dismissCheckboxBlank,
-      movementDuration: const Duration(seconds: 1),
-      resizeDuration: const Duration(seconds: 1),
-      secondaryBackground: dismissDelete,
-      onDismissed: (direction) => _taskDelete(),
-      confirmDismiss: (direction) async {
-        if (direction == DismissDirection.startToEnd) {
-          _toggleCheckbox();
-          return false;
-        }
-        return true;
-      },
-      child: ListTile(
-        hoverColor: Colors.transparent,
-        title: _tileTitle(pageTheme),
-        subtitle: _tileSubtitle(pageTheme),
-        leading: widget.task.completed ? iconCheck : iconBlank,
-        trailing: IconButton(
-            icon: const Icon(Icons.info_outline), onPressed: _onInfoTap),
-        onTap: _toggleCheckbox,
+    return ClipRect(
+      child: Dismissible(
+        key: UniqueKey(),
+        background: widget.task.completed
+            ? dismissCheckboxChecked
+            : dismissCheckboxBlank,
+        movementDuration: const Duration(seconds: 1),
+        resizeDuration: const Duration(seconds: 1),
+        secondaryBackground: dismissDelete,
+        onDismissed: (direction) => _taskDelete(),
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.startToEnd) {
+            _toggleCheckbox();
+            return false;
+          }
+          return true;
+        },
+        child: ListTile(
+          hoverColor: Colors.transparent,
+          title: _tileTitle(pageTheme),
+          subtitle: _tileSubtitle(pageTheme),
+          leading: widget.task.completed ? iconCheck : iconBlank,
+          trailing: IconButton(
+              icon: const Icon(Icons.info_outline), onPressed: _onInfoTap),
+          onTap: _toggleCheckbox,
+        ),
       ),
     );
   }
@@ -129,7 +131,6 @@ class _TaskState extends State<TaskTile> {
     }
     return RichText(
       text: TextSpan(
-        // text: widget.task.description
         children: <InlineSpan>[
           leading,
           TextSpan(
@@ -162,25 +163,4 @@ class _TaskState extends State<TaskTile> {
   }
 }
 
-class DismissBackgroundWidget extends StatelessWidget {
-  final Icon? icon;
-  final Color? color;
-  final Alignment? alignment;
 
-  const DismissBackgroundWidget({
-    super.key,
-    this.icon,
-    this.color,
-    this.alignment,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: alignment ?? Alignment.centerLeft,
-      color: color ?? Colors.green,
-      padding: const EdgeInsets.only(left: 24, right: 24),
-      child: icon ?? const Icon(Icons.delete, color: Colors.white),
-    );
-  }
-}
