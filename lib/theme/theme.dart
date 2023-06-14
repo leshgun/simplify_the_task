@@ -95,7 +95,11 @@ final lightTheme = ThemeData(
     fillColor: const Color(0xffffffff),
     contentPadding: const EdgeInsets.all(24),
   ),
-  textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.black),
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: Colors.black,
+    selectionColor: Colors.black12,
+    selectionHandleColor: Colors.black45
+  ),
   switchTheme: SwitchThemeData(
       trackColor: MaterialStateProperty.resolveWith((state) =>
           state.contains(MaterialState.selected)
@@ -116,7 +120,6 @@ final lightTheme = ThemeData(
     titleSmall: subhead,
     bodyMedium: body,
     bodySmall: subhead,
-    // labelMedium: subhead,
   ),
   appBarTheme: const AppBarTheme(
     color: Color(0xfff7f6f2),
@@ -125,9 +128,7 @@ final lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
-  listTileTheme: const ListTileThemeData(
-    dense: true,
-  ),
+  listTileTheme: const ListTileThemeData(dense: true, minVerticalPadding: 16),
 );
 
 final darkTheme = ThemeData(
@@ -152,7 +153,11 @@ final darkTheme = ThemeData(
     fillColor: const Color(0xff252528),
     contentPadding: const EdgeInsets.all(24),
   ),
-  textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.white),
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: Colors.white,
+    selectionColor: Colors.white24,
+    selectionHandleColor: Colors.white54
+  ),
   switchTheme: SwitchThemeData(
     trackColor: MaterialStateProperty.resolveWith((state) =>
         state.contains(MaterialState.selected)
@@ -182,7 +187,5 @@ final darkTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
-  listTileTheme: const ListTileThemeData(
-    dense: true,
-  ),
+  listTileTheme: const ListTileThemeData(dense: true, minVerticalPadding: 16),
 );
