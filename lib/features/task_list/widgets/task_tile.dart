@@ -24,13 +24,13 @@ class _TaskState extends State<TaskTile> {
 
   void _toggleCheckbox() async {
     setState(() {
-      _bloc.add(ToggleTask(widget.task));
+      _bloc.add(TaskListToggle(task: widget.task));
     });
   }
 
   void _taskDelete() async {
     setState(() {
-      _bloc.add(TaskDelete(widget.task));
+      _bloc.add(TaskListDelete(task: widget.task));
     });
   }
 
@@ -134,7 +134,7 @@ class _TaskState extends State<TaskTile> {
         children: <InlineSpan>[
           leading,
           TextSpan(
-            text: widget.task.description,
+            text: widget.task.text,
             style: widget.task.completed
                 ? pageTheme.textTheme.bodyMedium?.apply(
                     decoration: TextDecoration.lineThrough,

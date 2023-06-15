@@ -1,46 +1,41 @@
-import 'dart:convert';
-
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
-import 'package:simplify_the_task/models/task_entity.dart';
 
-class TaskModel extends TaskEntity {
-  const TaskModel(
-      {required super.id,
-      required super.description,
-      super.completed,
-      super.priority,
-      super.deadline});
+part 'task_model.freezed.dart';
+part 'task_model.g.dart';
 
-  factory TaskModel.fromJson(Map<String, dynamic> json) {
-    DateTime? deadline;
-    final logger = Logger();
-    try {
-      deadline = DateTime.parse(json['deadline']);
-    } catch (e) {
-      logger.w(e);
+@freezed
+class TaskModel with _$TaskModel {
+  const factory TaskModel({
+    required int id,
+    required String text,
+    @Default(false) bool completed,
+    int? priority,
+    @TimestampSerializer() DateTime? deadline,
+  }) = _TaskModel;
+
+  factory TaskModel.fromJson(Map<String, dynamic> json) =>
+      _$TaskModelFromJson(json);
+}
+
+class TimestampSerializer implements JsonConverter<DateTime?, dynamic> {
+  const TimestampSerializer();
+
+  @override
+  DateTime? fromJson(dynamic timestamp) {
+    final Logger logger = Logger();
+    if (timestamp == null) {
+      return timestamp;
     }
-    return TaskModel(
-      id: json['id'],
-      description: json['description'],
-      completed: json['completed'] ?? false,
-      priority: json['priority'] ?? 0,
-      deadline: deadline,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'description': description,
-      'completed': completed,
-      'priority': priority ?? 0,
-      'deadline': deadline?.toIso8601String()
-    };
+    try {
+      return timestamp.toDate();
+    } catch (e) {
+      logger.w('Cant deserialize a date (wrong format)');
+      logger.w('e');
+    }
+    return null;
   }
 
   @override
-  String toString() {
-    // return super.toString();
-    return jsonEncode(toJson());
-  }
+  toJson(DateTime? date) => date?.toIso8601String();
 }

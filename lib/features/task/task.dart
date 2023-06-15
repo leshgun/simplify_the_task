@@ -17,17 +17,16 @@ class Task extends StatefulWidget {
 class _TaskState extends State<Task> {
   TaskListBloc get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
   NavigatorState get _navigator => Navigator.of(context);
-  TaskModel get _task {
-    return TaskModel(
+  TaskModel get _task => TaskModel(
         id: inputTask?.id ?? DateTime.now().hashCode,
         completed: inputTask?.completed ?? false,
-        description: taskDescription,
+        text: taskText,
         priority: taskPriority,
-        deadline: taskDeadline);
-  }
+        deadline: taskDeadline,
+      );
 
   bool deadlineIsOn = false;
-  String taskDescription = '';
+  String taskText = '';
   int? taskPriority;
   DateTime? taskDeadline;
   TaskModel? inputTask;
@@ -40,7 +39,7 @@ class _TaskState extends State<Task> {
     if (args is! TaskModel) return;
     setState(() {
       inputTask = args;
-      taskDescription = args.description;
+      taskText = args.text;
       if (args.priority != null) {
         taskPriority = args.priority!;
       }
@@ -53,11 +52,11 @@ class _TaskState extends State<Task> {
   void _saveTaskAndExit() {
     setState(() {
       if (inputTask == null) {
-        if (taskDescription.isNotEmpty) {
-          _taskListBloc.add(TaskAdd(_task));
+        if (taskText.isNotEmpty) {
+          _taskListBloc.add(TaskListEvent.add(task: _task));
         }
       } else {
-        _taskListBloc.add(TaskUpdate(_task));
+        _taskListBloc.add(TaskListUpdate(task: _task));
       }
       _navigator.pop();
     });
@@ -66,7 +65,7 @@ class _TaskState extends State<Task> {
   void _deleteTask() {
     setState(() {
       if (inputTask != null) {
-        _taskListBloc.add(TaskDelete(_task));
+        _taskListBloc.add(TaskListDelete(task: _task));
       }
       _navigator.pop();
     });
@@ -78,10 +77,10 @@ class _TaskState extends State<Task> {
 
     List<Widget> children = [
       TaskText(
-        initText: taskDescription,
+        initText: taskText,
         onChange: (String text) {
           setState(() {
-            taskDescription = text;
+            taskText = text;
           });
         },
       ),

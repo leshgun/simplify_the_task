@@ -1,22 +1,10 @@
 part of 'task_list_bloc.dart';
 
-abstract class TaskListState extends Equatable {
-  final List<TaskModel> taskList;
-
-  const TaskListState({this.taskList = const <TaskModel>[]});
-
-  @override
-  List<Object?> get props => [taskList];
-}
-
-class TaskListInitial extends TaskListState {
-  @override
-  List<Object?> get props => [];
-}
-
-class TaskListLoaded extends TaskListState {
-  const TaskListLoaded({required super.taskList});
-
-  @override
-  List<Object?> get props => [super.taskList];
+@freezed
+class TaskListState with _$TaskListState {
+  const factory TaskListState.initial() = _TaskListInitial;
+  const factory TaskListState.loading() = _TaskListLoading;
+  const factory TaskListState.loaded({
+    required List<TaskModel> taskList,
+  }) = _TaskListLoaded;
 }
