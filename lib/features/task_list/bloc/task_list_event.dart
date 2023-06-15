@@ -4,8 +4,11 @@ part of 'task_list_bloc.dart';
 class TaskListEvent with _$TaskListEvent {
   const factory TaskListEvent.load() = TaskListLoad;
   const factory TaskListEvent.save() = TaskListSave;
+<<<<<<< HEAD
   const factory TaskListEvent.synch() = TaskListSynch;
   const factory TaskListEvent.close() = TaskListClose;
+=======
+>>>>>>> d5b4746 (equitable => freezed)
   const factory TaskListEvent.add({
     required TaskModel task,
   }) = TaskListAdd;

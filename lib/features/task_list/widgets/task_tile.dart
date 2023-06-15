@@ -32,7 +32,11 @@ class _TaskState extends State<TaskTile> {
 
   void _taskDelete() async {
     setState(() {
+<<<<<<< HEAD
       _bloc.add(TaskListEvent.delete(task: widget.task));
+=======
+      _bloc.add(TaskListDelete(task: widget.task));
+>>>>>>> d5b4746 (equitable => freezed)
     });
   }
 

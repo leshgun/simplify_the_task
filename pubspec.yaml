@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: simplify_the_task
 description: A new Flutter project.
 publish_to: "none"
@@ -38,3 +39,34 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+=======
+name: simplify_the_task
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=2.19.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  path_provider: ^2.0.14
+  flutter_bloc: ^8.1.2
+  intl: ^0.18.1
+  logger: ^1.4.0
+  # equatable: ^2.0.5
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  freezed: ^2.3.5
+  build_runner: ^2.4.5
+  json_serializable: ^6.7.0
+
+flutter:
+  uses-material-design: true
+>>>>>>> d5b4746 (equitable => freezed)

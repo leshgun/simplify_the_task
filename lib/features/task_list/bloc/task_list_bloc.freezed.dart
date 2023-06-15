@@ -20,8 +20,11 @@ mixin _$TaskListEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -32,8 +35,11 @@ mixin _$TaskListEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -44,8 +50,11 @@ mixin _$TaskListEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -57,8 +66,11 @@ mixin _$TaskListEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -69,8 +81,11 @@ mixin _$TaskListEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -81,8 +96,11 @@ mixin _$TaskListEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -150,8 +168,11 @@ class _$TaskListLoad implements TaskListLoad {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -165,8 +186,11 @@ class _$TaskListLoad implements TaskListLoad {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -180,8 +204,11 @@ class _$TaskListLoad implements TaskListLoad {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -199,8 +226,11 @@ class _$TaskListLoad implements TaskListLoad {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -214,8 +244,11 @@ class _$TaskListLoad implements TaskListLoad {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -229,8 +262,11 @@ class _$TaskListLoad implements TaskListLoad {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -288,8 +324,11 @@ class _$TaskListSave implements TaskListSave {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -303,8 +342,11 @@ class _$TaskListSave implements TaskListSave {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -318,8 +360,11 @@ class _$TaskListSave implements TaskListSave {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -337,8 +382,11 @@ class _$TaskListSave implements TaskListSave {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -352,8 +400,11 @@ class _$TaskListSave implements TaskListSave {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -367,8 +418,11 @@ class _$TaskListSave implements TaskListSave {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -387,6 +441,7 @@ abstract class TaskListSave implements TaskListEvent {
 }
 
 /// @nodoc
+<<<<<<< HEAD
 abstract class _$$TaskListSynchCopyWith<$Res> {
   factory _$$TaskListSynchCopyWith(
           _$TaskListSynch value, $Res Function(_$TaskListSynch) then) =
@@ -663,6 +718,8 @@ abstract class TaskListClose implements TaskListEvent {
 }
 
 /// @nodoc
+=======
+>>>>>>> d5b4746 (equitable => freezed)
 abstract class _$$TaskListAddCopyWith<$Res> {
   factory _$$TaskListAddCopyWith(
           _$TaskListAdd value, $Res Function(_$TaskListAdd) then) =
@@ -738,8 +795,11 @@ class _$TaskListAdd implements TaskListAdd {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -753,8 +813,11 @@ class _$TaskListAdd implements TaskListAdd {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -768,8 +831,11 @@ class _$TaskListAdd implements TaskListAdd {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -787,8 +853,11 @@ class _$TaskListAdd implements TaskListAdd {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -802,8 +871,11 @@ class _$TaskListAdd implements TaskListAdd {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -817,8 +889,11 @@ class _$TaskListAdd implements TaskListAdd {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -917,8 +992,11 @@ class _$TaskListUpdate implements TaskListUpdate {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -932,8 +1010,11 @@ class _$TaskListUpdate implements TaskListUpdate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -947,8 +1028,11 @@ class _$TaskListUpdate implements TaskListUpdate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -966,8 +1050,11 @@ class _$TaskListUpdate implements TaskListUpdate {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -981,8 +1068,11 @@ class _$TaskListUpdate implements TaskListUpdate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -996,8 +1086,11 @@ class _$TaskListUpdate implements TaskListUpdate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -1097,8 +1190,11 @@ class _$TaskListDelete implements TaskListDelete {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -1112,8 +1208,11 @@ class _$TaskListDelete implements TaskListDelete {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -1127,8 +1226,11 @@ class _$TaskListDelete implements TaskListDelete {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -1146,8 +1248,11 @@ class _$TaskListDelete implements TaskListDelete {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -1161,8 +1266,11 @@ class _$TaskListDelete implements TaskListDelete {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -1176,8 +1284,11 @@ class _$TaskListDelete implements TaskListDelete {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -1277,8 +1388,11 @@ class _$TaskListToggle implements TaskListToggle {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function() save,
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -1292,8 +1406,11 @@ class _$TaskListToggle implements TaskListToggle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function()? save,
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -1307,8 +1424,11 @@ class _$TaskListToggle implements TaskListToggle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function()? save,
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -1326,8 +1446,11 @@ class _$TaskListToggle implements TaskListToggle {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -1341,8 +1464,11 @@ class _$TaskListToggle implements TaskListToggle {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -1356,8 +1482,11 @@ class _$TaskListToggle implements TaskListToggle {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> d5b4746 (equitable => freezed)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
