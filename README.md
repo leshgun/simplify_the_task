@@ -31,7 +31,7 @@
 
 ## License
 
-Это open-source приложение. Оно абсолютно бесплатно, и распространяется под [MIT лицензии][license].
+Это open-source приложение. Оно абсолютно бесплатно, и распространяется под [MIT лицензией][license].
 
 
 [latest_release]: https://github.com/leshgun/simplify_the_task/releases/latest
