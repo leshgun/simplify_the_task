@@ -1,47 +1,19 @@
 part of 'task_list_bloc.dart';
 
-abstract class TaskListEvent extends Equatable {
-  const TaskListEvent();
-}
-
-class LoadTaskList extends TaskListEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class SaveTaskList extends TaskListEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class TaskAdd extends TaskListEvent {
-  final TaskModel task;
-  const TaskAdd(this.task);
-
-  @override
-  List<Object?> get props => [task];
-}
-
-class TaskUpdate extends TaskListEvent {
-  final TaskModel task;
-  const TaskUpdate(this.task);
-
-  @override
-  List<Object?> get props => [task];
-}
-
-class TaskDelete extends TaskListEvent {
-  final TaskModel task;
-  const TaskDelete(this.task);
-
-  @override
-  List<Object?> get props => [task];
-}
-
-class ToggleTask extends TaskListEvent {
-  final TaskModel task;
-  const ToggleTask(this.task);
-
-  @override
-  List<Object?> get props => [task];
+@freezed
+class TaskListEvent with _$TaskListEvent {
+  const factory TaskListEvent.load() = TaskListLoad;
+  const factory TaskListEvent.save() = TaskListSave;
+  const factory TaskListEvent.add({
+    required TaskModel task,
+  }) = TaskListAdd;
+  const factory TaskListEvent.update({
+    required TaskModel task,
+  }) = TaskListUpdate;
+  const factory TaskListEvent.delete({
+    required TaskModel task,
+  }) = TaskListDelete;
+  const factory TaskListEvent.toggle({
+    required TaskModel task,
+  }) = TaskListToggle;
 }

@@ -16,32 +16,33 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
+  TaskListBloc get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
   bool isShowCompleted = true;
   List<TaskModel> taskList = [];
   Timer? timer;
 
   void _saveTasksToStorage() async {
-    if (_taskListBloc.state.taskList.isEmpty) {
-      return;
-    }
-    _taskListBloc.add(SaveTaskList());
+    final state = _taskListBloc.state;
+    state.when(
+      initial: () {},
+      loading: () {},
+      loaded: (List<TaskModel> taskList) {
+        if (taskList.isEmpty) {
+          return;
+        }
+        _taskListBloc.add(const TaskListSave());
+      },
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    _taskListBloc.add(LoadTaskList());
+    _taskListBloc.add(const TaskListLoad());
     timer = Timer.periodic(
       const Duration(seconds: 16),
       (Timer t) => _saveTasksToStorage(),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    _saveTasksToStorage();
-    super.didChangeDependencies();
   }
 
   @override
@@ -72,10 +73,11 @@ class _TaskListState extends State<TaskList> {
             callback: _toggleShowCompleted,
           ),
           SliverToBoxAdapter(
-            child: BlocBuilder(
-              bloc: BlocProvider.of<TaskListBloc>(context),
-              builder: _blocBuilder,
-            ),
+            child: _blocBuilder(context),
+            // child: BlocBuilder(
+            //   bloc: BlocProvider.of<TaskListBloc>(context),
+            //   builder: _blocBuilder,
+            // ),
           ),
         ],
       ),
@@ -86,60 +88,62 @@ class _TaskListState extends State<TaskList> {
     );
   }
 
-  Widget _blocBuilder(BuildContext context, state) {
+  Widget _blocBuilder(BuildContext context) {
     final pageTheme = Theme.of(context);
+    final state = context.watch<TaskListBloc>().state;
 
-    if (state is! TaskListLoaded) {
-      return Container();
-    }
-    taskList = state.taskList;
-    if (!isShowCompleted) {
-      taskList = taskList.where((task) => !task.completed).toList();
-    }
-    if (taskList.isEmpty) {
-      return Container();
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        color: pageTheme.colorScheme.secondary,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: Offset(0, 2),
+    return state.when(
+      initial: () => const Text('There are no tasks...'),
+      loading: () => const CircularProgressIndicator(),
+      loaded: (List<TaskModel> taskList) {
+        if (!isShowCompleted) {
+          taskList = taskList.where((task) => !task.completed).toList();
+        }
+        if (taskList.isEmpty) {
+          return const Icon(Icons.done_all);
+        }
+        return Container(
+          decoration: BoxDecoration(
+            color: pageTheme.colorScheme.secondary,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-        ],
-      ),
-      margin: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListView.builder(
-            physics: const ClampingScrollPhysics(),
-            itemCount: taskList.length,
-            shrinkWrap: true,
-            itemBuilder: (_, index) {
-              return TaskTile(task: taskList[index]);
-            },
+          margin: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                itemCount: taskList.length,
+                shrinkWrap: true,
+                itemBuilder: (_, index) {
+                  return TaskTile(task: taskList[index]);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.add,
+                  color: Colors.transparent,
+                ),
+                title: Text(
+                  'Новое',
+                  style: pageTheme.textTheme.bodySmall,
+                ),
+                onTap: () {
+                  _addNewTask();
+                },
+              )
+            ],
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.add,
-              color: Colors.transparent,
-            ),
-            title: Text(
-              'Новое',
-              style: pageTheme.textTheme.bodySmall,
-            ),
-            onTap: () {
-              _addNewTask();
-            },
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }
