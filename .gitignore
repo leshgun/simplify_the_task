@@ -20,9 +20,12 @@ migrate_working_dir/
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # .vscode/
 >>>>>>> b646ea1 (add vscode folder to gitignore)
+=======
+>>>>>>> 89cbeab (gitignore)
 .vscode/
 
 # Flutter/Dart/Pub related
