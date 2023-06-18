@@ -21,28 +21,24 @@ class _TaskListState extends State<TaskList> {
   List<TaskModel> taskList = [];
   Timer? timer;
 
-  void _saveTasksToStorage() async {
-    final state = _taskListBloc.state;
-    state.when(
-      initial: () {},
-      loading: () {},
-      loaded: (List<TaskModel> taskList) {
-        if (taskList.isEmpty) {
-          return;
-        }
-        _taskListBloc.add(const TaskListSave());
-      },
-    );
-  }
+  // void _saveTasksToStorage() async {
+  //   final state = _taskListBloc.state;
+  //   state.when(
+  //     initial: () {},
+  //     loading: () {},
+  //     loaded: (List<TaskModel> taskList) {
+  //       if (taskList.isEmpty) {
+  //         return;
+  //       }
+  //       _taskListBloc.add(const TaskListSave());
+  //     },
+  //   );
+  // }
 
   @override
   void initState() {
     super.initState();
     _taskListBloc.add(const TaskListLoad());
-    timer = Timer.periodic(
-      const Duration(seconds: 16),
-      (Timer t) => _saveTasksToStorage(),
-    );
   }
 
   @override
@@ -94,13 +90,18 @@ class _TaskListState extends State<TaskList> {
 
     return state.when(
       initial: () => const Text('There are no tasks...'),
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Padding(
+        padding: EdgeInsets.all(8),
+        child: Center(
+          child: CircularProgressIndicator(color: Colors.blue),
+        ),
+      ),
       loaded: (List<TaskModel> taskList) {
         if (!isShowCompleted) {
           taskList = taskList.where((task) => !task.completed).toList();
         }
         if (taskList.isEmpty) {
-          return const Icon(Icons.done_all);
+          return const Center(child: Icon(Icons.done_all));
         }
         return Container(
           decoration: BoxDecoration(
