@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
+import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
 import 'package:simplify_the_task/models/task_model.dart';
-import 'package:simplify_the_task/repositories/task_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_list_bloc.freezed.dart';
@@ -11,7 +12,9 @@ part 'task_list_event.dart';
 part 'task_list_state.dart';
 
 class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
-  final TaskRepository _taskRepository = TaskRepository();
+  final TaskListRepository _taskListRepository = TaskListRepository();
+  
+  final Logger logger = Logger();
 
   TaskListBloc() : super(const TaskListState.initial()) {
     on<TaskListLoad>(_onTaskListLoad);
@@ -22,19 +25,23 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListToggle>(_onTaskListToggle);
   }
 
-  void _taskLoading(Emitter<TaskListState> emit) {
-    emit(const TaskListState.loading());
-  }
+  // _loadTaskListFromYandexRepository() {
+  //   _yandexRepository.getTaskList().then((value) {
+  //     logger.i('Task List from yandex: $value');
+  //   });
+  // }
 
   void _onTaskListLoad(TaskListLoad event, Emitter<TaskListState> emit) async {
-    _taskLoading(emit);
-    final List<TaskModel> taskList = await _taskRepository.getTaskList();
+    emit(const TaskListState.loading());
+    // _loadTaskListFromYandexRepository();
+    final List<TaskModel> taskList = await _taskListRepository.getTaskList();
     emit(TaskListState.loaded(taskList: taskList));
   }
 
   void _onTaskListAdd(TaskListAdd event, Emitter<TaskListState> emit) async {
     if (state is _TaskListLoaded) {
       // _taskLoading(emit);
+      _taskListRepository.saveTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       emit(TaskListState.loaded(
           taskList: List.from(stateLoaded.taskList)..add(event.task)));
@@ -62,7 +69,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   ) async {
     if (state is _TaskListLoaded) {
       final stateLoaded = state as _TaskListLoaded;
-      _taskRepository.saveAllTasksToStorage(stateLoaded.taskList);
+      _taskListRepository.saveTaskList(stateLoaded.taskList);
     }
   }
 
