@@ -26,6 +26,7 @@ class _TaskListState extends State<TaskList> {
 =======
   Timer? timer;
 
+<<<<<<< HEAD
   void _saveTasksToStorage() async {
     final state = _taskListBloc.state;
     state.when(
@@ -40,6 +41,21 @@ class _TaskListState extends State<TaskList> {
     );
   }
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+  // void _saveTasksToStorage() async {
+  //   final state = _taskListBloc.state;
+  //   state.when(
+  //     initial: () {},
+  //     loading: () {},
+  //     loaded: (List<TaskModel> taskList) {
+  //       if (taskList.isEmpty) {
+  //         return;
+  //       }
+  //       _taskListBloc.add(const TaskListSave());
+  //     },
+  //   );
+  // }
+>>>>>>> 435c830 (yandex repo)
 
   @override
   void initState() {
@@ -49,10 +65,6 @@ class _TaskListState extends State<TaskList> {
 <<<<<<< HEAD
 =======
     _taskListBloc.add(const TaskListLoad());
-    timer = Timer.periodic(
-      const Duration(seconds: 16),
-      (Timer t) => _saveTasksToStorage(),
-    );
   }
 
   @override
@@ -162,13 +174,23 @@ class _TaskListState extends State<TaskList> {
       ),
 =======
       initial: () => const Text('There are no tasks...'),
+<<<<<<< HEAD
       loading: () => const CircularProgressIndicator(),
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+      loading: () => const Padding(
+        padding: EdgeInsets.all(8),
+        child: Center(
+          child: CircularProgressIndicator(color: Colors.blue),
+        ),
+      ),
+>>>>>>> 435c830 (yandex repo)
       loaded: (List<TaskModel> taskList) {
         if (!isShowCompleted) {
           taskList = taskList.where((task) => !task.completed).toList();
         }
         if (taskList.isEmpty) {
+<<<<<<< HEAD
 <<<<<<< HEAD
           return const Center(child: Icon(Icons.done_all));
         }
@@ -219,6 +241,9 @@ class _TaskListState extends State<TaskList> {
             ),
 =======
           return const Icon(Icons.done_all);
+=======
+          return const Center(child: Icon(Icons.done_all));
+>>>>>>> 435c830 (yandex repo)
         }
         return Container(
           decoration: BoxDecoration(
