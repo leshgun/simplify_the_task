@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
 import 'package:simplify_the_task/router/router.dart';
-import 'package:simplify_the_task/theme/theme.dart';
+import 'package:simplify_the_task/theme/dark_theme.dart';
+import 'package:simplify_the_task/theme/light_theme.dart';
 
 void main() => runApp(const MainApp());
 
