@@ -86,9 +86,15 @@ class _TaskListState extends State<TaskList> {
     );
   }
 
+<<<<<<< HEAD
   _syncTaskList() {
     _taskListBloc.add(const TaskListSynch());
   }
+=======
+  // _syncTaskList() {
+  //   _taskListBloc.add(const TaskListSynch());
+  // }
+>>>>>>> 7c8e3a0 (code review)
 
   _toggleShowCompleted() {
     setState(() {
@@ -139,6 +145,17 @@ class _TaskListState extends State<TaskList> {
           TaskListAppBar(
             visibility: isShowCompleted,
             callback: _toggleShowCompleted,
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 32),
+              child: Text(
+                "Выполнено: $completed",
+                // style: pageTheme.textTheme.,
+                style: pageTheme.textTheme.bodyMedium
+                    ?.apply(color: pageTheme.disabledColor),
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: _blocBuilder(context),

@@ -21,10 +21,14 @@ mixin _$TaskListEvent {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -36,10 +40,14 @@ mixin _$TaskListEvent {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -51,10 +59,14 @@ mixin _$TaskListEvent {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -67,10 +79,14 @@ mixin _$TaskListEvent {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -82,10 +98,14 @@ mixin _$TaskListEvent {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -97,10 +117,14 @@ mixin _$TaskListEvent {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -169,10 +193,14 @@ class _$TaskListLoad implements TaskListLoad {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -187,10 +215,14 @@ class _$TaskListLoad implements TaskListLoad {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -205,10 +237,14 @@ class _$TaskListLoad implements TaskListLoad {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -227,10 +263,14 @@ class _$TaskListLoad implements TaskListLoad {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -245,10 +285,14 @@ class _$TaskListLoad implements TaskListLoad {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -263,10 +307,14 @@ class _$TaskListLoad implements TaskListLoad {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -325,10 +373,14 @@ class _$TaskListSave implements TaskListSave {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -343,10 +395,14 @@ class _$TaskListSave implements TaskListSave {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -361,10 +417,14 @@ class _$TaskListSave implements TaskListSave {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -383,10 +443,14 @@ class _$TaskListSave implements TaskListSave {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -401,10 +465,14 @@ class _$TaskListSave implements TaskListSave {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -419,10 +487,14 @@ class _$TaskListSave implements TaskListSave {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -442,6 +514,9 @@ abstract class TaskListSave implements TaskListEvent {
 
 /// @nodoc
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7c8e3a0 (code review)
 abstract class _$$TaskListSynchCopyWith<$Res> {
   factory _$$TaskListSynchCopyWith(
           _$TaskListSynch value, $Res Function(_$TaskListSynch) then) =
@@ -482,7 +557,10 @@ class _$TaskListSynch implements TaskListSynch {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+<<<<<<< HEAD
     required TResult Function() close,
+=======
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -497,7 +575,10 @@ class _$TaskListSynch implements TaskListSynch {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+<<<<<<< HEAD
     TResult? Function()? close,
+=======
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -512,7 +593,10 @@ class _$TaskListSynch implements TaskListSynch {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+<<<<<<< HEAD
     TResult Function()? close,
+=======
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -531,7 +615,10 @@ class _$TaskListSynch implements TaskListSynch {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+<<<<<<< HEAD
     required TResult Function(TaskListClose value) close,
+=======
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -546,7 +633,10 @@ class _$TaskListSynch implements TaskListSynch {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+<<<<<<< HEAD
     TResult? Function(TaskListClose value)? close,
+=======
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -561,7 +651,10 @@ class _$TaskListSynch implements TaskListSynch {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+<<<<<<< HEAD
     TResult Function(TaskListClose value)? close,
+=======
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -580,6 +673,7 @@ abstract class TaskListSynch implements TaskListEvent {
 }
 
 /// @nodoc
+<<<<<<< HEAD
 abstract class _$$TaskListCloseCopyWith<$Res> {
   factory _$$TaskListCloseCopyWith(
           _$TaskListClose value, $Res Function(_$TaskListClose) then) =
@@ -720,6 +814,8 @@ abstract class TaskListClose implements TaskListEvent {
 /// @nodoc
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+>>>>>>> 7c8e3a0 (code review)
 abstract class _$$TaskListAddCopyWith<$Res> {
   factory _$$TaskListAddCopyWith(
           _$TaskListAdd value, $Res Function(_$TaskListAdd) then) =
@@ -796,10 +892,14 @@ class _$TaskListAdd implements TaskListAdd {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -814,10 +914,14 @@ class _$TaskListAdd implements TaskListAdd {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -832,10 +936,14 @@ class _$TaskListAdd implements TaskListAdd {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -854,10 +962,14 @@ class _$TaskListAdd implements TaskListAdd {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -872,10 +984,14 @@ class _$TaskListAdd implements TaskListAdd {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -890,10 +1006,14 @@ class _$TaskListAdd implements TaskListAdd {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -993,10 +1113,14 @@ class _$TaskListUpdate implements TaskListUpdate {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -1011,10 +1135,14 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -1029,10 +1157,14 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -1051,10 +1183,14 @@ class _$TaskListUpdate implements TaskListUpdate {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -1069,10 +1205,14 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -1087,10 +1227,14 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -1191,10 +1335,14 @@ class _$TaskListDelete implements TaskListDelete {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -1209,10 +1357,14 @@ class _$TaskListDelete implements TaskListDelete {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -1227,10 +1379,14 @@ class _$TaskListDelete implements TaskListDelete {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -1249,10 +1405,14 @@ class _$TaskListDelete implements TaskListDelete {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -1267,10 +1427,14 @@ class _$TaskListDelete implements TaskListDelete {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -1285,10 +1449,14 @@ class _$TaskListDelete implements TaskListDelete {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -1389,10 +1557,14 @@ class _$TaskListToggle implements TaskListToggle {
     required TResult Function() load,
     required TResult Function() save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function() synch,
     required TResult Function() close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function() synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -1407,10 +1579,14 @@ class _$TaskListToggle implements TaskListToggle {
     TResult? Function()? load,
     TResult? Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function()? synch,
     TResult? Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -1425,10 +1601,14 @@ class _$TaskListToggle implements TaskListToggle {
     TResult Function()? load,
     TResult Function()? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function()? synch,
     TResult Function()? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function()? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -1447,10 +1627,14 @@ class _$TaskListToggle implements TaskListToggle {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     required TResult Function(TaskListSynch value) synch,
     required TResult Function(TaskListClose value) close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    required TResult Function(TaskListSynch value) synch,
+>>>>>>> 7c8e3a0 (code review)
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -1465,10 +1649,14 @@ class _$TaskListToggle implements TaskListToggle {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult? Function(TaskListSynch value)? synch,
     TResult? Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult? Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -1483,10 +1671,14 @@ class _$TaskListToggle implements TaskListToggle {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TResult Function(TaskListSynch value)? synch,
     TResult Function(TaskListClose value)? close,
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+    TResult Function(TaskListSynch value)? synch,
+>>>>>>> 7c8e3a0 (code review)
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,

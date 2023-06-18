@@ -27,7 +27,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   final TaskListRepository taskListRepository;
 =======
   final TaskListRepository _taskListRepository = TaskListRepository();
-  
+
   final Logger logger = Logger();
 >>>>>>> 2ab6a09 (code review)
 
@@ -46,6 +46,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListDelete>(_onTaskListDelete);
     on<TaskListToggle>(_onTaskListToggle);
 <<<<<<< HEAD
+<<<<<<< HEAD
     on<TaskListSynch>(_onTaskListSynch);
     on<TaskListClose>(_onTaskListClose);
   }
@@ -54,6 +55,9 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     emit(const TaskListState.loading());
     final List<TaskModel> taskList = await taskListRepository.getTaskList();
 =======
+=======
+    on<TaskListSynch>(_onTaskListSynch);
+>>>>>>> 7c8e3a0 (code review)
   }
 
   // _loadTaskListFromYandexRepository() {
@@ -88,17 +92,26 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       _taskListRepository.saveTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       emit(TaskListState.loaded(
+<<<<<<< HEAD
           taskList: List.from(stateLoaded.taskList)..add(event.task)));
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+        taskList: List.from(stateLoaded.taskList)..add(event.task),
+      ));
+>>>>>>> 7c8e3a0 (code review)
     }
   }
 
   void _onTaskListUpdate(TaskListUpdate event, Emitter<TaskListState> emit) {
     if (state is _TaskListLoaded) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       taskListRepository.saveTask(event.task);
 =======
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+      _taskListRepository.saveTask(event.task);
+>>>>>>> 7c8e3a0 (code review)
       final stateLoaded = state as _TaskListLoaded;
       final int index =
           stateLoaded.taskList.indexWhere((task) => task.id == event.task.id);
@@ -128,8 +141,8 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     // }
 =======
     if (state is _TaskListLoaded) {
-      final stateLoaded = state as _TaskListLoaded;
-      _taskListRepository.saveTaskList(stateLoaded.taskList);
+      // final stateLoaded = state as _TaskListLoaded;
+      // _taskListRepository.saveTaskList(stateLoaded.taskList);
     }
 >>>>>>> d5b4746 (equitable => freezed)
   }
@@ -145,6 +158,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
             ..removeWhere((task) => event.task.id == task.id),
 =======
       // _taskLoading(emit);
+      _taskListRepository.deleteTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       emit(
         TaskListState.loaded(
@@ -162,6 +176,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       final TaskModel newTask = event.task.copyWith(
         completed: !event.task.completed,
       );
+<<<<<<< HEAD
 <<<<<<< HEAD
       taskListRepository.saveTask(newTask);
       emit(
@@ -187,6 +202,9 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     await taskListRepository.closeRepositories();
     emit(const TaskListState.initial());
 =======
+=======
+      _taskListRepository.saveTask(newTask);
+>>>>>>> 7c8e3a0 (code review)
       emit(
         TaskListState.loaded(
           taskList: List.from(stateLoaded.taskList)
@@ -196,5 +214,9 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       );
     }
 >>>>>>> d5b4746 (equitable => freezed)
+  }
+
+  void _onTaskListSynch(TaskListSynch event, Emitter<TaskListState> emit) {
+    _taskListRepository.syncRepositories();
   }
 }
