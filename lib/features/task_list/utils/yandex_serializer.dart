@@ -1,20 +1,20 @@
 import 'package:simplify_the_task/models/task_model.dart';
+import 'package:simplify_the_task/models/task_model_yandex.dart';
 
 class YandexSerializer {
   static final List<String> importance = ['low', 'basic', 'important'];
 
-  static Map<String, dynamic> taskJsonToYandexJson(TaskModel task) {
-    return {
-      'id': task.id,
-      'text': task.text,
-      'importance': importance[task.priority ?? 0],
-      // 'deadline': dateTimeToTimestamp(task.deadline),
-      'done': task.completed,
-      // 'color': null,
-      'created_at': dateTimeToTimestamp(DateTime.now()),
-      'changed_at': dateTimeToTimestamp(DateTime.now()),
-      'last_update_by': 1
-    };
+  static TaskModelYandex taskModelToTaskModelYandex(TaskModel task) {
+    return TaskModelYandex(
+      id: task.id,
+      text: task.text,
+      deadline: dateTimeToTimestamp(task.deadline),
+      importance: importance[task.priority ?? 0],
+      done: task.completed,
+      createdAt: dateTimeToTimestamp(DateTime.now())!,
+      changedAt: dateTimeToTimestamp(DateTime.now())!,
+      lastUpdatedBy: 1,
+    );
   }
 
   static int? dateTimeToTimestamp(DateTime? date) {

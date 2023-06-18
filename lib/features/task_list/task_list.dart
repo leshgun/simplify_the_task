@@ -53,6 +53,10 @@ class _TaskListState extends State<TaskList> {
     );
   }
 
+  // _syncTaskList() {
+  //   _taskListBloc.add(const TaskListSynch());
+  // }
+
   _toggleShowCompleted() {
     setState(() {
       isShowCompleted = !isShowCompleted;
@@ -61,12 +65,31 @@ class _TaskListState extends State<TaskList> {
 
   @override
   Widget build(BuildContext context) {
+    final pageTheme = Theme.of(context);
+    final state = context.watch<TaskListBloc>().state;
+    final int completed = state.when(
+      initial: () => 0,
+      loading: () => 0,
+      loaded: (List<TaskModel> taskList) =>
+          taskList.where((TaskModel task) => task.completed).length,
+    );
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
           TaskListAppBar(
             visibility: isShowCompleted,
             callback: _toggleShowCompleted,
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 32),
+              child: Text(
+                "Выполнено: $completed",
+                // style: pageTheme.textTheme.,
+                style: pageTheme.textTheme.bodyMedium
+                    ?.apply(color: pageTheme.disabledColor),
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: _blocBuilder(context),

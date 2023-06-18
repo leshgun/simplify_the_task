@@ -67,6 +67,9 @@ class _TaskDatePickerState extends State<TaskDatePicker> {
         if (widget.onDateChange == null) {
           return;
         }
+        setState(() {
+          isDateHidden = false;
+        });
         widget.onDateChange!(newDate);
       },
       trailing: Switch(

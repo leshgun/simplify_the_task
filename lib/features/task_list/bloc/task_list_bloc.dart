@@ -13,7 +13,7 @@ part 'task_list_state.dart';
 
 class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   final TaskListRepository _taskListRepository = TaskListRepository();
-  
+
   final Logger logger = Logger();
 
   TaskListBloc() : super(const TaskListState.initial()) {
@@ -23,6 +23,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListUpdate>(_onTaskListUpdate);
     on<TaskListDelete>(_onTaskListDelete);
     on<TaskListToggle>(_onTaskListToggle);
+    on<TaskListSynch>(_onTaskListSynch);
   }
 
   // _loadTaskListFromYandexRepository() {
@@ -44,12 +45,14 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       _taskListRepository.saveTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       emit(TaskListState.loaded(
-          taskList: List.from(stateLoaded.taskList)..add(event.task)));
+        taskList: List.from(stateLoaded.taskList)..add(event.task),
+      ));
     }
   }
 
   void _onTaskListUpdate(TaskListUpdate event, Emitter<TaskListState> emit) {
     if (state is _TaskListLoaded) {
+      _taskListRepository.saveTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       final int index =
           stateLoaded.taskList.indexWhere((task) => task.id == event.task.id);
@@ -68,14 +71,15 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     Emitter<TaskListState> emit,
   ) async {
     if (state is _TaskListLoaded) {
-      final stateLoaded = state as _TaskListLoaded;
-      _taskListRepository.saveTaskList(stateLoaded.taskList);
+      // final stateLoaded = state as _TaskListLoaded;
+      // _taskListRepository.saveTaskList(stateLoaded.taskList);
     }
   }
 
   void _onTaskListDelete(TaskListDelete event, Emitter<TaskListState> emit) {
     if (state is _TaskListLoaded) {
       // _taskLoading(emit);
+      _taskListRepository.deleteTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       emit(
         TaskListState.loaded(
@@ -92,6 +96,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       final TaskModel newTask = event.task.copyWith(
         completed: !event.task.completed,
       );
+      _taskListRepository.saveTask(newTask);
       emit(
         TaskListState.loaded(
           taskList: List.from(stateLoaded.taskList)
@@ -100,5 +105,9 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
         ),
       );
     }
+  }
+
+  void _onTaskListSynch(TaskListSynch event, Emitter<TaskListState> emit) {
+    _taskListRepository.syncRepositories();
   }
 }
