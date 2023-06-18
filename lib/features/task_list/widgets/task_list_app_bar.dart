@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
-import 'package:simplify_the_task/models/task_model.dart';
 
 class TaskListAppBar extends StatelessWidget {
   final bool? visibility;
@@ -33,44 +30,16 @@ class TaskListAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pageTheme = Theme.of(context);
-    final state = context.watch<TaskListBloc>().state;
-    final int completed = state.when(
-      initial: () => 0,
-      loading: () => 0,
-      loaded: (List<TaskModel> taskList) =>
-          taskList.where((TaskModel task) => task.completed).length,
-    );
 
     return SliverAppBar(
       pinned: true,
       expandedHeight: 150,
-      collapsedHeight: 64,
-      flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.pin,
-        expandedTitleScale: 1.6,
-        background: Container(
-          alignment: Alignment.bottomLeft,
+      // collapsedHeight: 80,
+      actions: [
+        Center(
           child: Padding(
-            padding: const EdgeInsets.only(left: 32, bottom: 8),
-            child: Text(
-              "Выполнено: $completed",
-              // style: pageTheme.textTheme.,
-              style: pageTheme.textTheme.bodyMedium
-                  ?.apply(color: pageTheme.disabledColor),
-            ),
-          ),
-        ),
-        titlePadding: const EdgeInsets.only(
-          left: 32,
-          right: 16,
-          bottom: 20,
-          top: 16,
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Мои дела", style: pageTheme.textTheme.titleLarge),
-            IconButton(
+            padding: const EdgeInsets.only(right: 20),
+            child: IconButton(
               onPressed: _onCallback,
               alignment: Alignment.center,
               hoverColor: Colors.transparent,
@@ -78,11 +47,21 @@ class TaskListAppBar extends StatelessWidget {
               icon: Icon(
                 _visibilityIcon,
                 color: Colors.blue,
-                size: 16,
+                size: 24,
               ),
             ),
-          ],
+          ),
         ),
+      ],
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.pin,
+        stretchModes: [StretchMode.fadeTitle],
+        expandedTitleScale: 1.6,
+        titlePadding: const EdgeInsets.only(
+          left: 32,
+          bottom: 14,
+        ),
+        title: Text("Мои дела", style: pageTheme.textTheme.titleLarge),
       ),
     );
   }
