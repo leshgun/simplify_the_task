@@ -3,8 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
+<<<<<<< HEAD
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 import 'package:simplify_the_task/presentation/router/router.dart';
+=======
+import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
+import 'package:simplify_the_task/features/task_list/widgets/dismiss_background.dart';
+import 'package:simplify_the_task/models/task_model.dart';
+>>>>>>> 07b4506 (code review)
 
 import '../bloc/task_list_bloc.dart';
 import '../widgets/dismiss_background.dart';
@@ -41,6 +47,7 @@ class _TaskState extends State<TaskTile> {
   }
 
   void _onInfoTap() {
+<<<<<<< HEAD
     // Navigator.of(context).pushNamed(
     //   '/task-info',
     //   arguments: TaskInfoArguments(
@@ -54,6 +61,11 @@ class _TaskState extends State<TaskTile> {
       pathParameters: {'id': widget.task.id},
       // queryParameters: {'task': widget.task.toBase64()},
       extra: TaskInfoArguments(
+=======
+    Navigator.of(context).pushNamed(
+      '/task-info',
+      arguments: TaskInfoArguments(
+>>>>>>> 07b4506 (code review)
         inputTask: widget.task,
         onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
         onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),

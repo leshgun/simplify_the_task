@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_gen/gen_l10n/S.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/presentation/router/router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
+=======
+import 'package:logger/logger.dart';
+import 'package:simplify_the_task/models/task_model.dart';
+>>>>>>> 07b4506 (code review)
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
@@ -29,6 +34,7 @@ class _TaskInfoState extends State<TaskInfo> {
   int? taskPriority;
   DateTime? taskDeadline;
 
+<<<<<<< HEAD
   // NavigatorState get _navigator => Navigator.of(context);
 
   TaskModel get task {
@@ -38,6 +44,11 @@ class _TaskInfoState extends State<TaskInfo> {
       createdAt: DateTime.now(),
       changedAt: DateTime.now(),
     );
+=======
+  NavigatorState get _navigator => Navigator.of(context);
+  TaskModel get task {
+    inputTask ??= TaskModel(id: DateTime.now().hashCode, text: '');
+>>>>>>> 07b4506 (code review)
     return inputTask!.copyWith(
       text: taskText,
       priority: taskPriority,
@@ -49,6 +60,7 @@ class _TaskInfoState extends State<TaskInfo> {
     if (widget.arguments?.onSaveTask == null) {
       return;
     }
+<<<<<<< HEAD
     // if (inputTask == null) {
     if (task.text.isEmpty) {
       widget.arguments?.onSaveTask!(
@@ -59,6 +71,12 @@ class _TaskInfoState extends State<TaskInfo> {
     }
   }
   // }
+=======
+    if (inputTask == null) {
+      widget.arguments?.onSaveTask!(task);
+    }
+  }
+>>>>>>> 07b4506 (code review)
 
   void _update() {
     if (widget.arguments?.onUpdateTask == null) {
@@ -70,7 +88,11 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _delete() {
+<<<<<<< HEAD
     if (widget.arguments?.onDeleteTask == null) {
+=======
+    if (widget.arguments?.onUpdateTask == null) {
+>>>>>>> 07b4506 (code review)
       return;
     }
     if (inputTask != null) {
@@ -79,12 +101,16 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _exit() {
+<<<<<<< HEAD
     // _navigator.pop();
     if (context.canPop()) {
       context.pop();
     } else {
       context.goNamed(Routes.taskList);
     }
+=======
+    _navigator.pop();
+>>>>>>> 07b4506 (code review)
   }
 
   void deleteTask() {
@@ -93,8 +119,12 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void saveTask() {
+<<<<<<< HEAD
     // if (inputTask == null) {
     if (widget.arguments?.onSaveTask != null) {
+=======
+    if (inputTask == null) {
+>>>>>>> 07b4506 (code review)
       _save();
     } else {
       _update();
@@ -127,11 +157,15 @@ class _TaskInfoState extends State<TaskInfo> {
         },
       ),
       TaskPopup(
+<<<<<<< HEAD
         items: [
           S.of(context)!.taskPriorityNone,
           S.of(context)!.taskPriorityLow,
           S.of(context)!.taskPriorityHigh,
         ],
+=======
+        items: const ['Нет', 'Низкий', 'Высокий'],
+>>>>>>> 07b4506 (code review)
         initItem: taskPriority,
         onItemChange: (value) {
           setState(() {
@@ -148,7 +182,11 @@ class _TaskInfoState extends State<TaskInfo> {
         },
       ),
       DeleteButton(
+<<<<<<< HEAD
         disabled: inputTask == null,
+=======
+        disabled: inputTask != null,
+>>>>>>> 07b4506 (code review)
         callback: deleteTask,
       )
     ];
@@ -162,19 +200,29 @@ class _TaskInfoState extends State<TaskInfo> {
             color: pageTheme.textTheme.labelMedium?.color,
           ),
           hoverColor: Colors.transparent,
+<<<<<<< HEAD
           // onPressed: () => _navigator.pop(),
           onPressed: _exit,
+=======
+          onPressed: () => _navigator.pop(),
+>>>>>>> 07b4506 (code review)
         ),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: TextButton(
+<<<<<<< HEAD
               key: const Key('save_bth'),
               onPressed: saveTask,
               child: Text(
                 S.of(context)!.taskSave,
                 style: const TextStyle(color: Color(0xff0a84ff)),
               ),
+=======
+              onPressed: saveTask,
+              child: const Text('СОХРАНИТЬ',
+                  style: TextStyle(color: Color(0xff0a84ff))),
+>>>>>>> 07b4506 (code review)
             ),
           )
         ],

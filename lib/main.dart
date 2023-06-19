@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:simplify_the_task/presentation/router/router.dart';
 import 'package:simplify_the_task/presentation/theme/dark_theme.dart';
 import 'package:simplify_the_task/presentation/theme/light_theme.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 =======
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
+=======
+>>>>>>> 07b4506 (code review)
 import 'package:simplify_the_task/router/router.dart';
 import 'package:simplify_the_task/theme/dark_theme.dart';
 import 'package:simplify_the_task/theme/light_theme.dart';
@@ -24,6 +27,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log.d('App has been started at ${DateTime.now().toString()}...');
+<<<<<<< HEAD
     return MaterialApp.router(
       title: 'Simplify the task!',
       debugShowCheckedModeBanner: false,
@@ -42,6 +46,15 @@ class MainApp extends StatelessWidget {
         Locale('en'),
         Locale('ru'),
       ],
+=======
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      routes: routes,
+      initialRoute: '/task-list',
+      // home:
+>>>>>>> 07b4506 (code review)
     );
   }
 }
