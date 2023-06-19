@@ -55,7 +55,6 @@ class TaskListAppBar extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.pin,
-        stretchModes: [StretchMode.fadeTitle],
         expandedTitleScale: 1.6,
         titlePadding: const EdgeInsets.only(
           left: 32,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
 import 'package:simplify_the_task/features/task_list/widgets/dismiss_background.dart';
 import 'package:simplify_the_task/models/task_model.dart';
@@ -36,8 +37,12 @@ class _TaskState extends State<TaskTile> {
 
   void _onInfoTap() {
     Navigator.of(context).pushNamed(
-      '/task-details',
-      arguments: widget.task,
+      '/task-info',
+      arguments: TaskInfoArguments(
+        inputTask: widget.task,
+        onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
+        onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
+      ),
     );
   }
 
@@ -162,5 +167,3 @@ class _TaskState extends State<TaskTile> {
     );
   }
 }
-
-
