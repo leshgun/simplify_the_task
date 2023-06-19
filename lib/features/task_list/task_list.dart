@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/widgets/task_list_app_bar.dart';
 import 'package:simplify_the_task/features/task_list/widgets/task_tile.dart';
 import 'package:simplify_the_task/models/task_model.dart';
@@ -49,7 +50,10 @@ class _TaskListState extends State<TaskList> {
 
   _addNewTask() {
     Navigator.of(context).pushNamed(
-      '/task-details',
+      '/task-info',
+      arguments: TaskInfoArguments(
+        onSaveTask: (task) => _taskListBloc.add(TaskListEvent.add(task: task)),
+      )
     );
   }
 

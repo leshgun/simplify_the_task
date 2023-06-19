@@ -1,74 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:simplify_the_task/models/task_model.dart';
+
+import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
 import 'widgets/task_date_picker.dart';
 import 'widgets/task_popup.dart';
 import 'widgets/task_text.dart';
 
-class Task extends StatefulWidget {
-  const Task({super.key});
+class TaskInfo extends StatefulWidget {
+  final TaskInfoArguments? arguments;
+  final Logger logger = Logger();
+
+  TaskInfo({super.key, this.arguments});
 
   @override
-  State<Task> createState() => _TaskState();
+  State<TaskInfo> createState() => _TaskInfoState();
 }
 
-class _TaskState extends State<Task> {
-  TaskListBloc get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
-  NavigatorState get _navigator => Navigator.of(context);
-  TaskModel get _task => TaskModel(
-        id: inputTask?.id ?? DateTime.now().hashCode,
-        completed: inputTask?.completed ?? false,
-        text: taskText,
-        priority: taskPriority,
-        deadline: taskDeadline,
-      );
-
+class _TaskInfoState extends State<TaskInfo> {
+  TaskModel? inputTask;
   bool deadlineIsOn = false;
   String taskText = '';
   int? taskPriority;
   DateTime? taskDeadline;
-  TaskModel? inputTask;
+
+  NavigatorState get _navigator => Navigator.of(context);
+  TaskModel get task {
+    inputTask ??= TaskModel(id: DateTime.now().hashCode, text: '');
+    return inputTask!.copyWith(
+      text: taskText,
+      priority: taskPriority,
+      deadline: taskDeadline,
+    );
+  }
+
+  void _save() {
+    if (widget.arguments?.onSaveTask == null) {
+      return;
+    }
+    if (inputTask == null) {
+      widget.arguments?.onSaveTask!(task);
+    }
+  }
+
+  void _update() {
+    if (widget.arguments?.onUpdateTask == null) {
+      return;
+    }
+    if (inputTask != null) {
+      widget.arguments?.onUpdateTask!(task);
+    }
+  }
+
+  void _delete() {
+    if (widget.arguments?.onUpdateTask == null) {
+      return;
+    }
+    if (inputTask != null) {
+      widget.arguments?.onDeleteTask!(task);
+    }
+  }
+
+  void _exit() {
+    _navigator.pop();
+  }
+
+  void deleteTask() {
+    _delete();
+    _exit();
+  }
+
+  void saveTask() {
+    if (inputTask == null) {
+      _save();
+    } else {
+      _update();
+    }
+    _exit();
+  }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final args = ModalRoute.of(context)?.settings.arguments;
-    if (args == null) return;
-    if (args is! TaskModel) return;
-    setState(() {
-      inputTask = args;
-      taskText = args.text;
-      if (args.priority != null) {
-        taskPriority = args.priority!;
-      }
-      if (args.deadline != null) {
-        taskDeadline = args.deadline;
-      }
-    });
-  }
-
-  void _saveTaskAndExit() {
-    setState(() {
-      if (inputTask == null) {
-        if (taskText.isNotEmpty) {
-          _taskListBloc.add(TaskListEvent.add(task: _task));
-        }
-      } else {
-        _taskListBloc.add(TaskListUpdate(task: _task));
-      }
-      _navigator.pop();
-    });
-  }
-
-  void _deleteTask() {
-    setState(() {
-      if (inputTask != null) {
-        _taskListBloc.add(TaskListDelete(task: _task));
-      }
-      _navigator.pop();
-    });
+  void initState() {
+    super.initState();
+    inputTask = widget.arguments?.inputTask;
+    if (inputTask != null) {
+      taskText = inputTask?.text ?? '';
+      taskPriority = inputTask?.priority ?? 0;
+      taskDeadline = inputTask?.deadline;
+    }
   }
 
   @override
@@ -95,15 +115,15 @@ class _TaskState extends State<Task> {
       ),
       TaskDatePicker(
         initDate: taskDeadline,
-        onDateChange: (DateTime newDate) {
+        onDateChange: (DateTime? newDate) {
           setState(() {
             taskDeadline = newDate;
           });
         },
       ),
       DeleteButton(
-        disabled: inputTask == null,
-        callback: _deleteTask,
+        disabled: inputTask != null,
+        callback: deleteTask,
       )
     ];
 
@@ -122,7 +142,7 @@ class _TaskState extends State<Task> {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: TextButton(
-              onPressed: _saveTaskAndExit,
+              onPressed: saveTask,
               child: const Text('СОХРАНИТЬ',
                   style: TextStyle(color: Color(0xff0a84ff))),
             ),
