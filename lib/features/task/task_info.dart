@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/models/task_model.dart';
+import 'package:uuid/uuid.dart';
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
@@ -27,7 +28,10 @@ class _TaskInfoState extends State<TaskInfo> {
 
   NavigatorState get _navigator => Navigator.of(context);
   TaskModel get task {
-    inputTask ??= TaskModel(id: DateTime.now().hashCode, text: '');
+    inputTask ??= TaskModel(
+      id: const Uuid().v4(),
+      text: '',
+    );
     return inputTask!.copyWith(
       text: taskText,
       priority: taskPriority,
