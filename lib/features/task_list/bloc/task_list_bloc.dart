@@ -93,10 +93,14 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       final stateLoaded = state as _TaskListLoaded;
       emit(TaskListState.loaded(
 <<<<<<< HEAD
+<<<<<<< HEAD
           taskList: List.from(stateLoaded.taskList)..add(event.task)));
 >>>>>>> d5b4746 (equitable => freezed)
 =======
         taskList: List.from(stateLoaded.taskList)..add(event.task),
+=======
+        taskList: List.from(stateLoaded.taskList)..insert(0, event.task),
+>>>>>>> d0ad65a (reverse add)
       ));
 >>>>>>> 7c8e3a0 (code review)
     }

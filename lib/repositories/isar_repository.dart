@@ -31,8 +31,8 @@ class IsarRepository {
   IsarRepository({required this.directoryName});
 
   Future<List<TaskModelIsar>> getTaskList() {
-    return isarInstance
-        .then((Isar isar) => isar.taskModelIsars.where().findAll());
+    return isarInstance.then((Isar isar) =>
+        isar.taskModelIsars.where(sort: Sort.desc).anyId().findAll());
   }
 
   Future<void> updateTask(TaskModelIsar task) async {
