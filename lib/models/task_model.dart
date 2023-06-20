@@ -7,7 +7,7 @@ part 'task_model.g.dart';
 @freezed
 class TaskModel with _$TaskModel {
   const factory TaskModel({
-    required int id,
+    required String id,
     required String text,
     @Default(false) bool completed,
     int? priority,

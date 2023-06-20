@@ -22,24 +22,11 @@ class _TaskListState extends State<TaskList> {
   List<TaskModel> taskList = [];
   Timer? timer;
 
-  // void _saveTasksToStorage() async {
-  //   final state = _taskListBloc.state;
-  //   state.when(
-  //     initial: () {},
-  //     loading: () {},
-  //     loaded: (List<TaskModel> taskList) {
-  //       if (taskList.isEmpty) {
-  //         return;
-  //       }
-  //       _taskListBloc.add(const TaskListSave());
-  //     },
-  //   );
-  // }
-
   @override
   void initState() {
     super.initState();
     _taskListBloc.add(const TaskListLoad());
+    // _syncTaskList();
   }
 
   @override
@@ -49,17 +36,16 @@ class _TaskListState extends State<TaskList> {
   }
 
   _addNewTask() {
-    Navigator.of(context).pushNamed(
-      '/task-info',
-      arguments: TaskInfoArguments(
-        onSaveTask: (task) => _taskListBloc.add(TaskListEvent.add(task: task)),
-      )
-    );
+    Navigator.of(context).pushNamed('/task-info',
+        arguments: TaskInfoArguments(
+          onSaveTask: (task) =>
+              _taskListBloc.add(TaskListEvent.add(task: task)),
+        ));
   }
 
-  // _syncTaskList() {
-  //   _taskListBloc.add(const TaskListSynch());
-  // }
+  _syncTaskList() {
+    _taskListBloc.add(const TaskListSynch());
+  }
 
   _toggleShowCompleted() {
     setState(() {
@@ -82,14 +68,14 @@ class _TaskListState extends State<TaskList> {
         slivers: <Widget>[
           TaskListAppBar(
             visibility: isShowCompleted,
-            callback: _toggleShowCompleted,
+            onVisibility: _toggleShowCompleted,
+            onSync: _syncTaskList,
           ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(left: 32),
               child: Text(
                 "Выполнено: $completed",
-                // style: pageTheme.textTheme.,
                 style: pageTheme.textTheme.bodyMedium
                     ?.apply(color: pageTheme.disabledColor),
               ),
@@ -97,10 +83,6 @@ class _TaskListState extends State<TaskList> {
           ),
           SliverToBoxAdapter(
             child: _blocBuilder(context),
-            // child: BlocBuilder(
-            //   bloc: BlocProvider.of<TaskListBloc>(context),
-            //   builder: _blocBuilder,
-            // ),
           ),
         ],
       ),

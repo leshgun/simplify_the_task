@@ -31,16 +31,31 @@ class IsarRepository {
   IsarRepository({required this.directoryName});
 
   Future<List<TaskModelIsar>> getTaskList() {
-    return isarInstance.then((Isar isar) => isar.taskModelIsars.where().findAll());
+    return isarInstance
+        .then((Isar isar) => isar.taskModelIsars.where().findAll());
   }
 
   Future<void> updateTask(TaskModelIsar task) async {
     final isar = await isarInstance;
+    final taskToDelete = await isar.taskModelIsars
+        .filter()
+        .taskIdEqualTo(task.taskId)
+        .findFirst();
+    if (taskToDelete != null) {
+      await _delete(taskToDelete.id);
+    }
     isar.writeTxn(() => isar.taskModelIsars.put(task));
   }
 
-  Future<void> deleteTask(int id) async {
+  Future<void> deleteTask(String taskId) async {
     final isar = await isarInstance;
-    isar.writeTxn(() => isar.taskModelIsars.delete(id));
+    isar.writeTxn(
+      () => isar.taskModelIsars.filter().taskIdEqualTo(taskId).deleteAll(),
+    );
+  }
+
+  Future<void> _delete(int id) async {
+    final isar = await isarInstance;
+    await isar.writeTxn(() => isar.taskModelIsars.delete(id));
   }
 }

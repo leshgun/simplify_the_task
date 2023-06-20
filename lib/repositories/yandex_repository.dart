@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:simplify_the_task/models/task_model_yandex.dart';
 
 const String baseURL = 'https://beta.mrdekk.ru/todobackend';
+const Duration deleay = Duration(microseconds: 300);
 
 class YandexRepository {
   final Logger logger = Logger();
@@ -40,27 +41,26 @@ class YandexRepository {
       return;
     }
     _updateRevision(response);
-    final data = response.data['list'];
-    List<int> listToDelete = data.map((json) {
-      if (json['id'] is int) {
-        return json['id'] as int;
-      }
-      return -1;
-    }).toList();
+    final data = response.data['list'] as List;
+    List<dynamic> listToDelete =
+        data.map((json) => json['id'].toString()).toList();
     List<TaskModelYandex> listToAdd = [];
     List<TaskModelYandex> listToUpdate = [];
     for (TaskModelYandex task in list) {
       if (listToDelete.contains(task.id)) {
+        final taskToDelete = data.firstWhere((t) => t['id'] == task.id);
+        if (task.changedAt != taskToDelete['changed_at']) {
+          listToUpdate.add(task);
+        }
         listToDelete.remove(task.id);
-        listToUpdate.add(task);
-        continue;
+      } else {
+        listToAdd.add(task);
       }
-      listToAdd.add(task);
     }
-    deleteFromRepository(listToDelete);
-    updateListOnRepository(listToUpdate);
-    updateTheRepository();
-    addToRepository(listToAdd);
+    await deleteFromRepository(listToDelete);
+    await updateListOnRepository(listToUpdate);
+    await addToRepository(listToAdd);
+    logger.v('Synchronization was successful');
   }
 
   Future<void> addToRepository(List<TaskModelYandex> list) async {
@@ -68,8 +68,8 @@ class YandexRepository {
       return;
     }
     for (TaskModelYandex task in list) {
-      logger.d(jsonEncode({"element": task.toJson()}));
-      _post('/list', jsonEncode({"element": task.toJson()}));
+      await _post('/list', jsonEncode({"element": task.toJson()}));
+      Future.delayed(deleay);
     }
   }
 
@@ -78,16 +78,18 @@ class YandexRepository {
       return;
     }
     for (TaskModelYandex task in list) {
-      _put('/list/${task.id}', jsonEncode(task.toJson()));
+      await _put('/list/${task.id}', jsonEncode({"element": task.toJson()}));
+      Future.delayed(deleay);
     }
   }
 
-  Future<void> deleteFromRepository(List<int> list) async {
+  Future<void> deleteFromRepository(List<dynamic> list) async {
     if (list.isEmpty) {
       return;
     }
-    for (int taskId in list) {
-      _delete('/list/$taskId');
+    for (final taskId in list) {
+      await _delete('/list/$taskId');
+      Future.delayed(deleay);
     }
   }
 
@@ -95,62 +97,58 @@ class YandexRepository {
     _patch('/lsit');
   }
 
-  Future<Response> _get(String url) {
-    return dio.get(url).then(
+  Future<Response> _get(String url) async {
+    return await dio.get(url).then(
       (Response response) {
         _updateRevision(response);
         logger.v('The response from the repository was successfully received.');
         return response;
       },
       onError: (error) {
-        logger.w('The response from the repository cannot by recieved.');
-        logger.w(error);
+        logger.w('The response from the repository cannot by recieved.', error);
       },
     );
   }
 
   Future<void> _post(String url, String data) async {
-    logger.v('Post request headders: ${dio.options.headers}');
-    dio.post(url, data: data).then(
+    await dio.post(url, data: data).then(
       (Response response) {
         _updateRevision(response);
         logger.v('Data send to the Yandex repository successfully');
       },
       onError: (error) {
-        logger.w('The data cannot be sended to the Yandex repository');
-        logger.w(error);
+        logger.w('The data cannot be sended to the Yandex repository', error);
       },
     );
   }
 
   Future<void> _put(String url, String data) async {
-    dio.put(url, data: data).then(
+    await dio.put(url, data: data).then(
       (Response response) {
         _updateRevision(response);
         logger.v('Data changed in the Yandex repository successfully');
       },
       onError: (error) {
-        logger.w('The data in the Yandex repository cannot be changed');
-        logger.w(error);
+        logger.w('The data in the Yandex repository cannot be changed', error);
       },
     );
   }
 
   Future<void> _delete(String url) async {
-    dio.delete(url).then(
+    await dio.delete(url).then(
       (Response response) {
         _updateRevision(response);
         logger.v('Data deleted from the Yandex repository successfully');
       },
       onError: (error) {
-        logger.w('The data cannot be deleted from the Yandex repository');
-        logger.w(error);
+        logger.w(
+            'The data cannot be deleted from the Yandex repository', error);
       },
     );
   }
 
   Future<void> _patch(String url) async {
-    dio.patch(url).then(
+    await dio.patch(url).then(
       (Response response) {
         _updateRevision(response);
         logger.v('Data in the Yandex repository patched successfully');
@@ -166,6 +164,12 @@ class YandexRepository {
     response ??= await _get('list');
     final revision = response.data['revision'];
     if (revision is int) {
+      // Maybe sometimes....
+      // final int oldRevision =
+      //     dio.options.headers['X-Last-Known-Revision'] ?? (revision - 1);
+      // if (revision - oldRevision > 1) {
+      //   syncRepository();
+      // }
       dio.options.headers['X-Last-Known-Revision'] = revision;
       logger.v('Last known revision: $revision');
     }

@@ -1,5 +1,5 @@
 class TaskModelYandex {
-  final int id;
+  final String id;
   final String text;
   final String importance;
   final int? deadline;
@@ -7,7 +7,7 @@ class TaskModelYandex {
   final String? color;
   final int createdAt;
   final int changedAt;
-  final int lastUpdatedBy;
+  final String lastUpdatedBy;
 
   const TaskModelYandex(
       {required this.id,
