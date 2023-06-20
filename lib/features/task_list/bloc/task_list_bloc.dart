@@ -45,7 +45,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       _taskListRepository.saveTask(event.task);
       final stateLoaded = state as _TaskListLoaded;
       emit(TaskListState.loaded(
-        taskList: List.from(stateLoaded.taskList)..add(event.task),
+        taskList: List.from(stateLoaded.taskList)..insert(0, event.task),
       ));
     }
   }
