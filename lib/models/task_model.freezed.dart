@@ -20,7 +20,7 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TaskModel {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
   int? get priority => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $TaskModelCopyWith<$Res> {
       _$TaskModelCopyWithImpl<$Res, TaskModel>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String text,
       bool completed,
       int? priority,
@@ -69,7 +69,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -98,7 +98,7 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String text,
       bool completed,
       int? priority,
@@ -126,7 +126,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -161,7 +161,7 @@ class _$_TaskModel implements _TaskModel {
       _$$_TaskModelFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String text;
   @override
@@ -214,7 +214,7 @@ class _$_TaskModel implements _TaskModel {
 
 abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
-      {required final int id,
+      {required final String id,
       required final String text,
       final bool completed,
       final int? priority,
@@ -224,7 +224,7 @@ abstract class _TaskModel implements TaskModel {
       _$_TaskModel.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get text;
   @override

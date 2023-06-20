@@ -13,8 +13,18 @@ import 'package:simplify_the_task/models/task_model.dart';
 class TaskListAppBar extends StatelessWidget {
   final bool? visibility;
   final Function()? onVisibility;
+<<<<<<< HEAD
 
   const TaskListAppBar({super.key, this.visibility, this.onVisibility});
+=======
+  final Function()? onSync;
+
+  const TaskListAppBar(
+      {super.key,
+      this.visibility,
+      this.onVisibility,
+      this.onSync});
+>>>>>>> 203c2a7 (code review)
 
   IconData get _visibilityIcon {
     if (visibility == null) {
@@ -85,6 +95,7 @@ class TaskListAppBar extends StatelessWidget {
 =======
       // collapsedHeight: 80,
       actions: [
+<<<<<<< HEAD
         Center(
 >>>>>>> 7c8e3a0 (code review)
           child: Padding(
@@ -99,6 +110,19 @@ class TaskListAppBar extends StatelessWidget {
                 color: Colors.blue,
                 size: 24,
               ),
+=======
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: IconButton(
+            onPressed: onVisibility ?? () {},
+            alignment: Alignment.center,
+            hoverColor: Colors.transparent,
+            color: Colors.blue,
+            splashRadius: 24,
+            icon: Icon(
+              _visibilityIcon,
+              size: 24,
+>>>>>>> 203c2a7 (code review)
             ),
 <<<<<<< HEAD
           ],
@@ -107,6 +131,16 @@ class TaskListAppBar extends StatelessWidget {
           ),
 >>>>>>> 7c8e3a0 (code review)
         ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: IconButton(
+            onPressed: onSync ?? () {},
+            color: Colors.blue,
+            hoverColor: Colors.transparent,
+            splashRadius: 24,
+            icon: const Icon(Icons.sync),
+          ),
+        )
       ],
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.pin,

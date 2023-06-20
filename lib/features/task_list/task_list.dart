@@ -34,6 +34,7 @@ class _TaskListState extends State<TaskList> {
   Timer? timer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   void _saveTasksToStorage() async {
     final state = _taskListBloc.state;
     state.when(
@@ -64,6 +65,8 @@ class _TaskListState extends State<TaskList> {
   // }
 >>>>>>> 435c830 (yandex repo)
 
+=======
+>>>>>>> 203c2a7 (code review)
   @override
   void initState() {
     _taskListBloc.add(const TaskListLoad());
@@ -72,6 +75,7 @@ class _TaskListState extends State<TaskList> {
 <<<<<<< HEAD
 =======
     _taskListBloc.add(const TaskListLoad());
+    // _syncTaskList();
   }
 
   @override
@@ -82,6 +86,7 @@ class _TaskListState extends State<TaskList> {
   }
 
   _addNewTask() {
+<<<<<<< HEAD
 <<<<<<< HEAD
     context.goNamed(
       Routes.task,
@@ -110,6 +115,18 @@ class _TaskListState extends State<TaskList> {
   //   _taskListBloc.add(const TaskListSynch());
   // }
 >>>>>>> 7c8e3a0 (code review)
+=======
+    Navigator.of(context).pushNamed('/task-info',
+        arguments: TaskInfoArguments(
+          onSaveTask: (task) =>
+              _taskListBloc.add(TaskListEvent.add(task: task)),
+        ));
+  }
+
+  _syncTaskList() {
+    _taskListBloc.add(const TaskListSynch());
+  }
+>>>>>>> 203c2a7 (code review)
 
   _toggleShowCompleted() {
     setState(() {
@@ -159,14 +176,14 @@ class _TaskListState extends State<TaskList> {
         slivers: <Widget>[
           TaskListAppBar(
             visibility: isShowCompleted,
-            callback: _toggleShowCompleted,
+            onVisibility: _toggleShowCompleted,
+            onSync: _syncTaskList,
           ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(left: 32),
               child: Text(
                 "Выполнено: $completed",
-                // style: pageTheme.textTheme.,
                 style: pageTheme.textTheme.bodyMedium
                     ?.apply(color: pageTheme.disabledColor),
               ),
@@ -174,10 +191,6 @@ class _TaskListState extends State<TaskList> {
           ),
           SliverToBoxAdapter(
             child: _blocBuilder(context),
-            // child: BlocBuilder(
-            //   bloc: BlocProvider.of<TaskListBloc>(context),
-            //   builder: _blocBuilder,
-            // ),
           ),
         ],
 >>>>>>> d5b4746 (equitable => freezed)

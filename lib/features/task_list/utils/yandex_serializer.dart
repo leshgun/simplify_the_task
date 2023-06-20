@@ -6,14 +6,14 @@ class YandexSerializer {
 
   static TaskModelYandex taskModelToTaskModelYandex(TaskModel task) {
     return TaskModelYandex(
-      id: task.id,
+      id: task.id.toString(),
       text: task.text,
       deadline: dateTimeToTimestamp(task.deadline),
       importance: importance[task.priority ?? 0],
       done: task.completed,
       createdAt: dateTimeToTimestamp(DateTime.now())!,
       changedAt: dateTimeToTimestamp(DateTime.now())!,
-      lastUpdatedBy: 1,
+      lastUpdatedBy: '',
     );
   }
 

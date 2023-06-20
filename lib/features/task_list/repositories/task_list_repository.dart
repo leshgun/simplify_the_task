@@ -78,7 +78,6 @@ import 'package:simplify_the_task/features/task_list/utils/isar_serializer.dart'
 import 'package:simplify_the_task/features/task_list/utils/yandex_serializer.dart';
 import 'package:simplify_the_task/models/task_model.dart';
 import 'package:simplify_the_task/models/task_model_isar.dart';
-import 'package:simplify_the_task/models/task_model_yandex.dart';
 import 'package:simplify_the_task/repositories/isar_repository.dart';
 import 'package:simplify_the_task/repositories/yandex_repository.dart';
 
@@ -94,10 +93,6 @@ class TaskListRepository {
   );
 
   Future<List<TaskModel>> getTaskList() async {
-    _yandexRepository.getTaskList().then((List<TaskModelYandex> list) {
-      logger.v('Task List on the Yandex Repository: $list');
-    });
-
     return _getTaskListFromIsarRepository();
   }
 
