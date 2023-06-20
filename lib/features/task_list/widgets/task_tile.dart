@@ -86,8 +86,6 @@ class _TaskState extends State<TaskTile> {
         background: widget.task.completed
             ? dismissCheckboxChecked
             : dismissCheckboxBlank,
-        movementDuration: const Duration(seconds: 1),
-        resizeDuration: const Duration(seconds: 1),
         secondaryBackground: dismissDelete,
         onDismissed: (direction) => _taskDelete(),
         confirmDismiss: (direction) async {

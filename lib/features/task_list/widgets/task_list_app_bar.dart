@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class TaskListAppBar extends StatelessWidget {
   final bool? visibility;
-  final Function()? callback;
+  final Function()? onVisibility;
+  final Function()? onSync;
 
-  const TaskListAppBar({
-    super.key,
-    this.visibility,
-    this.callback,
-  });
+  const TaskListAppBar(
+      {super.key,
+      this.visibility,
+      this.onVisibility,
+      this.onSync});
 
   IconData get _visibilityIcon {
     if (visibility == null) {
@@ -20,13 +21,6 @@ class TaskListAppBar extends StatelessWidget {
     return Icons.visibility;
   }
 
-  _onCallback() {
-    if (callback == null) {
-      return;
-    }
-    callback!();
-  }
-
   @override
   Widget build(BuildContext context) {
     final pageTheme = Theme.of(context);
@@ -36,22 +30,30 @@ class TaskListAppBar extends StatelessWidget {
       expandedHeight: 150,
       // collapsedHeight: 80,
       actions: [
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: IconButton(
-              onPressed: _onCallback,
-              alignment: Alignment.center,
-              hoverColor: Colors.transparent,
-              splashRadius: 24,
-              icon: Icon(
-                _visibilityIcon,
-                color: Colors.blue,
-                size: 24,
-              ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: IconButton(
+            onPressed: onVisibility ?? () {},
+            alignment: Alignment.center,
+            hoverColor: Colors.transparent,
+            color: Colors.blue,
+            splashRadius: 24,
+            icon: Icon(
+              _visibilityIcon,
+              size: 24,
             ),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: IconButton(
+            onPressed: onSync ?? () {},
+            color: Colors.blue,
+            hoverColor: Colors.transparent,
+            splashRadius: 24,
+            icon: const Icon(Icons.sync),
+          ),
+        )
       ],
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.pin,
