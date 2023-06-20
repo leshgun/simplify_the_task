@@ -9,7 +9,11 @@ import 'package:simplify_the_task/data/models/task/task_model.dart';
 =======
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/models/task_model.dart';
+<<<<<<< HEAD
 >>>>>>> 07b4506 (code review)
+=======
+import 'package:uuid/uuid.dart';
+>>>>>>> 49aa5b0 (add uuid)
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
@@ -47,8 +51,15 @@ class _TaskInfoState extends State<TaskInfo> {
 =======
   NavigatorState get _navigator => Navigator.of(context);
   TaskModel get task {
+<<<<<<< HEAD
     inputTask ??= TaskModel(id: DateTime.now().hashCode, text: '');
 >>>>>>> 07b4506 (code review)
+=======
+    inputTask ??= TaskModel(
+      id: const Uuid().v4(),
+      text: '',
+    );
+>>>>>>> 49aa5b0 (add uuid)
     return inputTask!.copyWith(
       text: taskText,
       priority: taskPriority,
