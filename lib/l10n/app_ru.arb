@@ -1,0 +1,14 @@
+{
+  "taskListTitle": "Мои дела",
+  "taskListCompleted": "Выполнено",
+  "taskListEmpty": "Все задачи выполены",
+  "taskListNewTask": "Новое",
+
+  "taskSave": "Сохранить",
+  "taskDelete": "Удалить",
+  "taskDeadline": "Сделать до",
+  "taskPriority": "Важность",
+  "taskPriorityNone": "Нет",
+  "taskPriorityLow": "Низкая",
+  "taskPriorityHigh": "Высокая"
+}

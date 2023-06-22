@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/S.dart';
 
 class DeleteButton extends StatelessWidget {
   final bool? disabled;
@@ -26,7 +27,7 @@ class DeleteButton extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Text(
-              'Удалить',
+              S.of(context)!.taskDelete,
               style: pageTheme.textTheme.bodyMedium?.apply(
                 color: isDisabled ? pageTheme.disabledColor : Colors.red,
               ),

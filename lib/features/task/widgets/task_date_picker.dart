@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/S.dart';
 
 class TaskDatePicker extends StatefulWidget {
   final DateTime? initDate;
-  final Function(DateTime newDate)? onDateChange;
+  final Function(DateTime? newDate)? onDateChange;
 
   const TaskDatePicker({
     super.key,
@@ -34,13 +35,15 @@ class _TaskDatePickerState extends State<TaskDatePicker> {
 
     return ListTile(
       title: Text(
-        'Сделать до',
+        S.of(context)!.taskDeadline,
         style: pageTheme.textTheme.bodyMedium,
       ),
       subtitle: Text(
         formatter.format(initDate),
         style: pageTheme.textTheme.titleSmall?.apply(
-          color: isDateHidden ? Colors.transparent : Colors.blue,
+          color: (isDateHidden || (widget.initDate == null))
+              ? Colors.transparent
+              : Colors.blue,
         ),
       ),
       onTap: () async {
@@ -78,7 +81,7 @@ class _TaskDatePickerState extends State<TaskDatePicker> {
             isDateHidden = !value;
           });
           if (widget.onDateChange != null) {
-            widget.onDateChange!(initDate);
+            widget.onDateChange!(value ? initDate : null);
           }
         },
         value: !isDateHidden,
