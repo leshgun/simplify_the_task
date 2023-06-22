@@ -8,6 +8,20 @@ class TaskModelIsar {
   String? taskId;
   String? text;
   bool? completed;
-  DateTime? deadline;
   int? priority;
+  DateTime? deadline;
+  DateTime? createdAt;
+  DateTime? changedAt;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': taskId,
+      'text': text,
+      'completed': completed,
+      'priority': priority,
+      'deadline': deadline,
+      'created_at': createdAt,
+      'changed_at': changedAt,
+    };
+  }
 }

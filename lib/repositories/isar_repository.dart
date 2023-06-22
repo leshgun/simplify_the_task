@@ -35,14 +35,20 @@ class IsarRepository {
         isar.taskModelIsars.where(sort: Sort.desc).anyId().findAll());
   }
 
+  Future<void> updateTaskList(List<TaskModelIsar> taskList) async {
+    for (TaskModelIsar task in taskList) {
+      await updateTask(task);
+    }
+  }
+
   Future<void> updateTask(TaskModelIsar task) async {
     final isar = await isarInstance;
-    final taskToDelete = await isar.taskModelIsars
+    final taskInDB = await isar.taskModelIsars
         .filter()
         .taskIdEqualTo(task.taskId)
         .findFirst();
-    if (taskToDelete != null) {
-      await _delete(taskToDelete.id);
+    if (taskInDB != null) {
+      task = task..id = taskInDB.id;
     }
     isar.writeTxn(() => isar.taskModelIsars.put(task));
   }
@@ -54,6 +60,7 @@ class IsarRepository {
     );
   }
 
+  // ignore: unused_element
   Future<void> _delete(int id) async {
     final isar = await isarInstance;
     await isar.writeTxn(() => isar.taskModelIsars.delete(id));
