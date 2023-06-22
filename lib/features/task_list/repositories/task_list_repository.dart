@@ -108,6 +108,7 @@ class TaskListRepository {
 
   Future<List<TaskModel>> syncRepositories({bool isMerge = false}) async {
     List<TaskModelIsar> taskListIsar = await _isarRepository.getTaskList();
+<<<<<<< HEAD
     List<TaskModelYandex> taskListYandex;
     List<TaskModel> taskList = [];
     if (taskListIsar.isEmpty) {
@@ -134,6 +135,20 @@ class TaskListRepository {
           .toList());
     }
     taskList.sort((a, b) => b.changedAt.compareTo(a.createdAt));
+=======
+    List<TaskModelYandex> taskListYandex = await _yandexRepository.mergeData(
+      taskListIsar
+          .map((TaskModelIsar task) => YandexSerializer.fromTaskModelIsar(task))
+          .toList(),
+    );
+    List<TaskModel> taskList = taskListYandex
+        .map((TaskModelYandex task) => YandexSerializer.toTaskModel(task))
+        .toList();
+    taskList.sort((a, b) => b.changedAt.compareTo(a.changedAt));
+    _isarRepository.updateTaskList(taskListYandex
+        .map((TaskModelYandex task) => IsarSerializer.fromTaskModelYandex(task))
+        .toList());
+>>>>>>> 8bb3c8b (add synchronization)
     return taskList;
   }
 
@@ -143,10 +158,14 @@ class TaskListRepository {
 
   Future<List<TaskModel>> _getTaskListFromIsarRepository() async {
     final List<TaskModelIsar> list = await _isarRepository.getTaskList();
+<<<<<<< HEAD
     final List<TaskModel> taskList =
         list.map((task) => IsarSerializer.toTaskModel(task)).toList();
     taskList.sort((a, b) => b.changedAt.compareTo(a.createdAt));
     return taskList;
+=======
+    return list.map((task) => IsarSerializer.toTaskModel(task)).toList();
+>>>>>>> 8bb3c8b (add synchronization)
   }
 }
 >>>>>>> 435c830 (yandex repo)

@@ -1,11 +1,33 @@
 import 'package:simplify_the_task/features/task_list/utils/yandex_serializer.dart';
 import 'package:simplify_the_task/models/task_model.dart';
 import 'package:simplify_the_task/models/task_model_isar.dart';
+<<<<<<< HEAD
 import 'package:simplify_the_task/models/task_model_yandex.dart';
 import 'package:uuid/uuid.dart';
 
 class IsarSerializer {
   static TaskModelIsar fromJson(Map<String, dynamic> json) {
+=======
+<<<<<<< HEAD
+=======
+import 'package:simplify_the_task/models/task_model_yandex.dart';
+import 'package:uuid/uuid.dart';
+>>>>>>> bba706a (add synchronization)
+
+class IsarSerializer {
+  static TaskModelIsar fromJson(Map<String, dynamic> json) {
+    return TaskModelIsar()
+      ..taskId = json['id']
+      ..text = json['text']
+      ..completed = json['completed']
+      ..deadline = json['deadline']
+      ..priority = json['priority']
+      ..createdAt = json['createdAt']
+      ..changedAt = json['changedAt'];
+  }
+
+  static TaskModelIsar fromTaskModel(TaskModel task) {
+>>>>>>> 8bb3c8b (add synchronization)
     return TaskModelIsar()
       ..taskId = json['id']
       ..text = json['text']

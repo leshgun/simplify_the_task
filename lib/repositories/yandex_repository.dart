@@ -31,6 +31,7 @@ class YandexRepository {
 
   // TODO: code review
   Future<List<TaskModelYandex>> getTaskList() async {
+<<<<<<< HEAD
     final Response? response = await _get('/list');
     if (response == null) {
       return [];
@@ -44,11 +45,51 @@ class YandexRepository {
     }
     final list = data['list'];
     if (list == null || list is! List) {
+=======
+    final Response response = await _get('/list');
+    final data = response.data;
+    if (data is! Map<String, dynamic>) {
+      return [];
+    }
+    final List? list = data['list'];
+    if (list == null) {
+>>>>>>> 8bb3c8b (add synchronization)
       return [];
     }
     return list.map((json) => TaskModelYandex.fromJson(json)).toList();
   }
 
+<<<<<<< HEAD
+=======
+  Future<void> syncRepository(List<TaskModelYandex> list) async {
+    // final Response response = await dio.get('/list');
+    // if (response.statusCode != 200) {
+    //   return;
+    // }
+    // _updateRevision(response);
+    // final data = response.data['list'] as List;
+    // List<dynamic> listToDelete =
+    //     data.map((json) => json['id'].toString()).toList();
+    // List<TaskModelYandex> listToAdd = [];
+    // List<TaskModelYandex> listToUpdate = [];
+    // for (TaskModelYandex task in list) {
+    //   if (listToDelete.contains(task.id)) {
+    //     final taskToDelete = data.firstWhere((t) => t['id'] == task.id);
+    //     if (task.changedAt != taskToDelete['changed_at']) {
+    //       listToUpdate.add(task);
+    //     }
+    //     listToDelete.remove(task.id);
+    //   } else {
+    //     listToAdd.add(task);
+    //   }
+    // }
+    // await deleteFromRepository(listToDelete);
+    // await updateListOnRepository(list);
+    // await addToRepository(listToAdd);
+    // logger.v('Synchronization was successful');
+  }
+
+>>>>>>> 8bb3c8b (add synchronization)
   Future<List<TaskModelYandex>> mergeData(List<TaskModelYandex> list) async {
     _updateRevision(null);
     final Response? response = await updateListOnRepository(list);
@@ -77,6 +118,18 @@ class YandexRepository {
   }
 
   Future<Response?> updateListOnRepository(List<TaskModelYandex> list) async {
+<<<<<<< HEAD
+=======
+    // if (list.isEmpty) {
+    //   return;
+    // }
+    // for (TaskModelYandex task in list) {
+    //   await _put('/list/${task.id}', jsonEncode({"element": task.toJson()}));
+    //   Future.delayed(deleay);
+    // }
+    // logger.w(jsonEncode({"list": list.map((task) => task.toJson()).toList()}),
+    //     dio.options.headers);
+>>>>>>> 8bb3c8b (add synchronization)
     return await _patch(
       '/list',
       jsonEncode({"list": list.map((task) => task.toJson()).toList()}),
@@ -93,7 +146,11 @@ class YandexRepository {
     }
   }
 
+<<<<<<< HEAD
   Future<Response?> _get(String url) async {
+=======
+  Future<Response> _get(String url) async {
+>>>>>>> 8bb3c8b (add synchronization)
     return await dio.get(url).then(
       (Response response) {
         _updateRevision(response);
@@ -171,16 +228,23 @@ class YandexRepository {
 
   Future<void> _updateRevision(Response? response) async {
     response ??= await _get('/list');
+<<<<<<< HEAD
     if (response == null) {
       return;
     }
     if (response.statusCode != 200) {
       return;
     }
+=======
+>>>>>>> 8bb3c8b (add synchronization)
     final revision = response.data['revision'];
     if (revision is int) {
       lastKnownRevision = revision;
       updateDioOptions();
+<<<<<<< HEAD
+=======
+      ;
+>>>>>>> 8bb3c8b (add synchronization)
       logger.v('Last known revision: $revision');
     }
   }
