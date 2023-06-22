@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
@@ -12,13 +11,20 @@ class YandexRepository {
   final Logger logger = Logger();
   final Dio dio = Dio();
   final String? token;
+  int lastKnownRevision = 0;
 
   YandexRepository({this.token}) {
-    HttpOverrides.global = MyHttpOverrides();
+    updateDioOptions();
+  }
+
+  void updateDioOptions() {
     dio.options = BaseOptions(
       baseUrl: baseURL,
       contentType: "application/json",
-      headers: {'Authorization': 'Bearer ${token ?? ''}'},
+      headers: {
+        'Authorization': 'Bearer ${token ?? ''}',
+        'X-Last-Known-Revision': lastKnownRevision,
+      },
       validateStatus: _validateStatus,
     );
   }
@@ -26,41 +32,60 @@ class YandexRepository {
   // TODO: code review
   Future<List<TaskModelYandex>> getTaskList() async {
     final Response response = await _get('/list');
-    if (response.statusCode == 200) {
-      final data = response.data;
-      if (data is List) {
-        return data.map((json) => TaskModelYandex.fromJson(json)).toList();
-      }
+    final data = response.data;
+    if (data is! Map<String, dynamic>) {
+      return [];
     }
-    return [];
+    final List? list = data['list'];
+    if (list == null) {
+      return [];
+    }
+    return list.map((json) => TaskModelYandex.fromJson(json)).toList();
   }
 
   Future<void> syncRepository(List<TaskModelYandex> list) async {
-    final Response response = await dio.get('/list');
-    if (response.statusCode != 200) {
-      return;
+    // final Response response = await dio.get('/list');
+    // if (response.statusCode != 200) {
+    //   return;
+    // }
+    // _updateRevision(response);
+    // final data = response.data['list'] as List;
+    // List<dynamic> listToDelete =
+    //     data.map((json) => json['id'].toString()).toList();
+    // List<TaskModelYandex> listToAdd = [];
+    // List<TaskModelYandex> listToUpdate = [];
+    // for (TaskModelYandex task in list) {
+    //   if (listToDelete.contains(task.id)) {
+    //     final taskToDelete = data.firstWhere((t) => t['id'] == task.id);
+    //     if (task.changedAt != taskToDelete['changed_at']) {
+    //       listToUpdate.add(task);
+    //     }
+    //     listToDelete.remove(task.id);
+    //   } else {
+    //     listToAdd.add(task);
+    //   }
+    // }
+    // await deleteFromRepository(listToDelete);
+    // await updateListOnRepository(list);
+    // await addToRepository(listToAdd);
+    // logger.v('Synchronization was successful');
+  }
+
+  Future<List<TaskModelYandex>> mergeData(List<TaskModelYandex> list) async {
+    _updateRevision(null);
+    final Response? response = await updateListOnRepository(list);
+    if (response == null) {
+      return list;
     }
-    _updateRevision(response);
-    final data = response.data['list'] as List;
-    List<dynamic> listToDelete =
-        data.map((json) => json['id'].toString()).toList();
-    List<TaskModelYandex> listToAdd = [];
-    List<TaskModelYandex> listToUpdate = [];
-    for (TaskModelYandex task in list) {
-      if (listToDelete.contains(task.id)) {
-        final taskToDelete = data.firstWhere((t) => t['id'] == task.id);
-        if (task.changedAt != taskToDelete['changed_at']) {
-          listToUpdate.add(task);
-        }
-        listToDelete.remove(task.id);
-      } else {
-        listToAdd.add(task);
-      }
+    final data = response.data;
+    if (data == null) {
+      return list;
     }
-    await deleteFromRepository(listToDelete);
-    await updateListOnRepository(listToUpdate);
-    await addToRepository(listToAdd);
-    logger.v('Synchronization was successful');
+    final newList = data['list'];
+    if (newList == null || newList is! List) {
+      return list;
+    }
+    return newList.map((json) => TaskModelYandex.fromJson(json)).toList();
   }
 
   Future<void> addToRepository(List<TaskModelYandex> list) async {
@@ -73,14 +98,20 @@ class YandexRepository {
     }
   }
 
-  Future<void> updateListOnRepository(List<TaskModelYandex> list) async {
-    if (list.isEmpty) {
-      return;
-    }
-    for (TaskModelYandex task in list) {
-      await _put('/list/${task.id}', jsonEncode({"element": task.toJson()}));
-      Future.delayed(deleay);
-    }
+  Future<Response?> updateListOnRepository(List<TaskModelYandex> list) async {
+    // if (list.isEmpty) {
+    //   return;
+    // }
+    // for (TaskModelYandex task in list) {
+    //   await _put('/list/${task.id}', jsonEncode({"element": task.toJson()}));
+    //   Future.delayed(deleay);
+    // }
+    // logger.w(jsonEncode({"list": list.map((task) => task.toJson()).toList()}),
+    //     dio.options.headers);
+    return await _patch(
+      '/list',
+      jsonEncode({"list": list.map((task) => task.toJson()).toList()}),
+    );
   }
 
   Future<void> deleteFromRepository(List<dynamic> list) async {
@@ -91,10 +122,6 @@ class YandexRepository {
       await _delete('/list/$taskId');
       Future.delayed(deleay);
     }
-  }
-
-  Future<void> updateTheRepository() async {
-    _patch('/lsit');
   }
 
   Future<Response> _get(String url) async {
@@ -122,6 +149,7 @@ class YandexRepository {
     );
   }
 
+  // ignore: unused_element
   Future<void> _put(String url, String data) async {
     await dio.put(url, data: data).then(
       (Response response) {
@@ -147,30 +175,37 @@ class YandexRepository {
     );
   }
 
-  Future<void> _patch(String url) async {
-    await dio.patch(url).then(
-      (Response response) {
-        _updateRevision(response);
+  Future<dynamic> _patch(String url, String data) async {
+    return dio.patch(url, data: data).then(
+      (value) {
         logger.v('Data in the Yandex repository patched successfully');
+        return value;
       },
       onError: (error) {
-        logger.w('The data cannot be patched in the Yandex repository');
-        logger.w(error);
+        logger.w('The data cannot be patched in the Yandex repository', error);
       },
     );
+
+    // return await dio.patch(url, data: data).then(
+    //   (Response response) {
+    //     _updateRevision(response);
+    //     logger.v('Data in the Yandex repository patched successfully');
+    //     logger.w(response.data);
+    //     return response;
+    //   },
+    //   onError: (error) {
+    //     logger.w('The data cannot be patched in the Yandex repository', error);
+    //   },
+    // );
   }
 
   Future<void> _updateRevision(Response? response) async {
-    response ??= await _get('list');
+    response ??= await _get('/list');
     final revision = response.data['revision'];
     if (revision is int) {
-      // Maybe sometimes....
-      // final int oldRevision =
-      //     dio.options.headers['X-Last-Known-Revision'] ?? (revision - 1);
-      // if (revision - oldRevision > 1) {
-      //   syncRepository();
-      // }
-      dio.options.headers['X-Last-Known-Revision'] = revision;
+      lastKnownRevision = revision;
+      updateDioOptions();
+      ;
       logger.v('Last known revision: $revision');
     }
   }
@@ -187,11 +222,11 @@ class YandexRepository {
   }
 }
 
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+// class MyHttpOverrides extends HttpOverrides {
+//   @override
+//   HttpClient createHttpClient(SecurityContext? context) {
+//     return super.createHttpClient(context)
+//       ..badCertificateCallback =
+//           (X509Certificate cert, String host, int port) => true;
+//   }
+// }

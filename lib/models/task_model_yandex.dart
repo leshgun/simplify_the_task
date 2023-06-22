@@ -25,12 +25,12 @@ class TaskModelYandex {
       id: json['id'],
       text: json['text'],
       importance: json['importance'],
-      deadline: json['deadline'] ?? 0,
+      deadline: json['deadline'],
       done: json['done'],
-      color: json['color'] ?? '',
+      color: json['color'],
       createdAt: json['created_at'],
       changedAt: json['changed_at'],
-      lastUpdatedBy: json['last_update_by'],
+      lastUpdatedBy: json['last_updated_by'],
     );
   }
 
@@ -39,9 +39,9 @@ class TaskModelYandex {
       'id': id,
       'text': text,
       'importance': importance,
-      'deadline': deadline ?? 0,
+      'deadline': deadline,
       'done': done,
-      'color': color ?? '',
+      'color': color,
       'created_at': createdAt,
       'changed_at': changedAt,
       'last_updated_by': lastUpdatedBy
