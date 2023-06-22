@@ -13,7 +13,11 @@ import 'package:simplify_the_task/models/task_model.dart';
 >>>>>>> 07b4506 (code review)
 =======
 import 'package:uuid/uuid.dart';
+<<<<<<< HEAD
 >>>>>>> 49aa5b0 (add uuid)
+=======
+import 'package:flutter_gen/gen_l10n/S.dart';
+>>>>>>> da229dc (add localization)
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
@@ -169,14 +173,20 @@ class _TaskInfoState extends State<TaskInfo> {
       ),
       TaskPopup(
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da229dc (add localization)
         items: [
           S.of(context)!.taskPriorityNone,
           S.of(context)!.taskPriorityLow,
           S.of(context)!.taskPriorityHigh,
         ],
+<<<<<<< HEAD
 =======
         items: const ['Нет', 'Низкий', 'Высокий'],
 >>>>>>> 07b4506 (code review)
+=======
+>>>>>>> da229dc (add localization)
         initItem: taskPriority,
         onItemChange: (value) {
           setState(() {
@@ -194,10 +204,14 @@ class _TaskInfoState extends State<TaskInfo> {
       ),
       DeleteButton(
 <<<<<<< HEAD
+<<<<<<< HEAD
         disabled: inputTask == null,
 =======
         disabled: inputTask != null,
 >>>>>>> 07b4506 (code review)
+=======
+        disabled: inputTask == null,
+>>>>>>> da229dc (add localization)
         callback: deleteTask,
       )
     ];
@@ -231,9 +245,16 @@ class _TaskInfoState extends State<TaskInfo> {
               ),
 =======
               onPressed: saveTask,
+<<<<<<< HEAD
               child: const Text('СОХРАНИТЬ',
                   style: TextStyle(color: Color(0xff0a84ff))),
 >>>>>>> 07b4506 (code review)
+=======
+              child: Text(
+                S.of(context)!.taskSave,
+                style: const TextStyle(color: Color(0xff0a84ff)),
+              ),
+>>>>>>> da229dc (add localization)
             ),
           )
         ],

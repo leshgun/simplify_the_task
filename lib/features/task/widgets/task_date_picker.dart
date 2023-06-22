@@ -82,10 +82,14 @@ class _TaskDatePickerState extends State<TaskDatePicker> {
           });
           if (widget.onDateChange != null) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             widget.onDateChange!(value ? initDate : null);
 =======
             widget.onDateChange!(initDate);
 >>>>>>> 07b4506 (code review)
+=======
+            widget.onDateChange!(value ? initDate : null);
+>>>>>>> da229dc (add localization)
           }
         },
         value: !isDateHidden,

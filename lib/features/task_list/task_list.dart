@@ -8,7 +8,11 @@ import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/widgets/task_list_app_bar.dart';
 import 'package:simplify_the_task/features/task_list/widgets/task_tile.dart';
 import 'package:simplify_the_task/models/task_model.dart';
+<<<<<<< HEAD
 >>>>>>> 07b4506 (code review)
+=======
+import 'package:flutter_gen/gen_l10n/S.dart';
+>>>>>>> da229dc (add localization)
 
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
@@ -146,6 +150,9 @@ class _TaskListState extends State<TaskList> {
     );
     return Scaffold(
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> da229dc (add localization)
       body: RefreshIndicator(
         onRefresh: () async {
           _syncTaskList();
@@ -164,6 +171,7 @@ class _TaskListState extends State<TaskList> {
                   style: pageTheme.textTheme.bodyMedium
                       ?.apply(color: pageTheme.disabledColor),
                 ),
+<<<<<<< HEAD
               ),
             ),
             SliverToBoxAdapter(
@@ -194,6 +202,15 @@ class _TaskListState extends State<TaskList> {
           ),
         ],
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: _blocBuilder(context),
+            ),
+          ],
+        ),
+>>>>>>> da229dc (add localization)
       ),
       floatingActionButton: FloatingActionButton(
         key: const Key('add_task_btn'),
@@ -210,6 +227,7 @@ class _TaskListState extends State<TaskList> {
 
     return state.when(
 <<<<<<< HEAD
+<<<<<<< HEAD
       initial: () => Text(S.of(context)!.taskListEmpty),
       loading: () => const Padding(
         padding: EdgeInsets.only(top: 32),
@@ -223,8 +241,11 @@ class _TaskListState extends State<TaskList> {
       loading: () => const CircularProgressIndicator(),
 >>>>>>> d5b4746 (equitable => freezed)
 =======
+=======
+      initial: () => Text(S.of(context)!.taskListEmpty),
+>>>>>>> da229dc (add localization)
       loading: () => const Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.only(top: 32),
         child: Center(
           child: CircularProgressIndicator(color: Colors.blue),
         ),
@@ -305,7 +326,7 @@ class _TaskListState extends State<TaskList> {
           ),
           margin: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ListView.builder(
                 physics: const ClampingScrollPhysics(),
@@ -321,7 +342,7 @@ class _TaskListState extends State<TaskList> {
                   color: Colors.transparent,
                 ),
                 title: Text(
-                  'Новое',
+                  S.of(context)!.taskListNewTask,
                   style: pageTheme.textTheme.bodySmall,
                 ),
                 onTap: () {

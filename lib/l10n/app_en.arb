@@ -1,0 +1,14 @@
+{
+  "taskListTitle": "My tasks",
+  "taskListCompleted": "Completed",
+  "taskListEmpty": "All tasks completed",
+  "taskListNewTask": "New",
+
+  "taskSave": "Save",
+  "taskDelete": "Delete",
+  "taskDeadline": "Deadline",
+  "taskPriority": "Importance",
+  "taskPriorityNone": "None",
+  "taskPriorityLow": "Low",
+  "taskPriorityHigh": "High"
+}

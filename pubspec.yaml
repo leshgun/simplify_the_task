@@ -51,9 +51,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.0
   path_provider: ^2.0.14
   flutter_bloc: ^8.1.2
-  intl: ^0.18.1
   logger: ^1.4.0
   # equatable: ^2.0.5
   freezed_annotation: ^2.2.0
@@ -74,4 +76,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+<<<<<<< HEAD
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+  generate: true
+>>>>>>> da229dc (add localization)

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 arb-dir: lib/presentation/l10n
+=======
+arb-dir: lib/l10n
+>>>>>>> da229dc (add localization)
 template-arb-file: app_en.arb
 output-localization-file: S.dart
 output-class: S
