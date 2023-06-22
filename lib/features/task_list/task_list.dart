@@ -6,6 +6,7 @@ import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/widgets/task_list_app_bar.dart';
 import 'package:simplify_the_task/features/task_list/widgets/task_tile.dart';
 import 'package:simplify_the_task/models/task_model.dart';
+import 'package:flutter_gen/gen_l10n/S.dart';
 
 import 'bloc/task_list_bloc.dart';
 
@@ -64,30 +65,35 @@ class _TaskListState extends State<TaskList> {
           taskList.where((TaskModel task) => task.completed).length,
     );
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          TaskListAppBar(
-            visibility: isShowCompleted,
-            onVisibility: _toggleShowCompleted,
-            onSync: _syncTaskList,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 32),
-              child: Text(
-                "Выполнено: $completed",
-                style: pageTheme.textTheme.bodyMedium
-                    ?.apply(color: pageTheme.disabledColor),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          _syncTaskList();
+        },
+        child: CustomScrollView(
+          slivers: <Widget>[
+            TaskListAppBar(
+              visibility: isShowCompleted,
+              onVisibility: _toggleShowCompleted,
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: Text(
+                  "${S.of(context)!.taskListCompleted}: $completed",
+                  style: pageTheme.textTheme.bodyMedium
+                      ?.apply(color: pageTheme.disabledColor),
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _blocBuilder(context),
-          ),
-        ],
+            SliverToBoxAdapter(
+              child: _blocBuilder(context),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addNewTask,
+        elevation: 0,
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
@@ -98,9 +104,9 @@ class _TaskListState extends State<TaskList> {
     final state = context.watch<TaskListBloc>().state;
 
     return state.when(
-      initial: () => const Text('There are no tasks...'),
+      initial: () => Text(S.of(context)!.taskListEmpty),
       loading: () => const Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.only(top: 32),
         child: Center(
           child: CircularProgressIndicator(color: Colors.blue),
         ),
@@ -127,7 +133,7 @@ class _TaskListState extends State<TaskList> {
           ),
           margin: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ListView.builder(
                 physics: const ClampingScrollPhysics(),
@@ -143,7 +149,7 @@ class _TaskListState extends State<TaskList> {
                   color: Colors.transparent,
                 ),
                 title: Text(
-                  'Новое',
+                  S.of(context)!.taskListNewTask,
                   style: pageTheme.textTheme.bodySmall,
                 ),
                 onTap: () {

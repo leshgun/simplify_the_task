@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/models/task_model.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_gen/gen_l10n/S.dart';
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
@@ -31,6 +32,8 @@ class _TaskInfoState extends State<TaskInfo> {
     inputTask ??= TaskModel(
       id: const Uuid().v4(),
       text: '',
+      createdAt: DateTime.now(),
+      changedAt: DateTime.now(),
     );
     return inputTask!.copyWith(
       text: taskText,
@@ -109,7 +112,11 @@ class _TaskInfoState extends State<TaskInfo> {
         },
       ),
       TaskPopup(
-        items: const ['Нет', 'Низкий', 'Высокий'],
+        items: [
+          S.of(context)!.taskPriorityNone,
+          S.of(context)!.taskPriorityLow,
+          S.of(context)!.taskPriorityHigh,
+        ],
         initItem: taskPriority,
         onItemChange: (value) {
           setState(() {
@@ -126,7 +133,7 @@ class _TaskInfoState extends State<TaskInfo> {
         },
       ),
       DeleteButton(
-        disabled: inputTask != null,
+        disabled: inputTask == null,
         callback: deleteTask,
       )
     ];
@@ -147,8 +154,10 @@ class _TaskInfoState extends State<TaskInfo> {
             padding: const EdgeInsets.only(right: 16),
             child: TextButton(
               onPressed: saveTask,
-              child: const Text('СОХРАНИТЬ',
-                  style: TextStyle(color: Color(0xff0a84ff))),
+              child: Text(
+                S.of(context)!.taskSave,
+                style: const TextStyle(color: Color(0xff0a84ff)),
+              ),
             ),
           )
         ],

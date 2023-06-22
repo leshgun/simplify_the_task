@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/S.dart';
 
 class TaskPopup extends StatelessWidget {
   final List<String> items;
@@ -32,7 +33,7 @@ class TaskPopup extends StatelessWidget {
       tooltip: '',
       child: ListTile(
         title: Text(
-          'Важность',
+          S.of(context)!.taskPriority,
           style: pageTheme.textTheme.bodyMedium,
         ),
         subtitle: Text(
@@ -58,7 +59,6 @@ class TaskPopup extends StatelessWidget {
                 '!!',
                 style: pageTheme.textTheme.bodyMedium?.apply(
                   color: Colors.red,
-                  // fontWeightDelta: 2,
                 ),
               ),
             ),
