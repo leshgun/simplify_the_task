@@ -4,7 +4,10 @@
   "taskListEmpty": "Все задачи выполены",
   "taskListNewTask": "Новое",
 
+<<<<<<< HEAD
   "taskEmpty": "А что будем делать?",
+=======
+>>>>>>> 5a02aa9 (add localization)
   "taskSave": "Сохранить",
   "taskDelete": "Удалить",
   "taskDeadline": "Сделать до",

@@ -11,6 +11,11 @@ import 'package:logger/logger.dart';
 import 'package:simplify_the_task/models/task_model.dart';
 <<<<<<< HEAD
 >>>>>>> 07b4506 (code review)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 5a02aa9 (add localization)
 =======
 import 'package:uuid/uuid.dart';
 <<<<<<< HEAD
@@ -18,6 +23,10 @@ import 'package:uuid/uuid.dart';
 =======
 import 'package:flutter_gen/gen_l10n/S.dart';
 >>>>>>> da229dc (add localization)
+<<<<<<< HEAD
+=======
+>>>>>>> acc2c42 (add localization)
+>>>>>>> 5a02aa9 (add localization)
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';

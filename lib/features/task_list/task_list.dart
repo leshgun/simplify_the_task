@@ -348,6 +348,7 @@ class _TaskListState extends State<TaskList> {
 =======
 >>>>>>> 39dc754 (code review)
                 ),
+<<<<<<< HEAD
               ],
             ),
             margin: const EdgeInsets.all(16),
@@ -362,6 +363,11 @@ class _TaskListState extends State<TaskList> {
                   itemBuilder: (_, index) {
                     return TaskTile(task: taskList[index]);
                   },
+=======
+                title: Text(
+                  S.of(context)!.taskListNewTask,
+                  style: pageTheme.textTheme.bodySmall,
+>>>>>>> 5a02aa9 (add localization)
                 ),
 <<<<<<< HEAD
                 onTap: () {

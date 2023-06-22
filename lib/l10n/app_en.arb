@@ -4,7 +4,10 @@
   "taskListEmpty": "All tasks completed",
   "taskListNewTask": "New",
 
+<<<<<<< HEAD
   "taskEmpty": "And what will we do?",
+=======
+>>>>>>> 5a02aa9 (add localization)
   "taskSave": "Save",
   "taskDelete": "Delete",
   "taskDeadline": "Deadline",
