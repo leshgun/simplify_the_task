@@ -17,28 +17,38 @@ const TaskModelIsarSchema = CollectionSchema(
   name: r'TaskModelIsar',
   id: 3958406360649945408,
   properties: {
-    r'completed': PropertySchema(
+    r'changedAt': PropertySchema(
       id: 0,
+      name: r'changedAt',
+      type: IsarType.dateTime,
+    ),
+    r'completed': PropertySchema(
+      id: 1,
       name: r'completed',
       type: IsarType.bool,
     ),
+    r'createdAt': PropertySchema(
+      id: 2,
+      name: r'createdAt',
+      type: IsarType.dateTime,
+    ),
     r'deadline': PropertySchema(
-      id: 1,
+      id: 3,
       name: r'deadline',
       type: IsarType.dateTime,
     ),
     r'priority': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'priority',
       type: IsarType.long,
     ),
     r'taskId': PropertySchema(
-      id: 3,
+      id: 5,
       name: r'taskId',
       type: IsarType.string,
     ),
     r'text': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'text',
       type: IsarType.string,
     )
@@ -84,11 +94,13 @@ void _taskModelIsarSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.completed);
-  writer.writeDateTime(offsets[1], object.deadline);
-  writer.writeLong(offsets[2], object.priority);
-  writer.writeString(offsets[3], object.taskId);
-  writer.writeString(offsets[4], object.text);
+  writer.writeDateTime(offsets[0], object.changedAt);
+  writer.writeBool(offsets[1], object.completed);
+  writer.writeDateTime(offsets[2], object.createdAt);
+  writer.writeDateTime(offsets[3], object.deadline);
+  writer.writeLong(offsets[4], object.priority);
+  writer.writeString(offsets[5], object.taskId);
+  writer.writeString(offsets[6], object.text);
 }
 
 TaskModelIsar _taskModelIsarDeserialize(
@@ -98,12 +110,14 @@ TaskModelIsar _taskModelIsarDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = TaskModelIsar();
-  object.completed = reader.readBoolOrNull(offsets[0]);
-  object.deadline = reader.readDateTimeOrNull(offsets[1]);
+  object.changedAt = reader.readDateTimeOrNull(offsets[0]);
+  object.completed = reader.readBoolOrNull(offsets[1]);
+  object.createdAt = reader.readDateTimeOrNull(offsets[2]);
+  object.deadline = reader.readDateTimeOrNull(offsets[3]);
   object.id = id;
-  object.priority = reader.readLongOrNull(offsets[2]);
-  object.taskId = reader.readStringOrNull(offsets[3]);
-  object.text = reader.readStringOrNull(offsets[4]);
+  object.priority = reader.readLongOrNull(offsets[4]);
+  object.taskId = reader.readStringOrNull(offsets[5]);
+  object.text = reader.readStringOrNull(offsets[6]);
   return object;
 }
 
@@ -115,14 +129,18 @@ P _taskModelIsarDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 1:
       return (reader.readDateTimeOrNull(offset)) as P;
+    case 1:
+      return (reader.readBoolOrNull(offset)) as P;
     case 2:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 4:
+      return (reader.readLongOrNull(offset)) as P;
+    case 5:
+      return (reader.readStringOrNull(offset)) as P;
+    case 6:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -226,6 +244,80 @@ extension TaskModelIsarQueryWhere
 extension TaskModelIsarQueryFilter
     on QueryBuilder<TaskModelIsar, TaskModelIsar, QFilterCondition> {
   QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      changedAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'changedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      changedAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'changedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      changedAtEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'changedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      changedAtGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'changedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      changedAtLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'changedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      changedAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'changedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
       completedIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -249,6 +341,80 @@ extension TaskModelIsarQueryFilter
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'completed',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      createdAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'createdAt',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      createdAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'createdAt',
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      createdAtEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      createdAtGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      createdAtLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterFilterCondition>
+      createdAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createdAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -771,6 +937,19 @@ extension TaskModelIsarQueryLinks
 
 extension TaskModelIsarQuerySortBy
     on QueryBuilder<TaskModelIsar, TaskModelIsar, QSortBy> {
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy> sortByChangedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy>
+      sortByChangedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changedAt', Sort.desc);
+    });
+  }
+
   QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy> sortByCompleted() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'completed', Sort.asc);
@@ -781,6 +960,19 @@ extension TaskModelIsarQuerySortBy
       sortByCompletedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'completed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy> sortByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy>
+      sortByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
@@ -837,6 +1029,19 @@ extension TaskModelIsarQuerySortBy
 
 extension TaskModelIsarQuerySortThenBy
     on QueryBuilder<TaskModelIsar, TaskModelIsar, QSortThenBy> {
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy> thenByChangedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy>
+      thenByChangedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changedAt', Sort.desc);
+    });
+  }
+
   QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy> thenByCompleted() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'completed', Sort.asc);
@@ -847,6 +1052,19 @@ extension TaskModelIsarQuerySortThenBy
       thenByCompletedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'completed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy> thenByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QAfterSortBy>
+      thenByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
     });
   }
 
@@ -915,9 +1133,21 @@ extension TaskModelIsarQuerySortThenBy
 
 extension TaskModelIsarQueryWhereDistinct
     on QueryBuilder<TaskModelIsar, TaskModelIsar, QDistinct> {
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QDistinct> distinctByChangedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'changedAt');
+    });
+  }
+
   QueryBuilder<TaskModelIsar, TaskModelIsar, QDistinct> distinctByCompleted() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'completed');
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, TaskModelIsar, QDistinct> distinctByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createdAt');
     });
   }
 
@@ -956,9 +1186,21 @@ extension TaskModelIsarQueryProperty
     });
   }
 
+  QueryBuilder<TaskModelIsar, DateTime?, QQueryOperations> changedAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'changedAt');
+    });
+  }
+
   QueryBuilder<TaskModelIsar, bool?, QQueryOperations> completedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'completed');
+    });
+  }
+
+  QueryBuilder<TaskModelIsar, DateTime?, QQueryOperations> createdAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'createdAt');
     });
   }
 

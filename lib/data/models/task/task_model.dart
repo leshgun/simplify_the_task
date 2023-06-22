@@ -23,6 +23,7 @@ class TaskModel with _$TaskModel {
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);
 
+<<<<<<< HEAD:lib/data/models/task/task_model.dart
   factory TaskModel.fromString(String string) {
     return TaskModel.fromJson(jsonDecode(string));
   }
@@ -38,6 +39,18 @@ class TaskModel with _$TaskModel {
   String toBase64() {
     return base64Encode(utf8.encode(toJsonString()));
   }
+=======
+  // factory TaskModel.fromJson(Map<String, dynamic> json) {
+  //   return TaskModel(
+  //     id: json['id'], 
+  //     text: json['text'], 
+  //     completed: json['completed'],
+  //     deadline: json['deadline'],
+  //     createdAt: json['created_at'], 
+  //     changedAt: json['changed_at'],
+  //     );
+  // }
+>>>>>>> f1f251c (add synchronization):lib/models/task_model.dart
 }
 
 class TimestampSerializer implements JsonConverter<DateTime?, dynamic> {
