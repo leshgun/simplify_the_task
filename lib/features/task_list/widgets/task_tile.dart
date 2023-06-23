@@ -81,6 +81,7 @@ class _TaskState extends State<TaskTile> {
     );
 
     return ClipRect(
+      clipBehavior: Clip.antiAlias,
       child: Dismissible(
         key: UniqueKey(),
         background: widget.task.completed

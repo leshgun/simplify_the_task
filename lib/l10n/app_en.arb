@@ -4,6 +4,7 @@
   "taskListEmpty": "All tasks completed",
   "taskListNewTask": "New",
 
+  "taskEmpty": "And what will we do?",
   "taskSave": "Save",
   "taskDelete": "Delete",
   "taskDeadline": "Deadline",

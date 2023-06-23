@@ -25,9 +25,9 @@ class _TaskListState extends State<TaskList> {
 
   @override
   void initState() {
-    super.initState();
     _taskListBloc.add(const TaskListLoad());
-    // _syncTaskList();
+    _taskListBloc.add(const TaskListSynch());
+    super.initState();
   }
 
   @override
@@ -118,45 +118,50 @@ class _TaskListState extends State<TaskList> {
         if (taskList.isEmpty) {
           return const Center(child: Icon(Icons.done_all));
         }
-        return Container(
-          decoration: BoxDecoration(
-            color: pageTheme.colorScheme.secondary,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          margin: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ListView.builder(
-                physics: const ClampingScrollPhysics(),
-                itemCount: taskList.length,
-                shrinkWrap: true,
-                itemBuilder: (_, index) {
-                  return TaskTile(task: taskList[index]);
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.add,
-                  color: Colors.transparent,
+        return ClipRect(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: pageTheme.colorScheme.secondary,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: Offset(0, 2),
                 ),
-                title: Text(
-                  S.of(context)!.taskListNewTask,
-                  style: pageTheme.textTheme.bodySmall,
+              ],
+            ),
+            margin: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ListView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: taskList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) {
+                    return TaskTile(task: taskList[index]);
+                  },
                 ),
-                onTap: () {
-                  _addNewTask();
-                },
-              )
-            ],
+                ListTile(
+                  leading: const Icon(
+                    Icons.add,
+                    color: Colors.transparent,
+                  ),
+                  title: Text(
+                    S.of(context)!.taskListNewTask,
+                    style: pageTheme.textTheme.bodySmall,
+                  ),
+                  onTap: () {
+                    _addNewTask();
+                  },
+                )
+              ],
+            ),
           ),
         );
       },

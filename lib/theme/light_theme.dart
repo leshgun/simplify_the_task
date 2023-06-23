@@ -48,7 +48,7 @@ final lightTheme = ThemeData(
   ),
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: LightColors.labelPrimary,
-    selectionColor: LightColors.labelSecondary,
+    selectionColor: LightColors.grayLight,
     selectionHandleColor: LightColors.labelTerritory,
   ),
   switchTheme: SwitchThemeData(
