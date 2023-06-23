@@ -73,13 +73,17 @@ class _TaskListState extends State<TaskList> {
 >>>>>>> 203c2a7 (code review)
   @override
   void initState() {
+<<<<<<< HEAD
     _taskListBloc.add(const TaskListLoad());
     _taskListBloc.add(const TaskListSynch());
     super.initState();
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 39dc754 (code review)
     _taskListBloc.add(const TaskListLoad());
-    // _syncTaskList();
+    _taskListBloc.add(const TaskListSynch());
+    super.initState();
   }
 
   @override
@@ -273,6 +277,7 @@ class _TaskListState extends State<TaskList> {
                   spreadRadius: 1,
                   blurRadius: 2,
                   offset: Offset(0, 2),
+<<<<<<< HEAD
                 ),
               ],
             ),
@@ -340,17 +345,48 @@ class _TaskListState extends State<TaskList> {
                 leading: const Icon(
                   Icons.add,
                   color: Colors.transparent,
+=======
+>>>>>>> 39dc754 (code review)
                 ),
-                title: Text(
-                  S.of(context)!.taskListNewTask,
-                  style: pageTheme.textTheme.bodySmall,
+              ],
+            ),
+            margin: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ListView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: taskList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) {
+                    return TaskTile(task: taskList[index]);
+                  },
                 ),
+<<<<<<< HEAD
                 onTap: () {
                   _addNewTask();
                 },
               )
             ],
 >>>>>>> d5b4746 (equitable => freezed)
+=======
+                ListTile(
+                  leading: const Icon(
+                    Icons.add,
+                    color: Colors.transparent,
+                  ),
+                  title: Text(
+                    S.of(context)!.taskListNewTask,
+                    style: pageTheme.textTheme.bodySmall,
+                  ),
+                  onTap: () {
+                    _addNewTask();
+                  },
+                )
+              ],
+            ),
+>>>>>>> 39dc754 (code review)
           ),
         );
       },

@@ -105,7 +105,10 @@ class _TaskState extends State<TaskTile> {
     );
 
     return ClipRect(
+<<<<<<< HEAD
       key: Key('${key}_rect'),
+=======
+>>>>>>> 39dc754 (code review)
       clipBehavior: Clip.antiAlias,
       child: Dismissible(
         // key: Key('task_${widget.task.id}_dismissible'),

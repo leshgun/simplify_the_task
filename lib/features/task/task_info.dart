@@ -88,7 +88,13 @@ class _TaskInfoState extends State<TaskInfo> {
   // }
 =======
     if (inputTask == null) {
-      widget.arguments?.onSaveTask!(task);
+      if (task.text.isEmpty) {
+        widget.arguments?.onSaveTask!(
+          task.copyWith(text: S.of(context)!.taskEmpty),
+        );
+      } else {
+        widget.arguments?.onSaveTask!(task);
+      }
     }
   }
 >>>>>>> 07b4506 (code review)
