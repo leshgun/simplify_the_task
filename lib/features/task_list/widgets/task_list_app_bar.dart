@@ -28,7 +28,7 @@ class TaskListAppBar extends StatelessWidget {
       // collapsedHeight: 80,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 12),
+          padding: const EdgeInsets.only(right: 24),
           child: IconButton(
             onPressed: onVisibility ?? () {},
             alignment: Alignment.center,

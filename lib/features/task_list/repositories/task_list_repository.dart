@@ -33,18 +33,32 @@ class TaskListRepository {
 
   Future<List<TaskModel>> syncRepositories({bool isMerge = false}) async {
     List<TaskModelIsar> taskListIsar = await _isarRepository.getTaskList();
-    List<TaskModelYandex> taskListYandex = await _yandexRepository.mergeData(
-      taskListIsar
-          .map((TaskModelIsar task) => YandexSerializer.fromTaskModelIsar(task))
-          .toList(),
-    );
-    List<TaskModel> taskList = taskListYandex
-        .map((TaskModelYandex task) => YandexSerializer.toTaskModel(task))
-        .toList();
-    taskList.sort((a, b) => b.changedAt.compareTo(a.changedAt));
-    _isarRepository.updateTaskList(taskListYandex
-        .map((TaskModelYandex task) => IsarSerializer.fromTaskModelYandex(task))
-        .toList());
+    List<TaskModelYandex> taskListYandex;
+    List<TaskModel> taskList = [];
+    if (taskListIsar.isEmpty) {
+      taskListYandex = await _yandexRepository.getTaskList();
+    } else {
+      taskListYandex = await _yandexRepository.mergeData(
+        taskListIsar
+            .map((TaskModelIsar task) =>
+                YandexSerializer.fromTaskModelIsar(task))
+            .toList(),
+      );
+    }
+    if (taskListYandex.isEmpty) {
+      taskList = taskListIsar
+          .map((TaskModelIsar task) => IsarSerializer.toTaskModel(task))
+          .toList();
+    } else {
+      taskList = taskListYandex
+          .map((TaskModelYandex task) => YandexSerializer.toTaskModel(task))
+          .toList();
+      _isarRepository.updateTaskList(taskListYandex
+          .map((TaskModelYandex task) =>
+              IsarSerializer.fromTaskModelYandex(task))
+          .toList());
+    }
+    taskList.sort((a, b) => b.changedAt.compareTo(a.createdAt));
     return taskList;
   }
 
@@ -54,6 +68,9 @@ class TaskListRepository {
 
   Future<List<TaskModel>> _getTaskListFromIsarRepository() async {
     final List<TaskModelIsar> list = await _isarRepository.getTaskList();
-    return list.map((task) => IsarSerializer.toTaskModel(task)).toList();
+    final List<TaskModel> taskList =
+        list.map((task) => IsarSerializer.toTaskModel(task)).toList();
+    taskList.sort((a, b) => b.changedAt.compareTo(a.createdAt));
+    return taskList;
   }
 }
