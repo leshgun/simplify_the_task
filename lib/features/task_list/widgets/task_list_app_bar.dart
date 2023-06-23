@@ -5,8 +5,7 @@ class TaskListAppBar extends StatelessWidget {
   final bool? visibility;
   final Function()? onVisibility;
 
-  const TaskListAppBar(
-      {super.key, this.visibility, this.onVisibility});
+  const TaskListAppBar({super.key, this.visibility, this.onVisibility});
 
   IconData get _visibilityIcon {
     if (visibility == null) {

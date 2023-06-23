@@ -25,6 +25,6 @@ class TaskInfoArguments {
     this.onSaveTask,
     this.onUpdateTask,
     this.onDeleteTask,
-    this.inputTask
+    this.inputTask,
   });
 }

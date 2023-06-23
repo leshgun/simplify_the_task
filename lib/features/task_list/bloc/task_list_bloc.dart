@@ -107,7 +107,8 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     }
   }
 
-  void _onTaskListSynch(TaskListSynch event, Emitter<TaskListState> emit) async {
+  void _onTaskListSynch(
+      TaskListSynch event, Emitter<TaskListState> emit) async {
     emit(const TaskListState.loading());
     List<TaskModel> taskList = await _taskListRepository.syncRepositories();
     emit(TaskListState.loaded(taskList: taskList));

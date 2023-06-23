@@ -18,17 +18,6 @@ class TaskModel with _$TaskModel {
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);
-
-  // factory TaskModel.fromJson(Map<String, dynamic> json) {
-  //   return TaskModel(
-  //     id: json['id'], 
-  //     text: json['text'], 
-  //     completed: json['completed'],
-  //     deadline: json['deadline'],
-  //     createdAt: json['created_at'], 
-  //     changedAt: json['changed_at'],
-  //     );
-  // }
 }
 
 class TimestampSerializer implements JsonConverter<DateTime?, dynamic> {
