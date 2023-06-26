@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:simplify_the_task/models/task_model_yandex.dart';
+import 'package:simplify_the_task/data/models/task_model_yandex.dart';
 
 const String baseURL = 'https://beta.mrdekk.ru/todobackend';
 const Duration deleay = Duration(microseconds: 300);

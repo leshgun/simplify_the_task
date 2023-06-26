@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simplify_the_task/theme/text_theme.dart';
+import 'package:simplify_the_task/presentation/theme/text_theme.dart';
 
 class LightColors {
   static const Color backgroundColor = Color(0xffE5E5E5);

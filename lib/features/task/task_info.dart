@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:simplify_the_task/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task_model.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 

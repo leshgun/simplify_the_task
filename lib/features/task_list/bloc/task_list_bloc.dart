@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
-import 'package:simplify_the_task/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_list_bloc.freezed.dart';

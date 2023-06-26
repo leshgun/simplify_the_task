@@ -1,11 +1,11 @@
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/features/task_list/utils/isar_serializer.dart';
 import 'package:simplify_the_task/features/task_list/utils/yandex_serializer.dart';
-import 'package:simplify_the_task/models/task_model.dart';
-import 'package:simplify_the_task/models/task_model_isar.dart';
-import 'package:simplify_the_task/models/task_model_yandex.dart';
-import 'package:simplify_the_task/repositories/isar_repository.dart';
-import 'package:simplify_the_task/repositories/yandex_repository.dart';
+import 'package:simplify_the_task/data/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task_model_isar.dart';
+import 'package:simplify_the_task/data/models/task_model_yandex.dart';
+import 'package:simplify_the_task/data/repositories/isar_repository.dart';
+import 'package:simplify_the_task/data/repositories/yandex_repository.dart';
 
 const directoryName = 'simplify_the_task';
 
