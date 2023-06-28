@@ -6,29 +6,26 @@ import 'package:path_provider/path_provider.dart';
 import 'package:simplify_the_task/data/models/task_model_isar.dart';
 
 class IsarRepository {
-  late Future<Directory> appDirectory;
-  Isar? _isar;
   final Logger logger = Logger();
+  Isar? _isar;
+  Directory? docDir;
+  Directory? appDir;
 
-  String directoryName;
+  String appDirName;
 
-  Future<Directory> get _appDir async {
-    final documentsPath = await getApplicationDocumentsDirectory();
-    return Directory('${documentsPath.path}/$directoryName')
-        .create(recursive: true);
-  }
+  IsarRepository({required this.appDirName});
 
   Future<Isar> get isarInstance async {
-    final appDir = await _appDir;
+    docDir ??= await getApplicationDocumentsDirectory();
+    appDir ??=
+        await Directory('${docDir!.path}/$appDirName').create(recursive: true);
     _isar ??= await Isar.open(
       [TaskModelIsarSchema],
-      directory: appDir.path,
+      directory: appDir!.path,
       inspector: true,
     );
     return _isar!;
   }
-
-  IsarRepository({required this.directoryName});
 
   Future<List<TaskModelIsar>> getTaskList() {
     return isarInstance.then((Isar isar) =>

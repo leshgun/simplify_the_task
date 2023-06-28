@@ -12,7 +12,7 @@ const directoryName = 'simplify_the_task';
 class TaskListRepository {
   final Logger logger = Logger();
   final IsarRepository _isarRepository = IsarRepository(
-    directoryName: directoryName,
+    appDirName: directoryName,
   );
   final YandexRepository _yandexRepository = YandexRepository(
     token: const String.fromEnvironment('yandex_api_key'),
