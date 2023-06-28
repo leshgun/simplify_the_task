@@ -1,8 +1,8 @@
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/data/utils/isar_serializer.dart';
 import 'package:simplify_the_task/data/utils/yandex_serializer.dart';
-import 'package:simplify_the_task/data/models/task_model.dart';
 import 'package:simplify_the_task/data/models/task_model_isar.dart';
+import 'package:simplify_the_task/data/models/task_model.dart';
 import 'package:simplify_the_task/data/models/task_model_yandex.dart';
 import 'package:simplify_the_task/data/repositories/isar_repository.dart';
 import 'package:simplify_the_task/data/repositories/yandex_repository.dart';
@@ -31,7 +31,7 @@ class TaskListRepository {
     _isarRepository.deleteTask(task.id);
   }
 
-  Future<List<TaskModel>> syncRepositories({bool isMerge = false}) async {
+  Future<List<TaskModel>> syncRepositories() async {
     List<TaskModelIsar> taskListIsar = await _isarRepository.getTaskList();
     List<TaskModelYandex> taskListYandex;
     List<TaskModel> taskList = [];

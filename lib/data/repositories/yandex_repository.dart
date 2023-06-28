@@ -25,13 +25,12 @@ class YandexRepository {
         'Authorization': 'Bearer ${token ?? ''}',
         'X-Last-Known-Revision': lastKnownRevision,
       },
-      validateStatus: _validateStatus,
     );
   }
 
   // TODO: code review
   Future<List<TaskModelYandex>> getTaskList() async {
-    final Response? response = await _get('/list');
+    final response = await _get('/list');
     if (response == null) {
       return [];
     }
@@ -94,27 +93,32 @@ class YandexRepository {
   }
 
   Future<Response?> _get(String url) async {
-    return await dio.get(url).then(
-      (Response response) {
-        _updateRevision(response);
-        logger.v('The response from the repository was successfully received.');
-        return response;
-      },
-      onError: (error) {
-        logger.w('The response from the repository cannot by recieved.', error);
-        return;
-      },
-    );
+    try {
+      final Response response = await dio.get(url);
+      _updateRevision(response);
+      _onResponse(
+        'The response from the repository was successfully received.',
+        response,
+      );
+      return response;
+    } on DioException catch (e) {
+      // logger.w('The response from the repository cannot by recieved.');
+      _onError('The response from the repository cannot by recieved.', e);
+    }
+    return null;
   }
 
   Future<void> _post(String url, String data) async {
     await dio.post(url, data: data).then(
       (Response response) {
         _updateRevision(response);
-        logger.v('Data send to the Yandex repository successfully');
+        _onResponse(
+          'Data send to the Yandex repository successfully',
+          response,
+        );
       },
       onError: (error) {
-        logger.w('The data cannot be sended to the Yandex repository', error);
+        _onError('The data cannot be sended to the Yandex repository', error);
       },
     );
   }
@@ -124,10 +128,11 @@ class YandexRepository {
     await dio.put(url, data: data).then(
       (Response response) {
         _updateRevision(response);
-        logger.v('Data changed in the Yandex repository successfully');
+        _onResponse(
+            'Data changed in the Yandex repository successfully', response);
       },
       onError: (error) {
-        logger.w('The data in the Yandex repository cannot be changed', error);
+        _onError('The data in the Yandex repository cannot be changed', error);
       },
     );
   }
@@ -136,37 +141,44 @@ class YandexRepository {
     await dio.delete(url).then(
       (Response response) {
         _updateRevision(response);
-        logger.v('Data deleted from the Yandex repository successfully');
+        _onResponse(
+          'Data deleted from the Yandex repository successfully',
+          response,
+        );
       },
       onError: (error) {
-        logger.w(
-            'The data cannot be deleted from the Yandex repository', error);
+        _onError(
+          'The data cannot be deleted from the Yandex repository',
+          error,
+        );
       },
     );
   }
 
-  Future<dynamic> _patch(String url, String data) async {
-    return dio.patch(url, data: data).then(
-      (value) {
-        logger.v('Data in the Yandex repository patched successfully');
-        return value;
-      },
-      onError: (error) {
-        logger.w('The data cannot be patched in the Yandex repository', error);
-      },
-    );
+  Future<Response?> _patch(String url, String data) async {
+    try {
+      final Response response = await dio.patch(url, data: data);
+      _updateRevision(response);
+      _onResponse(
+        'Data in the Yandex repository patched successfully',
+        response,
+      );
+      return response;
+    } on DioException catch (e) {
+      _onError('The data cannot be patched in the Yandex repository', e);
+    }
+    return null;
+  }
 
-    // return await dio.patch(url, data: data).then(
-    //   (Response response) {
-    //     _updateRevision(response);
-    //     logger.v('Data in the Yandex repository patched successfully');
-    //     logger.w(response.data);
-    //     return response;
-    //   },
-    //   onError: (error) {
-    //     logger.w('The data cannot be patched in the Yandex repository', error);
-    //   },
-    // );
+  void _onResponse(String text, Response? response) {
+    logger.v(
+      text,
+      '${response?.statusCode}\n${response?.realUri}\n${response?.headers}',
+    );
+  }
+
+  void _onError(String text, dynamic error) {
+    logger.w(text, error);
   }
 
   Future<void> _updateRevision(Response? response) async {
@@ -184,24 +196,4 @@ class YandexRepository {
       logger.v('Last known revision: $revision');
     }
   }
-
-  bool _validateStatus(int? status) {
-    if (status == null) {
-      return false;
-    }
-    if (status > 200) {
-      logger.wtf('WTF with status?: $status');
-      return false;
-    }
-    return true;
-  }
 }
-
-// class MyHttpOverrides extends HttpOverrides {
-//   @override
-//   HttpClient createHttpClient(SecurityContext? context) {
-//     return super.createHttpClient(context)
-//       ..badCertificateCallback =
-//           (X509Certificate cert, String host, int port) => true;
-//   }
-// }

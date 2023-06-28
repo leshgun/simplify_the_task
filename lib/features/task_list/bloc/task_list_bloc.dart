@@ -26,12 +26,6 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListSynch>(_onTaskListSynch);
   }
 
-  // _loadTaskListFromYandexRepository() {
-  //   _yandexRepository.getTaskList().then((value) {
-  //     logger.i('Task List from yandex: $value');
-  //   });
-  // }
-
   void _onTaskListLoad(TaskListLoad event, Emitter<TaskListState> emit) async {
     emit(const TaskListState.loading());
     // _loadTaskListFromYandexRepository();
