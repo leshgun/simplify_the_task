@@ -22,12 +22,12 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) {
 mixin _$TaskModel {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
+  int? get priority => throw _privateConstructorUsedError;
+  bool get completed => throw _privateConstructorUsedError;
   @TimestampSerializer()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @TimestampSerializer()
   DateTime get changedAt => throw _privateConstructorUsedError;
-  bool get completed => throw _privateConstructorUsedError;
-  int? get priority => throw _privateConstructorUsedError;
   @TimestampSerializer()
   DateTime? get deadline => throw _privateConstructorUsedError;
 
@@ -45,10 +45,10 @@ abstract class $TaskModelCopyWith<$Res> {
   $Res call(
       {String id,
       String text,
+      int? priority,
+      bool completed,
       @TimestampSerializer() DateTime createdAt,
       @TimestampSerializer() DateTime changedAt,
-      bool completed,
-      int? priority,
       @TimestampSerializer() DateTime? deadline});
 }
 
@@ -67,10 +67,10 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
   $Res call({
     Object? id = null,
     Object? text = null,
+    Object? priority = freezed,
+    Object? completed = null,
     Object? createdAt = null,
     Object? changedAt = null,
-    Object? completed = null,
-    Object? priority = freezed,
     Object? deadline = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,6 +82,14 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      priority: freezed == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as int?,
+      completed: null == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
+              as bool,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -90,14 +98,6 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.changedAt
           : changedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      completed: null == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      priority: freezed == priority
-          ? _value.priority
-          : priority // ignore: cast_nullable_to_non_nullable
-              as int?,
       deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
@@ -116,10 +116,10 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
   $Res call(
       {String id,
       String text,
+      int? priority,
+      bool completed,
       @TimestampSerializer() DateTime createdAt,
       @TimestampSerializer() DateTime changedAt,
-      bool completed,
-      int? priority,
       @TimestampSerializer() DateTime? deadline});
 }
 
@@ -136,10 +136,10 @@ class __$$_TaskModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? text = null,
+    Object? priority = freezed,
+    Object? completed = null,
     Object? createdAt = null,
     Object? changedAt = null,
-    Object? completed = null,
-    Object? priority = freezed,
     Object? deadline = freezed,
   }) {
     return _then(_$_TaskModel(
@@ -151,6 +151,14 @@ class __$$_TaskModelCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      priority: freezed == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as int?,
+      completed: null == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
+              as bool,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -159,14 +167,6 @@ class __$$_TaskModelCopyWithImpl<$Res>
           ? _value.changedAt
           : changedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      completed: null == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      priority: freezed == priority
-          ? _value.priority
-          : priority // ignore: cast_nullable_to_non_nullable
-              as int?,
       deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
@@ -181,10 +181,10 @@ class _$_TaskModel implements _TaskModel {
   const _$_TaskModel(
       {required this.id,
       required this.text,
+      this.priority,
+      this.completed = false,
       @TimestampSerializer() required this.createdAt,
       @TimestampSerializer() required this.changedAt,
-      this.completed = false,
-      this.priority,
       @TimestampSerializer() this.deadline});
 
   factory _$_TaskModel.fromJson(Map<String, dynamic> json) =>
@@ -195,23 +195,23 @@ class _$_TaskModel implements _TaskModel {
   @override
   final String text;
   @override
+  final int? priority;
+  @override
+  @JsonKey()
+  final bool completed;
+  @override
   @TimestampSerializer()
   final DateTime createdAt;
   @override
   @TimestampSerializer()
   final DateTime changedAt;
   @override
-  @JsonKey()
-  final bool completed;
-  @override
-  final int? priority;
-  @override
   @TimestampSerializer()
   final DateTime? deadline;
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, text: $text, createdAt: $createdAt, changedAt: $changedAt, completed: $completed, priority: $priority, deadline: $deadline)';
+    return 'TaskModel(id: $id, text: $text, priority: $priority, completed: $completed, createdAt: $createdAt, changedAt: $changedAt, deadline: $deadline)';
   }
 
   @override
@@ -221,22 +221,22 @@ class _$_TaskModel implements _TaskModel {
             other is _$_TaskModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
+            (identical(other.completed, completed) ||
+                other.completed == completed) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.changedAt, changedAt) ||
                 other.changedAt == changedAt) &&
-            (identical(other.completed, completed) ||
-                other.completed == completed) &&
-            (identical(other.priority, priority) ||
-                other.priority == priority) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, text, createdAt, changedAt,
-      completed, priority, deadline);
+  int get hashCode => Object.hash(runtimeType, id, text, priority, completed,
+      createdAt, changedAt, deadline);
 
   @JsonKey(ignore: true)
   @override
@@ -256,10 +256,10 @@ abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
       {required final String id,
       required final String text,
+      final int? priority,
+      final bool completed,
       @TimestampSerializer() required final DateTime createdAt,
       @TimestampSerializer() required final DateTime changedAt,
-      final bool completed,
-      final int? priority,
       @TimestampSerializer() final DateTime? deadline}) = _$_TaskModel;
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
@@ -270,15 +270,15 @@ abstract class _TaskModel implements TaskModel {
   @override
   String get text;
   @override
+  int? get priority;
+  @override
+  bool get completed;
+  @override
   @TimestampSerializer()
   DateTime get createdAt;
   @override
   @TimestampSerializer()
   DateTime get changedAt;
-  @override
-  bool get completed;
-  @override
-  int? get priority;
   @override
   @TimestampSerializer()
   DateTime? get deadline;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 import 'package:logger/logger.dart';
 import 'package:uuid/uuid.dart';
-import 'package:simplify_the_task/data/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task/task_model.dart';
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';

@@ -1,6 +1,4 @@
-import 'package:simplify_the_task/data/models/task_model.dart';
-import 'package:simplify_the_task/data/models/task_model_isar.dart';
-import 'package:simplify_the_task/data/models/task_model_yandex.dart';
+import 'package:simplify_the_task/data/models/models.dart';
 import 'package:uuid/uuid.dart';
 
 class YandexSerializer {

@@ -1,22 +1,51 @@
+import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:simplify_the_task/data/utils/isar_serializer.dart';
-import 'package:simplify_the_task/data/utils/yandex_serializer.dart';
-import 'package:simplify_the_task/data/models/task_model_isar.dart';
-import 'package:simplify_the_task/data/models/task_model.dart';
-import 'package:simplify_the_task/data/models/task_model_yandex.dart';
-import 'package:simplify_the_task/data/repositories/isar_repository.dart';
-import 'package:simplify_the_task/data/repositories/yandex_repository.dart';
+import 'package:simplify_the_task/data/api/dio_api.dart';
+import 'package:simplify_the_task/data/utils/utils.dart';
+import 'package:simplify_the_task/data/models/models.dart';
+import 'package:simplify_the_task/data/repositories/repositories.dart';
 
-const directoryName = 'simplify_the_task';
-
+// TODO(Decomposition the repositories)
 class TaskListRepository {
   final Logger logger = Logger();
-  final IsarRepository _isarRepository = IsarRepository(
-    appDirName: directoryName,
-  );
-  final YandexRepository _yandexRepository = YandexRepository(
-    token: const String.fromEnvironment('yandex_api_key'),
-  );
+  late final IsarRepository _isarRepository;
+  late final YandexRepository _yandexRepository;
+
+  final String token;
+
+  TaskListRepository({
+    this.token = const String.fromEnvironment('yandex_api_key'),
+    YandexRepository? yandexRepository,
+    IsarRepository? isarRepository,
+  }) {
+    _yandexRepository = yandexRepository ?? _initYandexRepository();
+    _isarRepository = isarRepository ?? _initIsarRepository();
+  }
+
+  YandexRepository _initYandexRepository() {
+    final DioApi dioApi = DioApi(
+      dio: Dio(
+        BaseOptions(
+          baseUrl: YandexConstants.baseUri,
+          contentType: "application/json",
+          headers: {
+            'Authorization': 'Bearer $token',
+            // 'X-Last-Known-Revision': lastKnownRevision,
+          },
+        ),
+      ),
+      interceptor: DioInterceptor(loger: logger),
+    );
+    return YandexRepository(
+      dio: dioApi.dio,
+    );
+  }
+
+  IsarRepository _initIsarRepository() {
+    return IsarRepository(
+      appDirName: IsarConstants.directoryName,
+    );
+  }
 
   Future<List<TaskModel>> getTaskList() async {
     return _getTaskListFromIsarRepository();

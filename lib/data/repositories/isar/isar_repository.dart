@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:isar/isar.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simplify_the_task/data/models/task_model_isar.dart';
+import 'package:simplify_the_task/data/models/isar/task_model_isar.dart';
 
 class IsarRepository {
   final Logger logger = Logger();
