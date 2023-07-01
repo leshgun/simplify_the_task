@@ -55,6 +55,8 @@ class _TaskState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
     final pageTheme = Theme.of(context);
+    String key = widget.key.toString();
+    key = key.substring(3, key.length - 3);
 
     final Widget iconBlank;
     if (widget.task.priority != null && widget.task.priority == 2) {
@@ -82,9 +84,11 @@ class _TaskState extends State<TaskTile> {
     );
 
     return ClipRect(
+      key: Key('${key}_rect'),
       clipBehavior: Clip.antiAlias,
       child: Dismissible(
-        key: UniqueKey(),
+        // key: Key('task_${widget.task.id}_dismissible'),
+        key: Key('${key}_dismissible'),
         background: widget.task.completed
             ? dismissCheckboxChecked
             : dismissCheckboxBlank,
@@ -98,6 +102,7 @@ class _TaskState extends State<TaskTile> {
           return true;
         },
         child: ListTile(
+          key: Key('${key}_tile'),
           hoverColor: Colors.transparent,
           title: _tileTitle(pageTheme),
           subtitle: _tileSubtitle(pageTheme),

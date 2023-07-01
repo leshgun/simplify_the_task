@@ -19,7 +19,7 @@ class IsarRepository {
     return _isar!;
   }
 
-  Future<List<TaskModelIsar>> getTaskList() { 
+  Future<List<TaskModelIsar>> getTaskList() {
     return isarInstance.then((Isar isar) =>
         isar.taskModelIsars.where(sort: Sort.desc).anyId().findAll());
   }

@@ -144,7 +144,10 @@ class _TaskListState extends State<TaskList> {
                   itemCount: taskList.length,
                   shrinkWrap: true,
                   itemBuilder: (_, index) {
-                    return TaskTile(task: taskList[index]);
+                    return TaskTile(
+                      task: taskList[index],
+                      key: Key('task_$index'),
+                    );
                   },
                 ),
                 ListTile(

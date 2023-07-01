@@ -20,8 +20,8 @@ class IsarApi {
     if (_directory == null) {
       const String appDirName = IsarApiConstants.directoryName;
       final docDir = await getApplicationDocumentsDirectory();
-      _directory = await Directory('${docDir.path}/$appDirName')
-          .create(recursive: true);
+      _directory =
+          await Directory('${docDir.path}/$appDirName').create(recursive: true);
     }
   }
 }

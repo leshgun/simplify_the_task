@@ -15,9 +15,9 @@ class YandexRepository {
   int lastKnownRevision;
 
   YandexRepository({required this.dioApi, this.lastKnownRevision = -1}) {
-    if (lastKnownRevision < 0) {
-      _updateRevision();
-    }
+    // if (lastKnownRevision < 0) {
+    //   _updateRevision();
+    // }
   }
 
   Options get dioOptions {
@@ -78,7 +78,7 @@ class YandexRepository {
 
   Future<Response?> updateListOnRepository(List<TaskModelYandex> list) async {
     return await _patch(
-      '/list',
+      YandexConstants.taskListUri,
       jsonEncode({"list": list.map((task) => task.toJson()).toList()}),
     );
   }
@@ -88,7 +88,7 @@ class YandexRepository {
       return;
     }
     for (final taskId in list) {
-      await _delete('/list/$taskId');
+      await _delete('${YandexConstants.taskListUri}/$taskId');
       Future.delayed(deleay);
     }
   }
@@ -96,7 +96,7 @@ class YandexRepository {
   Future<Response?> _get(String url) async {
     try {
       final Response response = await dioApi.dio.get(url);
-      await _updateRevision(response);
+      await _updateRevision(response.data['revision']);
       _onResponse(
         'The response from the repository was successfully received.',
         response,
@@ -112,7 +112,7 @@ class YandexRepository {
   Future<void> _post(String url, String data) async {
     await dioApi.dio.post(url, data: data, options: dioOptions).then(
       (Response response) {
-        _updateRevision(response);
+        _updateRevision(response.data['revision']);
         _onResponse(
           'Data send to the Yandex repository successfully',
           response,
@@ -128,7 +128,7 @@ class YandexRepository {
   Future<void> _put(String url, String data) async {
     await dioApi.dio.put(url, data: data, options: dioOptions).then(
       (Response response) {
-        _updateRevision(response);
+        _updateRevision(response.data['revision']);
         _onResponse(
             'Data changed in the Yandex repository successfully', response);
       },
@@ -141,7 +141,7 @@ class YandexRepository {
   Future<void> _delete(String url) async {
     await dioApi.dio.delete(url, options: dioOptions).then(
       (Response response) {
-        _updateRevision(response);
+        _updateRevision(response.data['revision']);
         _onResponse(
           'Data deleted from the Yandex repository successfully',
           response,
@@ -164,7 +164,7 @@ class YandexRepository {
         data: data,
         options: dioOptions,
       );
-      await _updateRevision(response);
+      await _updateRevision(response.data['revision']);
       _onResponse(
         'Data in the Yandex repository patched successfully',
         response,
@@ -174,6 +174,21 @@ class YandexRepository {
       _onError('The data cannot be patched in the Yandex repository', e);
     }
     return null;
+  }
+
+  Future<int?> _getRevision() async {
+    Response response = await dioApi.dio.get(YandexConstants.taskListUri);
+    if (response.statusCode != 200) {
+      return null;
+    }
+    final revision = response.data['revision'];
+    if (revision == null) {
+      return null;
+    }
+    if (revision is! int) {
+      return null;
+    }
+    return revision;
   }
 
   void _onResponse(String text, Response? response) {
@@ -187,18 +202,9 @@ class YandexRepository {
     logger.w(text, error);
   }
 
-  Future<void> _updateRevision([Response? response]) async {
-    response ??= await _get('/list');
-    if (response == null) {
-      return;
-    }
-    if (response.statusCode != 200) {
-      return;
-    }
-    final revision = response.data['revision'];
-    if (revision is int) {
-      lastKnownRevision = revision;
-      logger.v('Last known revision: $revision');
-    }
+  Future<void> _updateRevision([int? revision]) async {
+    revision ??= await _getRevision();
+    lastKnownRevision = revision ?? lastKnownRevision;
+    logger.v('Last known revision: $revision');
   }
 }
