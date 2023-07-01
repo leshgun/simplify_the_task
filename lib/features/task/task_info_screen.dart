@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simplify_the_task/data/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task/task_model.dart';
 
 import 'task_info.dart';
 

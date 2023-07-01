@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
-import 'package:simplify_the_task/data/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task/task_model.dart';
 
 import '../bloc/task_list_bloc.dart';
 import '../widgets/dismiss_background.dart';

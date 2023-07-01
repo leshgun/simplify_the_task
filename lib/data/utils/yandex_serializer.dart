@@ -1,6 +1,4 @@
-import 'package:simplify_the_task/data/models/task_model.dart';
-import 'package:simplify_the_task/data/models/task_model_isar.dart';
-import 'package:simplify_the_task/data/models/task_model_yandex.dart';
+import 'package:simplify_the_task/data/models/models.dart';
 import 'package:uuid/uuid.dart';
 
 class YandexSerializer {
@@ -39,7 +37,7 @@ class YandexSerializer {
       text: task.text ?? '',
       importance: importance[task.priority ?? 0],
       done: task.completed ?? false,
-      createdAt: dateTimeToTimestamp(task.changedAt ?? DateTime.now()),
+      createdAt: dateTimeToTimestamp(task.createdAt ?? DateTime.now()),
       changedAt: dateTimeToTimestamp(task.changedAt ?? DateTime.now()),
       lastUpdatedBy: '0', // TODO: code review
       color: '',
