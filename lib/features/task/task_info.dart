@@ -28,6 +28,7 @@ class _TaskInfoState extends State<TaskInfo> {
   DateTime? taskDeadline;
 
   NavigatorState get _navigator => Navigator.of(context);
+
   TaskModel get task {
     inputTask ??= TaskModel(
       id: const Uuid().v4(),

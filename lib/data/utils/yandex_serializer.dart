@@ -37,7 +37,7 @@ class YandexSerializer {
       text: task.text ?? '',
       importance: importance[task.priority ?? 0],
       done: task.completed ?? false,
-      createdAt: dateTimeToTimestamp(task.changedAt ?? DateTime.now()),
+      createdAt: dateTimeToTimestamp(task.createdAt ?? DateTime.now()),
       changedAt: dateTimeToTimestamp(task.changedAt ?? DateTime.now()),
       lastUpdatedBy: '0', // TODO: code review
       color: '',

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:simplify_the_task/data/api/dio_api.dart';
 import 'package:simplify_the_task/data/models/yandex/task_model_yandex.dart';
 
 import './yandex_constants.dart';
@@ -10,15 +11,17 @@ const Duration deleay = Duration(microseconds: 300);
 
 class YandexRepository {
   final Logger logger = Logger();
-  final Dio dio;
+  final DioApi dioApi;
   int lastKnownRevision;
 
-  YandexRepository({required this.dio, this.lastKnownRevision = -1}) {
-    _updateRevision();
+  YandexRepository({required this.dioApi, this.lastKnownRevision = -1}) {
+    if (lastKnownRevision < 0) {
+      _updateRevision();
+    }
   }
 
   Options get dioOptions {
-    final headers = dio.options.headers;
+    final headers = dioApi.dio.options.headers;
     headers['X-Last-Known-Revision'] = lastKnownRevision;
     return Options(headers: headers);
   }
@@ -92,7 +95,7 @@ class YandexRepository {
 
   Future<Response?> _get(String url) async {
     try {
-      final Response response = await dio.get(url);
+      final Response response = await dioApi.dio.get(url);
       await _updateRevision(response);
       _onResponse(
         'The response from the repository was successfully received.',
@@ -107,7 +110,7 @@ class YandexRepository {
   }
 
   Future<void> _post(String url, String data) async {
-    await dio.post(url, data: data, options: dioOptions).then(
+    await dioApi.dio.post(url, data: data, options: dioOptions).then(
       (Response response) {
         _updateRevision(response);
         _onResponse(
@@ -123,7 +126,7 @@ class YandexRepository {
 
   // ignore: unused_element
   Future<void> _put(String url, String data) async {
-    await dio.put(url, data: data, options: dioOptions).then(
+    await dioApi.dio.put(url, data: data, options: dioOptions).then(
       (Response response) {
         _updateRevision(response);
         _onResponse(
@@ -136,7 +139,7 @@ class YandexRepository {
   }
 
   Future<void> _delete(String url) async {
-    await dio.delete(url, options: dioOptions).then(
+    await dioApi.dio.delete(url, options: dioOptions).then(
       (Response response) {
         _updateRevision(response);
         _onResponse(
@@ -156,7 +159,11 @@ class YandexRepository {
   Future<Response?> _patch(String url, String data) async {
     await _updateRevision();
     try {
-      final response = await dio.patch(url, data: data, options: dioOptions);
+      final response = await dioApi.dio.patch(
+        url,
+        data: data,
+        options: dioOptions,
+      );
       await _updateRevision(response);
       _onResponse(
         'Data in the Yandex repository patched successfully',

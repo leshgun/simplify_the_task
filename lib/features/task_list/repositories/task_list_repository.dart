@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/data/api/dio_api.dart';
+import 'package:simplify_the_task/data/api/isar_api.dart';
 import 'package:simplify_the_task/data/utils/utils.dart';
 import 'package:simplify_the_task/data/models/models.dart';
 import 'package:simplify_the_task/data/repositories/repositories.dart';
@@ -8,18 +9,24 @@ import 'package:simplify_the_task/data/repositories/repositories.dart';
 // TODO(Decomposition the repositories)
 class TaskListRepository {
   final Logger logger = Logger();
-  late final IsarRepository _isarRepository;
-  late final YandexRepository _yandexRepository;
-
+  late final TaskListDataRepository _taskListDataRepository;
   final String token;
 
   TaskListRepository({
     this.token = const String.fromEnvironment('yandex_api_key'),
-    YandexRepository? yandexRepository,
-    IsarRepository? isarRepository,
+    TaskListDataRepository? taskListDataRepository,
   }) {
-    _yandexRepository = yandexRepository ?? _initYandexRepository();
-    _isarRepository = isarRepository ?? _initIsarRepository();
+    _taskListDataRepository =
+        taskListDataRepository ?? _initTaskListDataRepository();
+  }
+
+  TaskListDataRepository _initTaskListDataRepository() {
+    final YandexRepository yandexRepository = _initYandexRepository();
+    final IsarRepository isarRepository = _initIsarRepository();
+    return TaskListDataRepository(
+      isarRepository: isarRepository,
+      yandexRepository: yandexRepository,
+    );
   }
 
   YandexRepository _initYandexRepository() {
@@ -36,70 +43,27 @@ class TaskListRepository {
       ),
       interceptor: DioInterceptor(loger: logger),
     );
-    return YandexRepository(
-      dio: dioApi.dio,
-    );
+    return YandexRepository(dioApi: dioApi);
   }
 
   IsarRepository _initIsarRepository() {
-    return IsarRepository(
-      appDirName: IsarConstants.directoryName,
-    );
+    return IsarRepository(isarApi: IsarApi());
   }
 
   Future<List<TaskModel>> getTaskList() async {
-    return _getTaskListFromIsarRepository();
+    return await _taskListDataRepository.getTaskList();
   }
 
   Future<void> saveTask(TaskModel task) async {
     task = task.copyWith(changedAt: DateTime.now());
-    _updateTaskInIsarRepository(task);
+    return _taskListDataRepository.saveTask(task);
   }
 
   Future<void> deleteTask(TaskModel task) async {
-    _isarRepository.deleteTask(task.id);
+    return _taskListDataRepository.deleteTask(task);
   }
 
   Future<List<TaskModel>> syncRepositories() async {
-    List<TaskModelIsar> taskListIsar = await _isarRepository.getTaskList();
-    List<TaskModelYandex> taskListYandex;
-    List<TaskModel> taskList = [];
-    if (taskListIsar.isEmpty) {
-      taskListYandex = await _yandexRepository.getTaskList();
-    } else {
-      taskListYandex = await _yandexRepository.mergeData(
-        taskListIsar
-            .map((TaskModelIsar task) =>
-                YandexSerializer.fromTaskModelIsar(task))
-            .toList(),
-      );
-    }
-    if (taskListYandex.isEmpty) {
-      taskList = taskListIsar
-          .map((TaskModelIsar task) => IsarSerializer.toTaskModel(task))
-          .toList();
-    } else {
-      taskList = taskListYandex
-          .map((TaskModelYandex task) => YandexSerializer.toTaskModel(task))
-          .toList();
-      _isarRepository.updateTaskList(taskListYandex
-          .map((TaskModelYandex task) =>
-              IsarSerializer.fromTaskModelYandex(task))
-          .toList());
-    }
-    taskList.sort((a, b) => b.changedAt.compareTo(a.createdAt));
-    return taskList;
-  }
-
-  Future<void> _updateTaskInIsarRepository(TaskModel task) async {
-    _isarRepository.updateTask(IsarSerializer.fromTaskModel(task));
-  }
-
-  Future<List<TaskModel>> _getTaskListFromIsarRepository() async {
-    final List<TaskModelIsar> list = await _isarRepository.getTaskList();
-    final List<TaskModel> taskList =
-        list.map((task) => IsarSerializer.toTaskModel(task)).toList();
-    taskList.sort((a, b) => b.changedAt.compareTo(a.createdAt));
-    return taskList;
+    return await _taskListDataRepository.syncRepositories();
   }
 }

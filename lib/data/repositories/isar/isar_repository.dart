@@ -1,33 +1,25 @@
-import 'dart:io';
-
 import 'package:isar/isar.dart';
 import 'package:logger/logger.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:simplify_the_task/data/api/isar_api.dart';
 import 'package:simplify_the_task/data/models/isar/task_model_isar.dart';
 
 class IsarRepository {
   final Logger logger = Logger();
   Isar? _isar;
-  Directory? docDir;
-  Directory? appDir;
+  IsarApi isarApi;
 
-  String appDirName;
-
-  IsarRepository({required this.appDirName});
+  IsarRepository({required this.isarApi}) : _isar = isarApi.isar;
 
   Future<Isar> get isarInstance async {
-    docDir ??= await getApplicationDocumentsDirectory();
-    appDir ??=
-        await Directory('${docDir!.path}/$appDirName').create(recursive: true);
     _isar ??= await Isar.open(
       [TaskModelIsarSchema],
-      directory: appDir!.path,
+      directory: (await isarApi.directory).path,
       inspector: true,
     );
     return _isar!;
   }
 
-  Future<List<TaskModelIsar>> getTaskList() {
+  Future<List<TaskModelIsar>> getTaskList() { 
     return isarInstance.then((Isar isar) =>
         isar.taskModelIsars.where(sort: Sort.desc).anyId().findAll());
   }
