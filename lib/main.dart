@@ -15,13 +15,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final log = Logger();
     log.d('App has been started at ${DateTime.now().toString()}...');
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Simplify the task!',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
-      routes: routes,
-      initialRoute: '/task-list',
+      // routes: routes,
+      // initialRoute: '/task-list',
+      routerConfig: router,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

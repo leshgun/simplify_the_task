@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
@@ -37,9 +38,17 @@ class _TaskState extends State<TaskTile> {
   }
 
   void _onInfoTap() {
-    Navigator.of(context).pushNamed(
+    // Navigator.of(context).pushNamed(
+    //   '/task-info',
+    //   arguments: TaskInfoArguments(
+    //     inputTask: widget.task,
+    //     onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
+    //     onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
+    //   ),
+    // );
+    context.push(
       '/task-info',
-      arguments: TaskInfoArguments(
+      extra: TaskInfoArguments(
         inputTask: widget.task,
         onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
         onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),

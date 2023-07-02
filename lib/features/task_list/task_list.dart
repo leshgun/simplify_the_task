@@ -1,14 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 
-import 'bloc/task_list_bloc.dart';
-import 'widgets/task_list_app_bar.dart';
-import 'widgets/task_tile.dart';
+import './bloc/task_list_bloc.dart';
+import './widgets/task_list_app_bar.dart';
+import './widgets/task_tile.dart';
 
 class TaskList extends StatefulWidget {
   const TaskList({super.key});
@@ -21,7 +21,6 @@ class _TaskListState extends State<TaskList> {
   TaskListBloc get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
   bool isShowCompleted = true;
   List<TaskModel> taskList = [];
-  Timer? timer;
 
   @override
   void initState() {
@@ -30,18 +29,24 @@ class _TaskListState extends State<TaskList> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _taskListBloc.add(const TaskListClose());
+  //   super.dispose();
+  // }
 
   _addNewTask() {
-    Navigator.of(context).pushNamed('/task-info',
-        arguments: TaskInfoArguments(
-          onSaveTask: (task) =>
-              _taskListBloc.add(TaskListEvent.add(task: task)),
-        ));
+    context.push(
+      '/task-info',
+      extra: TaskInfoArguments(
+        onSaveTask: (task) => _taskListBloc.add(TaskListEvent.add(task: task)),
+      ),
+    );
+    // Navigator.of(context).pushNamed('/task-info',
+    //     arguments: TaskInfoArguments(
+    //       onSaveTask: (task) =>
+    //           _taskListBloc.add(TaskListEvent.add(task: task)),
+    //     ));
   }
 
   _syncTaskList() {
