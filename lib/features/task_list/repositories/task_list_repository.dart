@@ -66,4 +66,9 @@ class TaskListRepository {
   Future<List<TaskModel>> syncRepositories() async {
     return await _taskListDataRepository.syncRepositories();
   }
+
+  Future<void> closeRepositories() async {
+    logger.e('Close Isar Repo');
+    await _taskListDataRepository.isarRepository.isarApi.closeIsar();
+  }
 }

@@ -9,7 +9,11 @@ class IsarApi {
   Isar? isar;
   Directory? _directory;
 
-  IsarApi({directory}) : _directory = directory;
+  IsarApi({
+    directory,
+    isarInstance,
+  })  : _directory = directory,
+        isar = isarInstance;
 
   Future<Directory> get directory async {
     await _checkDirectory();
@@ -23,5 +27,12 @@ class IsarApi {
       _directory =
           await Directory('${docDir.path}/$appDirName').create(recursive: true);
     }
+  }
+
+  Future<void> closeIsar() async {
+    if (isar == null) {
+      return;
+    }
+    await isar!.close();
   }
 }

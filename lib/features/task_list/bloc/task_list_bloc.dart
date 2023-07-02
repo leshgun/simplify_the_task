@@ -25,6 +25,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     on<TaskListDelete>(_onTaskListDelete);
     on<TaskListToggle>(_onTaskListToggle);
     on<TaskListSynch>(_onTaskListSynch);
+    on<TaskListClose>(_onTaskListClose);
   }
 
   void _onTaskListLoad(TaskListLoad event, Emitter<TaskListState> emit) async {
@@ -103,5 +104,13 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     emit(const TaskListState.loading());
     List<TaskModel> taskList = await taskListRepository.syncRepositories();
     emit(TaskListState.loaded(taskList: taskList));
+  }
+
+  Future<void> _onTaskListClose(
+    TaskListClose event,
+    Emitter<TaskListState> emit,
+  ) async {
+    await taskListRepository.closeRepositories();
+    emit(const TaskListState.initial());
   }
 }

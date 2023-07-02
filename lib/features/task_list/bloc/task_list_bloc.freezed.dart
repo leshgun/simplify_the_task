@@ -21,6 +21,7 @@ mixin _$TaskListEvent {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -32,6 +33,7 @@ mixin _$TaskListEvent {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -43,6 +45,7 @@ mixin _$TaskListEvent {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -55,6 +58,7 @@ mixin _$TaskListEvent {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -66,6 +70,7 @@ mixin _$TaskListEvent {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -77,6 +82,7 @@ mixin _$TaskListEvent {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -145,6 +151,7 @@ class _$TaskListLoad implements TaskListLoad {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -159,6 +166,7 @@ class _$TaskListLoad implements TaskListLoad {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -173,6 +181,7 @@ class _$TaskListLoad implements TaskListLoad {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -191,6 +200,7 @@ class _$TaskListLoad implements TaskListLoad {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -205,6 +215,7 @@ class _$TaskListLoad implements TaskListLoad {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -219,6 +230,7 @@ class _$TaskListLoad implements TaskListLoad {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -277,6 +289,7 @@ class _$TaskListSave implements TaskListSave {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -291,6 +304,7 @@ class _$TaskListSave implements TaskListSave {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -305,6 +319,7 @@ class _$TaskListSave implements TaskListSave {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -323,6 +338,7 @@ class _$TaskListSave implements TaskListSave {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -337,6 +353,7 @@ class _$TaskListSave implements TaskListSave {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -351,6 +368,7 @@ class _$TaskListSave implements TaskListSave {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -409,6 +427,7 @@ class _$TaskListSynch implements TaskListSynch {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -423,6 +442,7 @@ class _$TaskListSynch implements TaskListSynch {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -437,6 +457,7 @@ class _$TaskListSynch implements TaskListSynch {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -455,6 +476,7 @@ class _$TaskListSynch implements TaskListSynch {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -469,6 +491,7 @@ class _$TaskListSynch implements TaskListSynch {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -483,6 +506,7 @@ class _$TaskListSynch implements TaskListSynch {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -498,6 +522,144 @@ class _$TaskListSynch implements TaskListSynch {
 
 abstract class TaskListSynch implements TaskListEvent {
   const factory TaskListSynch() = _$TaskListSynch;
+}
+
+/// @nodoc
+abstract class _$$TaskListCloseCopyWith<$Res> {
+  factory _$$TaskListCloseCopyWith(
+          _$TaskListClose value, $Res Function(_$TaskListClose) then) =
+      __$$TaskListCloseCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TaskListCloseCopyWithImpl<$Res>
+    extends _$TaskListEventCopyWithImpl<$Res, _$TaskListClose>
+    implements _$$TaskListCloseCopyWith<$Res> {
+  __$$TaskListCloseCopyWithImpl(
+      _$TaskListClose _value, $Res Function(_$TaskListClose) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TaskListClose implements TaskListClose {
+  const _$TaskListClose();
+
+  @override
+  String toString() {
+    return 'TaskListEvent.close()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TaskListClose);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function() save,
+    required TResult Function() synch,
+    required TResult Function() close,
+    required TResult Function(TaskModel task) add,
+    required TResult Function(TaskModel task) update,
+    required TResult Function(TaskModel task) delete,
+    required TResult Function(TaskModel task) toggle,
+  }) {
+    return close();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function()? save,
+    TResult? Function()? synch,
+    TResult? Function()? close,
+    TResult? Function(TaskModel task)? add,
+    TResult? Function(TaskModel task)? update,
+    TResult? Function(TaskModel task)? delete,
+    TResult? Function(TaskModel task)? toggle,
+  }) {
+    return close?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function()? save,
+    TResult Function()? synch,
+    TResult Function()? close,
+    TResult Function(TaskModel task)? add,
+    TResult Function(TaskModel task)? update,
+    TResult Function(TaskModel task)? delete,
+    TResult Function(TaskModel task)? toggle,
+    required TResult orElse(),
+  }) {
+    if (close != null) {
+      return close();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TaskListLoad value) load,
+    required TResult Function(TaskListSave value) save,
+    required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
+    required TResult Function(TaskListAdd value) add,
+    required TResult Function(TaskListUpdate value) update,
+    required TResult Function(TaskListDelete value) delete,
+    required TResult Function(TaskListToggle value) toggle,
+  }) {
+    return close(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TaskListLoad value)? load,
+    TResult? Function(TaskListSave value)? save,
+    TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
+    TResult? Function(TaskListAdd value)? add,
+    TResult? Function(TaskListUpdate value)? update,
+    TResult? Function(TaskListDelete value)? delete,
+    TResult? Function(TaskListToggle value)? toggle,
+  }) {
+    return close?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TaskListLoad value)? load,
+    TResult Function(TaskListSave value)? save,
+    TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
+    TResult Function(TaskListAdd value)? add,
+    TResult Function(TaskListUpdate value)? update,
+    TResult Function(TaskListDelete value)? delete,
+    TResult Function(TaskListToggle value)? toggle,
+    required TResult orElse(),
+  }) {
+    if (close != null) {
+      return close(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TaskListClose implements TaskListEvent {
+  const factory TaskListClose() = _$TaskListClose;
 }
 
 /// @nodoc
@@ -577,6 +739,7 @@ class _$TaskListAdd implements TaskListAdd {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -591,6 +754,7 @@ class _$TaskListAdd implements TaskListAdd {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -605,6 +769,7 @@ class _$TaskListAdd implements TaskListAdd {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -623,6 +788,7 @@ class _$TaskListAdd implements TaskListAdd {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -637,6 +803,7 @@ class _$TaskListAdd implements TaskListAdd {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -651,6 +818,7 @@ class _$TaskListAdd implements TaskListAdd {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -750,6 +918,7 @@ class _$TaskListUpdate implements TaskListUpdate {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -764,6 +933,7 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -778,6 +948,7 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -796,6 +967,7 @@ class _$TaskListUpdate implements TaskListUpdate {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -810,6 +982,7 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -824,6 +997,7 @@ class _$TaskListUpdate implements TaskListUpdate {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -924,6 +1098,7 @@ class _$TaskListDelete implements TaskListDelete {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -938,6 +1113,7 @@ class _$TaskListDelete implements TaskListDelete {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -952,6 +1128,7 @@ class _$TaskListDelete implements TaskListDelete {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -970,6 +1147,7 @@ class _$TaskListDelete implements TaskListDelete {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -984,6 +1162,7 @@ class _$TaskListDelete implements TaskListDelete {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -998,6 +1177,7 @@ class _$TaskListDelete implements TaskListDelete {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,
@@ -1098,6 +1278,7 @@ class _$TaskListToggle implements TaskListToggle {
     required TResult Function() load,
     required TResult Function() save,
     required TResult Function() synch,
+    required TResult Function() close,
     required TResult Function(TaskModel task) add,
     required TResult Function(TaskModel task) update,
     required TResult Function(TaskModel task) delete,
@@ -1112,6 +1293,7 @@ class _$TaskListToggle implements TaskListToggle {
     TResult? Function()? load,
     TResult? Function()? save,
     TResult? Function()? synch,
+    TResult? Function()? close,
     TResult? Function(TaskModel task)? add,
     TResult? Function(TaskModel task)? update,
     TResult? Function(TaskModel task)? delete,
@@ -1126,6 +1308,7 @@ class _$TaskListToggle implements TaskListToggle {
     TResult Function()? load,
     TResult Function()? save,
     TResult Function()? synch,
+    TResult Function()? close,
     TResult Function(TaskModel task)? add,
     TResult Function(TaskModel task)? update,
     TResult Function(TaskModel task)? delete,
@@ -1144,6 +1327,7 @@ class _$TaskListToggle implements TaskListToggle {
     required TResult Function(TaskListLoad value) load,
     required TResult Function(TaskListSave value) save,
     required TResult Function(TaskListSynch value) synch,
+    required TResult Function(TaskListClose value) close,
     required TResult Function(TaskListAdd value) add,
     required TResult Function(TaskListUpdate value) update,
     required TResult Function(TaskListDelete value) delete,
@@ -1158,6 +1342,7 @@ class _$TaskListToggle implements TaskListToggle {
     TResult? Function(TaskListLoad value)? load,
     TResult? Function(TaskListSave value)? save,
     TResult? Function(TaskListSynch value)? synch,
+    TResult? Function(TaskListClose value)? close,
     TResult? Function(TaskListAdd value)? add,
     TResult? Function(TaskListUpdate value)? update,
     TResult? Function(TaskListDelete value)? delete,
@@ -1172,6 +1357,7 @@ class _$TaskListToggle implements TaskListToggle {
     TResult Function(TaskListLoad value)? load,
     TResult Function(TaskListSave value)? save,
     TResult Function(TaskListSynch value)? synch,
+    TResult Function(TaskListClose value)? close,
     TResult Function(TaskListAdd value)? add,
     TResult Function(TaskListUpdate value)? update,
     TResult Function(TaskListDelete value)? delete,

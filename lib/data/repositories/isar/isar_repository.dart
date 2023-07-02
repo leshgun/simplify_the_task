@@ -11,10 +11,19 @@ class IsarRepository {
   IsarRepository({required this.isarApi}) : _isar = isarApi.isar;
 
   Future<Isar> get isarInstance async {
-    _isar ??= await Isar.open(
+    if (_isar != null) {
+      return _isar!;
+    }
+    final instance = Isar.getInstance('TaskList');
+    if (instance != null) {
+      _isar = instance;
+      return _isar!;
+    }
+    _isar = await Isar.open(
       [TaskModelIsarSchema],
       directory: (await isarApi.directory).path,
       inspector: true,
+      name: 'TaskList',
     );
     return _isar!;
   }
