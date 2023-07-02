@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:uuid/uuid.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
@@ -27,7 +28,7 @@ class _TaskInfoState extends State<TaskInfo> {
   int? taskPriority;
   DateTime? taskDeadline;
 
-  NavigatorState get _navigator => Navigator.of(context);
+  // NavigatorState get _navigator => Navigator.of(context);
 
   TaskModel get task {
     inputTask ??= TaskModel(
@@ -77,7 +78,12 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _exit() {
-    _navigator.pop();
+    // _navigator.pop();
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go('/task-list');
+    }
   }
 
   void deleteTask() {
@@ -154,7 +160,8 @@ class _TaskInfoState extends State<TaskInfo> {
             color: pageTheme.textTheme.labelMedium?.color,
           ),
           hoverColor: Colors.transparent,
-          onPressed: () => _navigator.pop(),
+          // onPressed: () => _navigator.pop(),
+          onPressed: _exit,
         ),
         actions: <Widget>[
           Padding(
