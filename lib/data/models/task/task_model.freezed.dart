@@ -177,7 +177,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TaskModel implements _TaskModel {
+class _$_TaskModel extends _TaskModel {
   const _$_TaskModel(
       {required this.id,
       required this.text,
@@ -185,7 +185,8 @@ class _$_TaskModel implements _TaskModel {
       this.completed = false,
       @TimestampSerializer() required this.createdAt,
       @TimestampSerializer() required this.changedAt,
-      @TimestampSerializer() this.deadline});
+      @TimestampSerializer() this.deadline})
+      : super._();
 
   factory _$_TaskModel.fromJson(Map<String, dynamic> json) =>
       _$$_TaskModelFromJson(json);
@@ -252,7 +253,7 @@ class _$_TaskModel implements _TaskModel {
   }
 }
 
-abstract class _TaskModel implements TaskModel {
+abstract class _TaskModel extends TaskModel {
   const factory _TaskModel(
       {required final String id,
       required final String text,
@@ -261,6 +262,7 @@ abstract class _TaskModel implements TaskModel {
       @TimestampSerializer() required final DateTime createdAt,
       @TimestampSerializer() required final DateTime changedAt,
       @TimestampSerializer() final DateTime? deadline}) = _$_TaskModel;
+  const _TaskModel._() : super._();
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
       _$_TaskModel.fromJson;

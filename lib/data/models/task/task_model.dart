@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
@@ -6,6 +8,8 @@ part 'task_model.g.dart';
 
 @freezed
 class TaskModel with _$TaskModel {
+  const TaskModel._();
+
   const factory TaskModel({
     required String id,
     required String text,
@@ -18,6 +22,23 @@ class TaskModel with _$TaskModel {
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);
+
+  factory TaskModel.fromString(String string) {
+    return TaskModel.fromJson(jsonDecode(string));
+  }
+
+  factory TaskModel.fromBase64(String string) {
+    Logger().e(utf8.decode(base64Decode(string)));
+    return TaskModel.fromString(utf8.decode(base64Decode(string)));
+  }
+
+  String toJsonString() {
+    return jsonEncode(toJson());
+  }
+
+  String toBase64() {
+    return base64Encode(utf8.encode(toJsonString()));
+  }
 }
 
 class TimestampSerializer implements JsonConverter<DateTime?, dynamic> {
@@ -30,10 +51,9 @@ class TimestampSerializer implements JsonConverter<DateTime?, dynamic> {
       return timestamp;
     }
     try {
-      return timestamp.toDate();
-    } catch (e) {
-      logger.w('Cant deserialize a date (wrong format)');
-      logger.w('e');
+      return DateTime.fromMillisecondsSinceEpoch(timestamp);
+    } catch (e, stacktrace) {
+      logger.w('Cant deserialize a date (wrong format)', e, stacktrace);
     }
     return null;
   }

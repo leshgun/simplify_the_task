@@ -1,0 +1,4 @@
+adb shell am start -a android.intent.action.VIEW -d "stt://stt.local/task/eyJkZ\
+WFkbGluZSI6IDE2ODc5ODE5NDkwMDAsImNyZWF0ZWRBdCI6ICIxNjg3OTgxOTQ5IiwiaWQiOiAiMGJl\
+YzQ2NTItM2M0YS00MjY1LThmYzgtZGM3MDJlNTFlMWYxIiwidGV4dCI6ICJUZXN0IiwiY29tcGxldGV\
+kIjogZmFsc2UsImNoYW5nZWRBdCI6ICIxNjg4MjM4OTk5IiwicHJpb3JpdHkiOjF9"
