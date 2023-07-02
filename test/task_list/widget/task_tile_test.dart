@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 
 import '../task_list_test_constants.dart';
-import 'test_app.dart';
+import '../../test_app.dart';
 
 void main() {
   late Widget testApp;

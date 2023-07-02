@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../task_list_test_constants.dart';
-import 'test_app.dart';
+import '../../test_app.dart';
 
 void main() {
   late Widget testApp;

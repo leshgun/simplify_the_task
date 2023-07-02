@@ -38,7 +38,7 @@ void main() {
 
       expect(isarInstance.isOpen, true);
       expect(isarInstance.directory, path);
-      expect(isarInstance.path, '$path/default.isar');
+      expect(isarInstance.path, '$path/TaskList.isar');
     },
   );
 }
