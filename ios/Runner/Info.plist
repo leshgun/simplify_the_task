@@ -47,5 +47,17 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+		<key>CFBundleURLName</key>
+		<string>stt.local</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>stt</string>
+			<string>http</string>
+		</array>
+		</dict>
+	</array>
 </dict>
 </plist>
