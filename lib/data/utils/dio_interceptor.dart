@@ -8,7 +8,6 @@ class DioInterceptor extends InterceptorsWrapper {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // TODO: implement onRequest
     loger?.v('Dio (${options.method}) Request',
         '${options.uri}\n${options.headers}');
     super.onRequest(options, handler);
@@ -16,7 +15,6 @@ class DioInterceptor extends InterceptorsWrapper {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // TODO: implement onResponse
     loger?.v(
       'Dio Response (${response.statusCode})',
       '${response.realUri} \n${response.headers}',

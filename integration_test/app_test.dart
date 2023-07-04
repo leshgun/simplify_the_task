@@ -28,7 +28,7 @@ void main() {
       expect(find.byIcon(Icons.check_box), findsNothing);
       await tester.pump(const Duration(seconds: 2));
 
-      final taskTile = find.byKey(const Key('task_0_tile'));
+      final taskTile = find.byKey(Key('${taskList.first.id}_tile'));
       await tester.tap(taskTile);
       await tester.pumpAndSettle();
       await tester.pump(const Duration(seconds: 2));

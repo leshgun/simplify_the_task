@@ -28,7 +28,6 @@ class TaskModel with _$TaskModel {
   }
 
   factory TaskModel.fromBase64(String string) {
-    Logger().e(utf8.decode(base64Decode(string)));
     return TaskModel.fromString(utf8.decode(base64Decode(string)));
   }
 
@@ -59,5 +58,5 @@ class TimestampSerializer implements JsonConverter<DateTime?, dynamic> {
   }
 
   @override
-  toJson(DateTime? date) => date?.toIso8601String();
+  toJson(DateTime? date) => date?.millisecondsSinceEpoch;
 }

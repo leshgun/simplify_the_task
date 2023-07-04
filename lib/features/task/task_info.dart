@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:simplify_the_task/presentation/router/router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 
@@ -82,7 +83,7 @@ class _TaskInfoState extends State<TaskInfo> {
     if (context.canPop()) {
       context.pop();
     } else {
-      context.go('/task-list');
+      context.go(Routes.home);
     }
   }
 

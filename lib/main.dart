@@ -6,23 +6,25 @@ import 'package:simplify_the_task/presentation/theme/light_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 
-void main() => runApp(const MainApp());
+void main() => runApp(MainApp());
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final log = Logger();
+  final MyRouter myRouter = MyRouter();
+
+  MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final log = Logger();
     log.d('App has been started at ${DateTime.now().toString()}...');
     return MaterialApp.router(
       title: 'Simplify the task!',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
-      // routes: routes,
-      // initialRoute: '/task-list',
-      routerConfig: router,
+      routerDelegate: myRouter.router.routerDelegate,
+      routeInformationParser: myRouter.router.routeInformationParser,
+      routeInformationProvider: myRouter.router.routeInformationProvider,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -33,7 +35,6 @@ class MainApp extends StatelessWidget {
         Locale('en'),
         Locale('ru'),
       ],
-      // home:
     );
   }
 }

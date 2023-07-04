@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
+import 'package:simplify_the_task/presentation/router/router.dart';
 
 import './bloc/task_list_bloc.dart';
 import './widgets/task_list_app_bar.dart';
@@ -29,24 +30,16 @@ class _TaskListState extends State<TaskList> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _taskListBloc.add(const TaskListClose());
-  //   super.dispose();
-  // }
-
   _addNewTask() {
-    context.push(
-      '/task-info',
+    context.goNamed(
+      Routes.task,
+      pathParameters: {'id': 'new'},
       extra: TaskInfoArguments(
-        onSaveTask: (task) => _taskListBloc.add(TaskListEvent.add(task: task)),
+        onSaveTask: (task) => _taskListBloc.add(
+          TaskListEvent.add(task: task),
+        ),
       ),
     );
-    // Navigator.of(context).pushNamed('/task-info',
-    //     arguments: TaskInfoArguments(
-    //       onSaveTask: (task) =>
-    //           _taskListBloc.add(TaskListEvent.add(task: task)),
-    //     ));
   }
 
   _syncTaskList() {
@@ -151,7 +144,7 @@ class _TaskListState extends State<TaskList> {
                   itemBuilder: (_, index) {
                     return TaskTile(
                       task: taskList[index],
-                      key: Key('task_$index'),
+                      key: Key(taskList[index].id),
                     );
                   },
                 ),
@@ -164,9 +157,7 @@ class _TaskListState extends State<TaskList> {
                     S.of(context)!.taskListNewTask,
                     style: pageTheme.textTheme.bodySmall,
                   ),
-                  onTap: () {
-                    _addNewTask();
-                  },
+                  onTap: _addNewTask,
                 )
               ],
             ),
