@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
-import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
-import 'package:simplify_the_task/features/task_list/widgets/dismiss_background.dart';
-import 'package:simplify_the_task/models/task_model.dart';
+import 'package:simplify_the_task/data/models/task/task_model.dart';
+import 'package:simplify_the_task/presentation/router/router.dart';
 
-enum TaskEvent { complete }
+import '../bloc/task_list_bloc.dart';
+import '../widgets/dismiss_background.dart';
 
 class TaskTile extends StatefulWidget {
   final TaskModel task;
@@ -31,14 +32,24 @@ class _TaskState extends State<TaskTile> {
 
   void _taskDelete() async {
     setState(() {
-      _bloc.add(TaskListDelete(task: widget.task));
+      _bloc.add(TaskListEvent.delete(task: widget.task));
     });
   }
 
   void _onInfoTap() {
-    Navigator.of(context).pushNamed(
-      '/task-info',
-      arguments: TaskInfoArguments(
+    // Navigator.of(context).pushNamed(
+    //   '/task-info',
+    //   arguments: TaskInfoArguments(
+    //     inputTask: widget.task,
+    //     onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
+    //     onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
+    //   ),
+    // );
+    context.goNamed(
+      Routes.task,
+      pathParameters: {'id': widget.task.id},
+      // queryParameters: {'task': widget.task.toBase64()},
+      extra: TaskInfoArguments(
         inputTask: widget.task,
         onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
         onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
@@ -47,13 +58,10 @@ class _TaskState extends State<TaskTile> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final pageTheme = Theme.of(context);
+    String key = widget.key.toString();
+    key = key.substring(3, key.length - 3);
 
     final Widget iconBlank;
     if (widget.task.priority != null && widget.task.priority == 2) {
@@ -81,9 +89,11 @@ class _TaskState extends State<TaskTile> {
     );
 
     return ClipRect(
+      key: Key('${key}_rect'),
       clipBehavior: Clip.antiAlias,
       child: Dismissible(
-        key: UniqueKey(),
+        // key: Key('task_${widget.task.id}_dismissible'),
+        key: Key('${key}_dismissible'),
         background: widget.task.completed
             ? dismissCheckboxChecked
             : dismissCheckboxBlank,
@@ -97,6 +107,7 @@ class _TaskState extends State<TaskTile> {
           return true;
         },
         child: ListTile(
+          key: Key('${key}_tile'),
           hoverColor: Colors.transparent,
           title: _tileTitle(pageTheme),
           subtitle: _tileSubtitle(pageTheme),

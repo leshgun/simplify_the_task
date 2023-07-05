@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:simplify_the_task/models/task_model.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
+import 'package:simplify_the_task/presentation/router/router.dart';
+import 'package:uuid/uuid.dart';
+import 'package:simplify_the_task/data/models/task/task_model.dart';
 
 import 'task_info_screen.dart';
 import 'widgets/delete_button.dart';
@@ -27,7 +29,8 @@ class _TaskInfoState extends State<TaskInfo> {
   int? taskPriority;
   DateTime? taskDeadline;
 
-  NavigatorState get _navigator => Navigator.of(context);
+  // NavigatorState get _navigator => Navigator.of(context);
+
   TaskModel get task {
     inputTask ??= TaskModel(
       id: const Uuid().v4(),
@@ -46,16 +49,16 @@ class _TaskInfoState extends State<TaskInfo> {
     if (widget.arguments?.onSaveTask == null) {
       return;
     }
-    if (inputTask == null) {
-      if (task.text.isEmpty) {
-        widget.arguments?.onSaveTask!(
-          task.copyWith(text: S.of(context)!.taskEmpty),
-        );
-      } else {
-        widget.arguments?.onSaveTask!(task);
-      }
+    // if (inputTask == null) {
+    if (task.text.isEmpty) {
+      widget.arguments?.onSaveTask!(
+        task.copyWith(text: S.of(context)!.taskEmpty),
+      );
+    } else {
+      widget.arguments?.onSaveTask!(task);
     }
   }
+  // }
 
   void _update() {
     if (widget.arguments?.onUpdateTask == null) {
@@ -67,7 +70,7 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _delete() {
-    if (widget.arguments?.onUpdateTask == null) {
+    if (widget.arguments?.onDeleteTask == null) {
       return;
     }
     if (inputTask != null) {
@@ -76,7 +79,12 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _exit() {
-    _navigator.pop();
+    // _navigator.pop();
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.goNamed(Routes.taskList);
+    }
   }
 
   void deleteTask() {
@@ -85,7 +93,8 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void saveTask() {
-    if (inputTask == null) {
+    // if (inputTask == null) {
+    if (widget.arguments?.onSaveTask != null) {
       _save();
     } else {
       _update();
@@ -153,12 +162,14 @@ class _TaskInfoState extends State<TaskInfo> {
             color: pageTheme.textTheme.labelMedium?.color,
           ),
           hoverColor: Colors.transparent,
-          onPressed: () => _navigator.pop(),
+          // onPressed: () => _navigator.pop(),
+          onPressed: _exit,
         ),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: TextButton(
+              key: const Key('save_bth'),
               onPressed: saveTask,
               child: Text(
                 S.of(context)!.taskSave,
