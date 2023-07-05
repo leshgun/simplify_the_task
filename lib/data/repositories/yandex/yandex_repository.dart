@@ -177,7 +177,13 @@ class YandexRepository {
   }
 
   Future<int?> _getRevision() async {
-    Response response = await dioApi.dio.get(YandexConstants.taskListUri);
+    Response? response;
+    try {
+      response = await dioApi.dio.get(YandexConstants.taskListUri);
+    } catch (e, stacktrace) {
+      logger.w('Cant update the revision', e, stacktrace);
+      return null;
+    }
     if (response.statusCode != 200) {
       return null;
     }
