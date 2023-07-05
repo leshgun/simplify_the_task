@@ -76,7 +76,8 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       final stateLoaded = state as _TaskListLoaded;
       emit(
         TaskListState.loaded(
-          taskList: List.from(stateLoaded.taskList)..remove(event.task),
+          taskList: List.from(stateLoaded.taskList)
+            ..removeWhere((task) => event.task.id == task.id),
         ),
       );
     }

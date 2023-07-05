@@ -90,6 +90,7 @@ class _TaskListState extends State<TaskList> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('add_task_btn'),
         onPressed: _addNewTask,
         elevation: 0,
         child: const Icon(Icons.add, color: Colors.white),

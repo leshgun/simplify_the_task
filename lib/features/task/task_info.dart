@@ -49,16 +49,16 @@ class _TaskInfoState extends State<TaskInfo> {
     if (widget.arguments?.onSaveTask == null) {
       return;
     }
-    if (inputTask == null) {
-      if (task.text.isEmpty) {
-        widget.arguments?.onSaveTask!(
-          task.copyWith(text: S.of(context)!.taskEmpty),
-        );
-      } else {
-        widget.arguments?.onSaveTask!(task);
-      }
+    // if (inputTask == null) {
+    if (task.text.isEmpty) {
+      widget.arguments?.onSaveTask!(
+        task.copyWith(text: S.of(context)!.taskEmpty),
+      );
+    } else {
+      widget.arguments?.onSaveTask!(task);
     }
   }
+  // }
 
   void _update() {
     if (widget.arguments?.onUpdateTask == null) {
@@ -70,7 +70,7 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _delete() {
-    if (widget.arguments?.onUpdateTask == null) {
+    if (widget.arguments?.onDeleteTask == null) {
       return;
     }
     if (inputTask != null) {
@@ -83,7 +83,7 @@ class _TaskInfoState extends State<TaskInfo> {
     if (context.canPop()) {
       context.pop();
     } else {
-      context.go(Routes.home);
+      context.goNamed(Routes.taskList);
     }
   }
 
@@ -93,7 +93,8 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void saveTask() {
-    if (inputTask == null) {
+    // if (inputTask == null) {
+    if (widget.arguments?.onSaveTask != null) {
       _save();
     } else {
       _update();
@@ -168,6 +169,7 @@ class _TaskInfoState extends State<TaskInfo> {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: TextButton(
+              key: const Key('save_bth'),
               onPressed: saveTask,
               child: Text(
                 S.of(context)!.taskSave,

@@ -7,31 +7,43 @@ import 'bloc/task_list_bloc.dart';
 import 'task_list.dart';
 
 class TaskListScreen extends StatelessWidget {
-  final TaskListRepository? taskListRepository;
+  final TaskListArguments? taskListArguments;
 
-  const TaskListScreen({super.key, this.taskListRepository});
+  const TaskListScreen({super.key, this.taskListArguments});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       lazy: false,
-      create: (context) => TaskListBloc(
-        taskListRepository: taskListRepository ?? TaskListRepository(),
-      ),
+      create: (context) =>
+          taskListArguments?.taskListBloc ??
+          TaskListBloc(
+            taskListRepository:
+                taskListArguments?.taskListRepository ?? TaskListRepository(),
+          ),
       child: const TaskList(),
     );
   }
+}
+
+class TaskListArguments {
+  final TaskListRepository? taskListRepository;
+  final TaskListBloc? taskListBloc;
+
+  const TaskListArguments({this.taskListRepository, this.taskListBloc});
 }
 
 class TaskListRoute {
   final String name;
   final String path;
   final List<GoRoute> routes;
+  final TaskListArguments? taskListArguments;
 
   const TaskListRoute({
     required this.name,
     required this.path,
     required this.routes,
+    this.taskListArguments,
   });
 
   GoRoute getRoute() {
@@ -41,7 +53,7 @@ class TaskListRoute {
       routes: routes,
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
-        child: const TaskListScreen(),
+        child: TaskListScreen(taskListArguments: taskListArguments),
       ),
     );
   }

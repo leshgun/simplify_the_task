@@ -36,11 +36,13 @@ class TaskInfoRoute {
   final String name;
   final String path;
   final List<GoRoute> routes;
+  final TaskInfoArguments? taskInfoArguments;
 
   const TaskInfoRoute({
     required this.name,
     required this.path,
     required this.routes,
+    this.taskInfoArguments,
   });
 
   GoRoute getRoute() {
@@ -56,8 +58,11 @@ class TaskInfoRoute {
         TaskInfoArguments tia;
         if (extra == null) {
           tia = TaskInfoArguments(
-            inputTask: task != null ? TaskModel.fromBase64(task) : null,
-          );
+              inputTask: task != null
+                  ? TaskModel.fromBase64(task)
+                      .copyWith(createdAt: DateTime.now())
+                  : null,
+              onSaveTask: taskInfoArguments?.onSaveTask);
         } else if (extra is TaskInfoArguments) {
           tia = extra;
         } else {

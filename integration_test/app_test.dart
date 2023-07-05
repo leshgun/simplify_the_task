@@ -36,4 +36,35 @@ void main() {
       expect(find.byIcon(Icons.check_box), findsOneWidget);
     },
   );
+
+  testWidgets(
+    'Can add a new task',
+    (WidgetTester tester) async {
+      arrangeTaskListRepositoryMock(taskListRepositoryMock, taskList: taskList);
+      test_app.runTestApp(repository: taskListRepositoryMock);
+
+      await tester.pumpAndSettle();
+
+      final taskNum =
+          find.byIcon(Icons.check_box_outline_blank).evaluate().length;
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+
+      final addTaskButton = find.byKey(const Key('add_task_btn'));
+      await tester.tap(addTaskButton);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+
+      final saveBtn = find.byKey(const Key('save_bth'));
+      await tester.tap(saveBtn);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+
+      verify(() => taskListRepositoryMock.saveTask(any())).called(1);
+      expect(
+        find.byIcon(Icons.check_box_outline_blank).evaluate().length,
+        taskNum + 1,
+      );
+    },
+  );
 }

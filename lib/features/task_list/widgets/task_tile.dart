@@ -58,11 +58,6 @@ class _TaskState extends State<TaskTile> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final pageTheme = Theme.of(context);
     String key = widget.key.toString();
