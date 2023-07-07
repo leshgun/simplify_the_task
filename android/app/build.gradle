@@ -61,6 +61,20 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+    productFlavors { 
+        prod {
+            dimension "default"
+            manifestPlaceholders = [appName: "Simplify the task"]
+        }
+        dev {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            manifestPlaceholders = [appName: "[DEV] Simplify the task"]
+        }   
+    }
 }
 
 flutter {

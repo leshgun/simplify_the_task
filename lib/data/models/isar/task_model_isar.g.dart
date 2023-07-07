@@ -15,7 +15,7 @@ extension GetTaskModelIsarCollection on Isar {
 
 const TaskModelIsarSchema = CollectionSchema(
   name: r'TaskModelIsar',
-  id: 3958406360649945408,
+  id: 3958406360649945,
   properties: {
     r'changedAt': PropertySchema(
       id: 0,

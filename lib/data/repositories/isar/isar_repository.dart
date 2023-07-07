@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:isar/isar.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/data/api/isar_api.dart';
@@ -6,6 +8,7 @@ import 'package:simplify_the_task/data/models/isar/task_model_isar.dart';
 class IsarRepository {
   final Logger logger = Logger();
   Isar? _isar;
+  Directory? _directory;
   IsarApi isarApi;
 
   IsarRepository({required this.isarApi}) : _isar = isarApi.isar;
@@ -19,9 +22,10 @@ class IsarRepository {
       _isar = instance;
       return _isar!;
     }
+    _directory ??= await isarApi.directory;
     _isar = await Isar.open(
       [TaskModelIsarSchema],
-      directory: (await isarApi.directory).path,
+      directory: _directory?.path ?? '',
       inspector: true,
       name: 'TaskList',
     );
