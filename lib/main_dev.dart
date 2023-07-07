@@ -10,15 +10,15 @@ void main() => runApp(DevApp());
 
 class DevApp extends StatelessWidget {
   final log = Logger();
-  final MyRouter myRouter = MyRouter();
+  final MyRouter myRouter = MyRouter(bannerText: 'DEV');
 
   DevApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    log.d('App has been started at ${DateTime.now().toString()}...');
+    log.d('Dev app has been started at ${DateTime.now().toString()}...');
     return MaterialApp.router(
-      title: 'Simplify the task!',
+      title: '[DEV] Simplify the task!',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,

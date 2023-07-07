@@ -59,6 +59,7 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            // archivesBaseName = "app-${builtType}-${versionName}-${versionCode}.apk"
         }
     }
 
@@ -72,6 +73,7 @@ android {
             dimension "default"
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
+            resValue "string", "app_name", "dev flavor"
             manifestPlaceholders = [appName: "[DEV] Simplify the task"]
         }   
     }
