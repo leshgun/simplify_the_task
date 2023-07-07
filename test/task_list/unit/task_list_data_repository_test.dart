@@ -1,3 +1,5 @@
+@Tags(['unit'])
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:simplify_the_task/data/repositories/repositories.dart';
