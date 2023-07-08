@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/presentation/router/router.dart';
 import 'package:simplify_the_task/presentation/theme/dark_theme.dart';
@@ -17,6 +18,11 @@ class DevApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log.d('Dev app has been started at ${DateTime.now().toString()}...');
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     return MaterialApp.router(
       title: '[DEV] Simplify the task!',
       debugShowCheckedModeBanner: false,
