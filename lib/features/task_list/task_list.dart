@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 import 'package:simplify_the_task/presentation/router/router.dart';
+import 'package:simplify_the_task/presentation/widgets/wrapper.dart';
 
 import './bloc/task_list_bloc.dart';
 import './widgets/task_list_app_bar.dart';
@@ -22,6 +23,13 @@ class _TaskListState extends State<TaskList> {
   TaskListBloc get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
   bool isShowCompleted = true;
   List<TaskModel> taskList = [];
+
+  IconData get _visibilityIcon {
+    if (!isShowCompleted) {
+      return Icons.visibility_off;
+    }
+    return Icons.visibility;
+  }
 
   @override
   void initState() {
@@ -52,52 +60,6 @@ class _TaskListState extends State<TaskList> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final pageTheme = Theme.of(context);
-    final state = context.watch<TaskListBloc>().state;
-    final int completed = state.when(
-      initial: () => 0,
-      loading: () => 0,
-      loaded: (List<TaskModel> taskList) =>
-          taskList.where((TaskModel task) => task.completed).length,
-    );
-    return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async {
-          _syncTaskList();
-        },
-        child: CustomScrollView(
-          slivers: <Widget>[
-            TaskListAppBar(
-              visibility: isShowCompleted,
-              onVisibility: _toggleShowCompleted,
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 32),
-                child: Text(
-                  "${S.of(context)!.taskListCompleted}: $completed",
-                  style: pageTheme.textTheme.bodyMedium
-                      ?.apply(color: pageTheme.disabledColor),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: _blocBuilder(context),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        key: const Key('add_task_btn'),
-        onPressed: _addNewTask,
-        elevation: 0,
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
-    );
-  }
-
   Widget _blocBuilder(BuildContext context) {
     final pageTheme = Theme.of(context);
     final state = context.watch<TaskListBloc>().state;
@@ -120,7 +82,6 @@ class _TaskListState extends State<TaskList> {
         return ClipRect(
           clipBehavior: Clip.antiAlias,
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
               color: pageTheme.colorScheme.secondary,
               borderRadius: BorderRadius.circular(8),
@@ -133,7 +94,7 @@ class _TaskListState extends State<TaskList> {
                 ),
               ],
             ),
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -165,6 +126,70 @@ class _TaskListState extends State<TaskList> {
           ),
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pageTheme = Theme.of(context);
+    final state = context.watch<TaskListBloc>().state;
+    final int completed = state.when(
+      initial: () => 0,
+      loading: () => 0,
+      loaded: (List<TaskModel> taskList) =>
+          taskList.where((TaskModel task) => task.completed).length,
+    );
+    return Scaffold(
+      body: Wrapper(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            _syncTaskList();
+          },
+          child: CustomScrollView(
+            slivers: <Widget>[
+              const TaskListAppBar(),
+              SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 32),
+                      child: Text(
+                        "${S.of(context)!.taskListCompleted}: $completed",
+                        style: pageTheme.textTheme.bodyMedium
+                            ?.apply(color: pageTheme.disabledColor),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 32),
+                      child: IconButton(
+                        onPressed: _toggleShowCompleted,
+                        alignment: Alignment.center,
+                        hoverColor: Colors.transparent,
+                        color: Colors.blue,
+                        splashRadius: 16,
+                        icon: Icon(
+                          _visibilityIcon,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: _blocBuilder(context),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('add_task_btn'),
+        onPressed: _addNewTask,
+        elevation: 0,
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
     );
   }
 }
