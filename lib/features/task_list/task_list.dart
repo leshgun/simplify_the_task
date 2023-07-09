@@ -21,8 +21,9 @@ class TaskList extends StatefulWidget {
 
 class _TaskListState extends State<TaskList> {
   TaskListBloc get _taskListBloc => BlocProvider.of<TaskListBloc>(context);
-  bool isShowCompleted = true;
   List<TaskModel> taskList = [];
+  bool isShowCompleted = true;
+  Icon visibilityIcon = const Icon(Icons.visibility);
 
   IconData get _visibilityIcon {
     if (!isShowCompleted) {
@@ -57,6 +58,7 @@ class _TaskListState extends State<TaskList> {
   _toggleShowCompleted() {
     setState(() {
       isShowCompleted = !isShowCompleted;
+      visibilityIcon = Icon(_visibilityIcon);
     });
   }
 
@@ -79,8 +81,7 @@ class _TaskListState extends State<TaskList> {
         if (taskList.isEmpty) {
           return const Center(child: Icon(Icons.done_all));
         }
-        return ClipRect(
-          clipBehavior: Clip.antiAlias,
+        return Wrapper(
           child: Container(
             decoration: BoxDecoration(
               color: pageTheme.colorScheme.secondary,
@@ -94,34 +95,37 @@ class _TaskListState extends State<TaskList> {
                 ),
               ],
             ),
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: taskList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (_, index) {
-                    return TaskTile(
-                      task: taskList[index],
-                      key: Key(taskList[index].id),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.add,
-                    color: Colors.transparent,
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ListView.builder(
+                    padding: EdgeInsets.zero,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: taskList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (_, index) {
+                      return TaskTile(
+                        task: taskList[index],
+                        key: Key(taskList[index].id),
+                      );
+                    },
                   ),
-                  title: Text(
-                    S.of(context)!.taskListNewTask,
-                    style: pageTheme.textTheme.bodySmall,
-                  ),
-                  onTap: _addNewTask,
-                )
-              ],
+                  ListTile(
+                    leading: const Icon(
+                      Icons.add,
+                      color: Colors.transparent,
+                    ),
+                    title: Text(
+                      S.of(context)!.taskListNewTask,
+                      style: pageTheme.textTheme.bodySmall,
+                    ),
+                    onTap: _addNewTask,
+                  )
+                ],
+              ),
             ),
           ),
         );
@@ -140,48 +144,35 @@ class _TaskListState extends State<TaskList> {
           taskList.where((TaskModel task) => task.completed).length,
     );
     return Scaffold(
-      body: Wrapper(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            _syncTaskList();
-          },
-          child: CustomScrollView(
-            slivers: <Widget>[
-              const TaskListAppBar(),
-              SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 32),
-                      child: Text(
-                        "${S.of(context)!.taskListCompleted}: $completed",
-                        style: pageTheme.textTheme.bodyMedium
-                            ?.apply(color: pageTheme.disabledColor),
-                      ),
+      body: RefreshIndicator(
+        color: pageTheme.disabledColor,
+        onRefresh: () async {
+          _syncTaskList();
+        },
+        child: CustomScrollView(
+          slivers: <Widget>[
+            TaskListAppBar(
+              key: UniqueKey(),
+              icon: visibilityIcon,
+              onIconPress: _toggleShowCompleted,
+            ),
+            SliverToBoxAdapter(
+              child: Wrapper(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
+                  child: Text(
+                    "${S.of(context)!.taskListCompleted}: $completed",
+                    style: pageTheme.textTheme.bodyMedium?.apply(
+                      color: pageTheme.disabledColor,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: IconButton(
-                        onPressed: _toggleShowCompleted,
-                        alignment: Alignment.center,
-                        hoverColor: Colors.transparent,
-                        color: Colors.blue,
-                        splashRadius: 16,
-                        icon: Icon(
-                          _visibilityIcon,
-                          size: 24,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: _blocBuilder(context),
-              ),
-            ],
-          ),
+            ),
+            SliverToBoxAdapter(
+              child: _blocBuilder(context),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(

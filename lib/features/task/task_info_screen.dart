@@ -46,9 +46,12 @@ class TaskInfoRoute {
   });
 
   GoRoute getRoute() {
+    const begin = Offset(0.0, 1.0);
+    const end = Offset.zero;
+    const curve = Curves.easeOutExpo;
+    final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
     return GoRoute(
-      // name: Routes.task,
-      // path: ':id',
       name: name,
       path: path,
       routes: routes,
@@ -68,9 +71,16 @@ class TaskInfoRoute {
         } else {
           tia = const TaskInfoArguments();
         }
-        return MaterialPage(
+        return CustomTransitionPage(
           key: state.pageKey,
-          // child: TaskInfoScreen(arguments: tia),
+          transitionDuration: const Duration(seconds: 1),
+          reverseTransitionDuration: const Duration(seconds: 1),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
           child: TaskInfoScreen(arguments: tia),
         );
       },

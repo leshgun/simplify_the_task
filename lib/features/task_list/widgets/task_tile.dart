@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -22,29 +23,19 @@ class TaskTile extends StatefulWidget {
 }
 
 class _TaskState extends State<TaskTile> {
+  double dismissIconPadding = .0;
+
   get _bloc => BlocProvider.of<TaskListBloc>(context);
 
   void _toggleCheckbox() async {
-    setState(() {
-      _bloc.add(TaskListToggle(task: widget.task));
-    });
+    _bloc.add(TaskListToggle(task: widget.task));
   }
 
   void _taskDelete() async {
-    setState(() {
-      _bloc.add(TaskListEvent.delete(task: widget.task));
-    });
+    _bloc.add(TaskListEvent.delete(task: widget.task));
   }
 
   void _onInfoTap() {
-    // Navigator.of(context).pushNamed(
-    //   '/task-info',
-    //   arguments: TaskInfoArguments(
-    //     inputTask: widget.task,
-    //     onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
-    //     onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
-    //   ),
-    // );
     context.goNamed(
       Routes.task,
       pathParameters: {'id': widget.task.id},
@@ -55,6 +46,13 @@ class _TaskState extends State<TaskTile> {
         onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
       ),
     );
+  }
+
+  void _onDismissUpdate(DismissUpdateDetails details, BuildContext context) {
+    final pad = MediaQuery.of(context).size.width * details.progress - 64;
+    setState(() {
+      dismissIconPadding = pad < 0 ? 0 : pad;
+    });
   }
 
   @override
@@ -74,48 +72,57 @@ class _TaskState extends State<TaskTile> {
     }
     const Icon iconCheck = Icon(Icons.check_box, color: Colors.green);
 
-    const dismissCheckboxBlank = DismissBackground(
+    final dismissCheckboxBlank = DismissBackground(
       color: Colors.green,
-      icon: Icon(Icons.check, color: Colors.white),
+      icon: const Icon(Icons.check, color: Colors.white),
+      padding: dismissIconPadding,
+      alignment: Alignment.centerLeft,
     );
-    const dismissCheckboxChecked = DismissBackground(
+    final dismissCheckboxChecked = DismissBackground(
       color: Colors.amber,
-      icon: Icon(Icons.check_box_outline_blank, color: Colors.white),
+      icon: const Icon(Icons.check_box_outline_blank, color: Colors.white),
+      padding: dismissIconPadding,
+      alignment: Alignment.centerLeft,
     );
-    const dismissDelete = DismissBackground(
+    final dismissDelete = DismissBackground(
       color: Colors.red,
-      icon: Icon(Icons.delete, color: Colors.white),
+      icon: const Icon(Icons.delete, color: Colors.white),
       alignment: Alignment.centerRight,
+      padding: dismissIconPadding,
     );
 
-    return ClipRect(
-      key: Key('${key}_rect'),
-      clipBehavior: Clip.antiAlias,
-      child: Dismissible(
-        // key: Key('task_${widget.task.id}_dismissible'),
-        key: Key('${key}_dismissible'),
-        background: widget.task.completed
-            ? dismissCheckboxChecked
-            : dismissCheckboxBlank,
-        secondaryBackground: dismissDelete,
-        onDismissed: (direction) => _taskDelete(),
-        confirmDismiss: (direction) async {
-          if (direction == DismissDirection.startToEnd) {
-            _toggleCheckbox();
-            return false;
-          }
-          return true;
-        },
-        child: ListTile(
-          key: Key('${key}_tile'),
-          hoverColor: Colors.transparent,
-          title: _tileTitle(pageTheme),
-          subtitle: _tileSubtitle(pageTheme),
-          leading: widget.task.completed ? iconCheck : iconBlank,
-          trailing: IconButton(
-              icon: const Icon(Icons.info_outline), onPressed: _onInfoTap),
-          onTap: _toggleCheckbox,
+    return Dismissible(
+      // key: Key('task_${widget.task.id}_dismissible'),
+      key: Key('${key}_dismissible'),
+      background:
+          widget.task.completed ? dismissCheckboxChecked : dismissCheckboxBlank,
+      secondaryBackground: dismissDelete,
+      onUpdate: ((details) => _onDismissUpdate(details, context)),
+      onDismissed: (direction) => _taskDelete(),
+      confirmDismiss: (direction) async {
+        if (direction == DismissDirection.startToEnd) {
+          _toggleCheckbox();
+          return false;
+        }
+        return true;
+      },
+      child: ListTile(
+        key: Key('${key}_tile'),
+        hoverColor: Colors.transparent,
+        title: _tileTitle(pageTheme),
+        subtitle: _tileSubtitle(pageTheme),
+        leading: widget.task.completed ? iconCheck : iconBlank,
+        horizontalTitleGap: 0,
+        titleAlignment: ListTileTitleAlignment.top,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+        trailing: IconButton(
+          onPressed: _onInfoTap,
+          alignment: Alignment.topRight,
+          padding: EdgeInsets.zero,
+          iconSize: 24,
+          icon: const Icon(Icons.info_outline),
         ),
+        onTap: _toggleCheckbox,
       ),
     );
   }

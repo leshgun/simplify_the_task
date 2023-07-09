@@ -46,15 +46,15 @@ class MyRouter {
         GoRoute(
           name: Routes.home,
           path: '/',
-          redirect: (context, state) => '/${Routes.taskList}',
-          builder: (context, state) => const Center(
+          redirect: (_, state) => '/${Routes.taskList}',
+          builder: (_, state) => const Center(
             child: Text('Hello there...'),
           ),
         ),
         ShellRoute(
-          builder: (context, state, child) => CustomBanner(
+          builder: (_, state, child) => CustomBanner(
             text: bannerText,
-            child: child,
+            child: child
           ),
           routes: [
             TaskListRoute(

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/S.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/presentation/router/router.dart';
+import 'package:simplify_the_task/presentation/widgets/wrapper.dart';
 import 'package:uuid/uuid.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 
@@ -153,21 +154,24 @@ class _TaskInfoState extends State<TaskInfo> {
       )
     ];
 
+    final boxWidth = MediaQuery.of(context).size.width;
+    final pad = boxWidth > 800 ? (boxWidth - 800 + 32) / 2 : 16.0;
+
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(
-            Icons.close,
-            color: pageTheme.textTheme.labelMedium?.color,
-          ),
-          hoverColor: Colors.transparent,
-          // onPressed: () => _navigator.pop(),
-          onPressed: _exit,
-        ),
+            icon: Icon(
+              Icons.close,
+              color: pageTheme.textTheme.labelMedium?.color,
+            ),
+            hoverColor: Colors.transparent,
+            // onPressed: () => _navigator.pop(),
+            onPressed: _exit,
+            padding: EdgeInsets.only(left: pad)),
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: pad),
             child: TextButton(
               key: const Key('save_bth'),
               onPressed: saveTask,
@@ -179,16 +183,18 @@ class _TaskInfoState extends State<TaskInfo> {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ListView.separated(
-          itemBuilder: (_, index) => children[index],
-          itemCount: children.length,
-          separatorBuilder: (_, index) => Divider(
-            // color: Colors.black26,
-            color: (index > 0) ? pageTheme.dividerColor : Colors.transparent,
-            thickness: index > 0 ? .5 : 0,
-            height: 10,
+      body: Wrapper(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: ListView.separated(
+            itemBuilder: (_, index) => children[index],
+            itemCount: children.length,
+            separatorBuilder: (_, index) => Divider(
+              // color: Colors.black26,
+              color: (index > 0) ? pageTheme.dividerColor : Colors.transparent,
+              thickness: index > 0 ? .5 : 0,
+              height: 10,
+            ),
           ),
         ),
       ),

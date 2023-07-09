@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CommonTextTheme extends TextTheme {
   @override
   TextStyle? get titleLarge => const TextStyle(
-        fontSize: 20,
-        height: 32 / 20,
+        fontSize: 32,
+        height: 38 / 32,
         fontWeight: FontWeight.w500,
       )..merge(super.titleLarge);
 
@@ -12,7 +12,7 @@ class CommonTextTheme extends TextTheme {
   TextStyle? get titleMedium => const TextStyle(
         fontSize: 20,
         height: 32 / 20,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
       )..merge(super.titleMedium);
 
   @override

@@ -7,7 +7,7 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const width = 600;
+    const width = 800;
     final media = MediaQuery.of(context);
     final deviceSize = media.size;
     final hPadding = (deviceSize.width > width)
