@@ -17,16 +17,24 @@ class TaskListYandexRepository implements TaskListRepository {
   Future<void> closeRepositories() async {}
 
   @override
-  Future<void> deleteTask(TaskModel task) async {}
+  Future<void> deleteTask(TaskModel task) async {
+    yandexRepository.deleteFromRepository([
+      YandexSerializer.fromTaskModel(task),
+    ]);
+  }
 
   @override
   Future<List<TaskModel>> getTaskList() async {
     final List<TaskModelYandex> list = await yandexRepository.getTaskList();
-    return list.map((TaskModelYandex task) => YandexSerializer.toTaskModel(task)).toList();
+    return list
+        .map((TaskModelYandex task) => YandexSerializer.toTaskModel(task))
+        .toList();
   }
 
   @override
-  Future<void> saveTask(TaskModel task) async {}
+  Future<void> saveTask(TaskModel task) async {
+    yandexRepository.addToRepository([YandexSerializer.fromTaskModel(task)]);
+  }
 
   @override
   Future<List<TaskModel>> syncRepositories() async {
@@ -49,5 +57,11 @@ class TaskListYandexRepository implements TaskListRepository {
       interceptor: DioInterceptor(),
     );
     return YandexRepository(dioApi: dioApi);
+  }
+
+  @override
+  Future<void> saveTaskList(List<TaskModel> taskList) async {
+    yandexRepository.updateListOnRepository(
+        taskList.map((task) => YandexSerializer.fromTaskModel(task)).toList());
   }
 }

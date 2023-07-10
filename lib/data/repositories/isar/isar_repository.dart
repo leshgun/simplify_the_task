@@ -32,9 +32,9 @@ class IsarRepository {
     return _isar!;
   }
 
-  Future<List<TaskModelIsar>> getTaskList() {
-    return isarInstance.then((Isar isar) =>
-        isar.taskModelIsars.where(sort: Sort.desc).anyId().findAll());
+  Future<List<TaskModelIsar>> getTaskList() async {
+    final isar = await isarInstance;
+    return isar.taskModelIsars.where(sort: Sort.desc).anyId().findAll();
   }
 
   Future<void> updateTaskList(List<TaskModelIsar> taskList) async {

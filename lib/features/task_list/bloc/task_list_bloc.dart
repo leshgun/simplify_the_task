@@ -89,6 +89,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       final int index = stateLoaded.taskList.indexOf(event.task);
       final TaskModel newTask = event.task.copyWith(
         completed: !event.task.completed,
+        changedAt: DateTime.now(),
       );
       taskListRepository.saveTask(newTask);
       emit(

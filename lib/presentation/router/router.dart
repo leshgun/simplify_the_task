@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simplify_the_task/data/repositories/repositories.dart';
+import 'package:simplify_the_task/data/repositories/task_list/task_list_isar_repository.dart';
 import 'package:simplify_the_task/data/repositories/task_list/task_list_yandex_repository.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
@@ -31,8 +32,12 @@ class MyRouter {
     final TaskListYandexRepository yandexRepo = TaskListYandexRepository(
       token: const String.fromEnvironment('yandex_api_key'),
     );
+    final TaskListIsarRepository isarRepo = TaskListIsarRepository();
     final TaskListBloc taskListBloc = TaskListBloc(
-      taskListRepository: TaskListMultiRepository(repositoryList: []),
+      taskListRepository: TaskListMultiRepository(repositoryList: [
+        isarRepo,
+        yandexRepo,
+      ]),
     );
     taskListArguments = TaskListArguments(
       taskListBloc: taskListBloc,

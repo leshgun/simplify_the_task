@@ -12,8 +12,8 @@ class IsarApi {
   Logger logger = Logger();
 
   IsarApi({
-    directory,
-    isarInstance,
+    Directory? directory,
+    Isar? isarInstance,
   })  : _directory = directory,
         isar = isarInstance;
 
