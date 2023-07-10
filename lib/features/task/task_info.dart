@@ -156,19 +156,24 @@ class _TaskInfoState extends State<TaskInfo> {
 
     final boxWidth = MediaQuery.of(context).size.width;
     final pad = boxWidth > 800 ? (boxWidth - 800 + 32) / 2 : 16.0;
+    const iconSize = 24.0;
 
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        leading: IconButton(
+        leadingWidth: pad + 2*iconSize,
+        leading: Padding(
+          padding: EdgeInsets.only(left: pad),
+          child: IconButton(
             icon: Icon(
               Icons.close,
               color: pageTheme.textTheme.labelMedium?.color,
+              size: iconSize,
             ),
-            hoverColor: Colors.transparent,
-            // onPressed: () => _navigator.pop(),
+            // hoverColor: Colors.transparent,
             onPressed: _exit,
-            padding: EdgeInsets.only(left: pad)),
+          ),
+        ),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: pad),
