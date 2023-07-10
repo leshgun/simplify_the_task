@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:simplify_the_task/data/repositories/repositories.dart';
+import 'package:simplify_the_task/data/repositories/task_list/task_list_yandex_repository.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
-import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
 import 'package:simplify_the_task/features/task_list/task_list_screen.dart';
 import 'package:simplify_the_task/presentation/widgets/custom_banner.dart';
 
@@ -27,8 +28,11 @@ class MyRouter {
   }
 
   void _initDI() {
+    final TaskListYandexRepository yandexRepo = TaskListYandexRepository(
+      token: const String.fromEnvironment('yandex_api_key'),
+    );
     final TaskListBloc taskListBloc = TaskListBloc(
-      taskListRepository: TaskListRepository(),
+      taskListRepository: TaskListMultiRepository(repositoryList: []),
     );
     taskListArguments = TaskListArguments(
       taskListBloc: taskListBloc,
@@ -52,10 +56,9 @@ class MyRouter {
           ),
         ),
         ShellRoute(
-          builder: (_, state, child) => CustomBanner(
-            text: bannerText,
-            child: child
-          ),
+          builder: (_, state, child) {
+            return CustomBanner(text: bannerText, child: child);
+          },
           routes: [
             TaskListRoute(
               name: Routes.taskList,

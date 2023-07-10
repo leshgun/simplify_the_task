@@ -70,16 +70,17 @@ class _TaskListState extends State<TaskList> {
       initial: () => Text(S.of(context)!.taskListEmpty),
       loading: () => const Padding(
         padding: EdgeInsets.only(top: 32),
-        child: Center(
-          child: CircularProgressIndicator(color: Colors.blue),
-        ),
+        child: Center(child: CircularProgressIndicator(color: Colors.blue)),
       ),
       loaded: (List<TaskModel> taskList) {
         if (!isShowCompleted) {
           taskList = taskList.where((task) => !task.completed).toList();
         }
         if (taskList.isEmpty) {
-          return const Center(child: Icon(Icons.done_all));
+          return const Padding(
+            padding: EdgeInsets.only(top: 32),
+            child: Icon(Icons.done_all),
+          );
         }
         return Wrapper(
           child: Container(

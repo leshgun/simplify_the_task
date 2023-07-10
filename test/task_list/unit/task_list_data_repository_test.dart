@@ -13,7 +13,7 @@ class MockYandexRepository extends Mock implements YandexRepository {}
 void main() {
   late MockIsarRepository mockIsarRepository;
   late MockYandexRepository mockYandexRepository;
-  late TaskListDataRepository sut;
+  late TaskListMultiRepository sut;
 
   void arrangeMockIsarRepository() {
     when(() => mockIsarRepository.getTaskList()).thenAnswer(
@@ -29,9 +29,8 @@ void main() {
     mockIsarRepository = MockIsarRepository();
     mockYandexRepository = MockYandexRepository();
     arrangeMockIsarRepository();
-    sut = TaskListDataRepository(
-      isarRepository: mockIsarRepository,
-      yandexRepository: mockYandexRepository,
+    sut = TaskListMultiRepository(
+      repositoryList: [],
     );
   });
 

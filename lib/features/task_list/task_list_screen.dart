@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
+import 'package:simplify_the_task/features/task_list/repositories/task_list_repository_empty.dart';
 
 import 'bloc/task_list_bloc.dart';
 import 'task_list.dart';
@@ -18,8 +19,8 @@ class TaskListScreen extends StatelessWidget {
       create: (context) =>
           taskListArguments?.taskListBloc ??
           TaskListBloc(
-            taskListRepository:
-                taskListArguments?.taskListRepository ?? TaskListRepository(),
+            taskListRepository: taskListArguments?.taskListRepository ??
+                TaskListRepositoryEmpty(),
           ),
       child: const TaskList(),
     );
