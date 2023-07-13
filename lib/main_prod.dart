@@ -5,12 +5,12 @@ import 'package:simplify_the_task/presentation/theme/light_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 
-void main() => runApp(MainApp());
+void main() => runApp(ProdApp());
 
-class MainApp extends StatelessWidget {
+class ProdApp extends StatelessWidget {
   final MyRouter myRouter = MyRouter();
 
-  MainApp({super.key});
+  ProdApp({super.key});
 
   @override
   Widget build(BuildContext context) {
