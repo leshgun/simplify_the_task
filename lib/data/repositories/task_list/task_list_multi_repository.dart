@@ -132,7 +132,7 @@ class TaskListMultiRepository extends TaskListRepository {
     }
     return maxDate;
   }
-  
+
   @override
   Future<void> saveTaskList(List<TaskModel> taskList) async {
     for (TaskListRepository repo in repositoryList) {

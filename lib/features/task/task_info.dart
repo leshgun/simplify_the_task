@@ -161,7 +161,7 @@ class _TaskInfoState extends State<TaskInfo> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        leadingWidth: pad + 2*iconSize,
+        leadingWidth: pad + 2 * iconSize,
         leading: Padding(
           padding: EdgeInsets.only(left: pad),
           child: IconButton(

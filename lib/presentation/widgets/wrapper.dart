@@ -10,9 +10,8 @@ class Wrapper extends StatelessWidget {
     const width = 800;
     final media = MediaQuery.of(context);
     final deviceSize = media.size;
-    final hPadding = (deviceSize.width > width)
-        ? (deviceSize.width - width) / 2
-        : .0;
+    final hPadding =
+        (deviceSize.width > width) ? (deviceSize.width - width) / 2 : .0;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: hPadding),
       child: child,
