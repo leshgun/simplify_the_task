@@ -1,4 +1,5 @@
 include: package:flutter_lints/flutter.yaml
 analyzer:
+  exclude: [build/**, lib/**.freezed.dart, lib/**.g.dart, lib/firebase/**]
   errors:
     invalid_annotation_target: ignore
