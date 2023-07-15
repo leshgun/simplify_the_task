@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:simplify_the_task/data/repositories/repositories.dart';
 import 'package:simplify_the_task/data/repositories/task_list/task_list_isar_repository.dart';
 import 'package:simplify_the_task/data/repositories/task_list/task_list_yandex_repository.dart';
+import 'package:simplify_the_task/domain/di.dart';
 import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
 import 'package:simplify_the_task/features/task_list/task_list_screen.dart';
@@ -38,6 +39,7 @@ class MyRouter {
         isarRepo,
         yandexRepo,
       ]),
+      firebaseAnalytics: DI.analytics,
     );
     taskListArguments = TaskListArguments(
       taskListBloc: taskListBloc,

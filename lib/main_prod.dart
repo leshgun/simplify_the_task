@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:simplify_the_task/domain/di.dart';
 import 'package:simplify_the_task/presentation/router/router.dart';
 import 'package:simplify_the_task/presentation/theme/dark_theme.dart';
 import 'package:simplify_the_task/presentation/theme/light_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 
-void main() => runApp(ProdApp());
+import 'firebase/prod/firebase_options.dart';
+
+void main() async {
+  await DI.initFirebase(DefaultFirebaseOptions.currentPlatform);
+  runApp(ProdApp());
+}
 
 class ProdApp extends StatelessWidget {
   final MyRouter myRouter = MyRouter();

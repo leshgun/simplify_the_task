@@ -52,34 +52,6 @@ class TaskListMultiRepository extends TaskListRepository {
 
     firstList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     return firstList;
-    // List<TaskModelIsar> taskListIsar = await isarRepository.getTaskList();
-    // List<TaskModelYandex> taskListYandex;
-    // List<TaskModel> taskList = [];
-    // if (taskListIsar.isEmpty) {
-    //   taskListYandex = await yandexRepository.getTaskList();
-    // } else {
-    //   taskListYandex = await yandexRepository.mergeData(
-    //     taskListIsar
-    //         .map((TaskModelIsar task) =>
-    //             YandexSerializer.fromTaskModelIsar(task))
-    //         .toList(),
-    //   );
-    // }
-    // if (taskListYandex.isEmpty) {
-    //   taskList = taskListIsar
-    //       .map((TaskModelIsar task) => IsarSerializer.toTaskModel(task))
-    //       .toList();
-    // } else {
-    //   taskList = taskListYandex
-    //       .map((TaskModelYandex task) => YandexSerializer.toTaskModel(task))
-    //       .toList();
-    //   isarRepository.updateTaskList(taskListYandex
-    //       .map((TaskModelYandex task) =>
-    //           IsarSerializer.fromTaskModelYandex(task))
-    //       .toList());
-    // }
-    // taskList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    // return taskList;
   }
 
   @override

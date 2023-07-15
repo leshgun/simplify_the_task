@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
@@ -13,10 +14,11 @@ part 'task_list_state.dart';
 
 class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   final TaskListRepository taskListRepository;
+  final FirebaseAnalytics? firebaseAnalytics;
 
   final Logger logger = Logger();
 
-  TaskListBloc({required this.taskListRepository})
+  TaskListBloc({required this.taskListRepository, this.firebaseAnalytics})
       : super(const TaskListState.initial()) {
     on<TaskListLoad>(_onTaskListLoad);
     on<TaskListSave>(_onTaskListSave);
@@ -41,6 +43,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       emit(TaskListState.loaded(
         taskList: List.from(stateLoaded.taskList)..insert(0, event.task),
       ));
+      _sendToFirebaseAnalytics(name: 'task_add');
     }
   }
 
@@ -56,6 +59,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
             ..replaceRange(index, index + 1, [event.task]),
         ),
       );
+      _sendToFirebaseAnalytics(name: 'task_update');
     }
   }
 
@@ -80,6 +84,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
             ..removeWhere((task) => event.task.id == task.id),
         ),
       );
+      _sendToFirebaseAnalytics(name: 'task_delete');
     }
   }
 
@@ -98,6 +103,9 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
             ..replaceRange(index, index + 1, [newTask]),
         ),
       );
+      if (newTask.completed) {
+        _sendToFirebaseAnalytics(name: 'task_complete');
+      }
     }
   }
 
@@ -106,6 +114,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
     emit(const TaskListState.loading());
     List<TaskModel> taskList = await taskListRepository.syncRepositories();
     emit(TaskListState.loaded(taskList: taskList));
+    _sendToFirebaseAnalytics(name: 'task_sync');
   }
 
   Future<void> _onTaskListClose(
@@ -114,5 +123,19 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   ) async {
     await taskListRepository.closeRepositories();
     emit(const TaskListState.initial());
+  }
+
+  Future<void> _sendToFirebaseAnalytics({
+    required String name,
+    Map<String, Object?>? parameters,
+    AnalyticsCallOptions? callOptions,
+  }) async {
+    if (firebaseAnalytics == null) return;
+    logger.v('Send message to firebase analytics', name);
+    firebaseAnalytics!.logEvent(
+      name: name,
+      parameters: parameters,
+      callOptions: callOptions,
+    );
   }
 }

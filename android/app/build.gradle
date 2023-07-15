@@ -47,11 +47,11 @@ android {
         applicationId "com.example.simplify_the_task"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        multiDexEnabled true
+        // multiDexEnabled true
     }
 
     buildTypes {
@@ -67,13 +67,14 @@ android {
     productFlavors { 
         prod {
             dimension "default"
+            resValue "string", "app_name", "Simplify the task"
             manifestPlaceholders = [appName: "Simplify the task"]
         }
         dev {
             dimension "default"
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
-            resValue "string", "app_name", "dev flavor"
+            resValue "string", "app_name", "[DEV] Simplify the task"
             manifestPlaceholders = [appName: "[DEV] Simplify the task"]
         }   
     }
