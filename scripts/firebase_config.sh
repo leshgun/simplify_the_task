@@ -3,16 +3,13 @@ flutterfire configure \
   -i "com.example.simplifyTheTaskDev" \
   -a "com.example.simplify_the_task.dev" \
   --project="simplify-the-task" \
-  --platforms="android,ios" \
-  --no-apply-gradle-plugins \
-  --no-app-id-json;
+  --platforms="android,ios";
 
 flutterfire configure \
   -o lib/firebase/prod/firebase_options.dart \
   --no-apply-gradle-plugins \
   --project="simplify-the-task" \
-  --platforms="android,ios" \
-  --no-app-id-json
+  --platforms="android,ios"
 
 
 

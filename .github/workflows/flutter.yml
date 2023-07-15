@@ -17,6 +17,14 @@ jobs:
       - uses: actions/checkout@v3
       
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: Create file
+        run: cat /home/runner/work/simplify_the_task/simplify_the_task/app/google-services.json | base64
+
+      - name: Putting data
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA > /home/runner/work/simplify_the_task/simplify_the_task/app/google-services.json
       
       - name: Flutter action
         uses: subosito/flutter-action@v2.10.0
@@ -34,9 +42,6 @@ jobs:
 
       - name: Run tests
         run: flutter test
-
-      - name: Create file
-        run: cat /home/runner/work/simplify_the_task/simplify_the_task/app/google-services.json | base64
 
       - name: Run build dev
         run: flutter build apk --flavor dev
