@@ -29,12 +29,12 @@ jobs:
       - name: Putting firebase options [DEV]
         env:
           DATA: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-        run: mkdir -p lib/firebase/dev; touch ./lib/firebase/dev/firebase_options.dart && echo $FIREBASE_OPTIONS_DEV | base64 -d > ./lib/firebase/dev/firebase_options.dart
+        run: mkdir -p lib/firebase/dev; touch ./lib/firebase/dev/firebase_options.dart && echo $FIREBASE_OPTIONS_DEV | base64 -di > ./lib/firebase/dev/firebase_options.dart
 
       - name: Putting firebase options [PROD]
         env:
           DATA: ${{ secrets.FIREBASE_OPTIONS_PROD }}
-        run: mkdir -p lib/firebase/prod; touch ./lib/firebase/prod/firebase_options.dart && echo $FIREBASE_OPTIONS_PROD | base64 -d > ./lib/firebase/prod/firebase_options.dart
+        run: mkdir -p lib/firebase/prod; touch ./lib/firebase/prod/firebase_options.dart && echo $FIREBASE_OPTIONS_PROD | base64 -di > ./lib/firebase/prod/firebase_options.dart
       
       - name: Flutter action
         uses: subosito/flutter-action@v2.10.0
