@@ -21,11 +21,20 @@ jobs:
       # - name: Create file
       #   run: cat /home/runner/work/simplify_the_task/android/app/google-services.json | base64
 
-      - name: Putting data
+      - name: Putting google services
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        # run: echo $DATA > /home/runner/work/simplify_the_task/android/app/google-services.json
         run: touch ./android/app/google-services.json && echo $GOOGLE_SERVICES_JSON | base64 -d > ./android/app/google-services.json
+
+      - name: Putting firebase options [DEV]
+        env:
+          DATA: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+        run: mkdir -p lib/firebase/dev; touch ./lib/firebase/dev/firebase_options.dart && echo $FIREBASE_OPTIONS_DEV | base64 -d > ./lib/firebase/dev/firebase_options.dart
+
+      - name: Putting firebase options [PROD]
+        env:
+          DATA: ${{ secrets.FIREBASE_OPTIONS_PROD }}
+        run: mkdir -p lib/firebase/prod; touch ./lib/firebase/prod/firebase_options.dart && echo $FIREBASE_OPTIONS_PROD | base64 -d > ./lib/firebase/prod/firebase_options.dart
       
       - name: Flutter action
         uses: subosito/flutter-action@v2.10.0
