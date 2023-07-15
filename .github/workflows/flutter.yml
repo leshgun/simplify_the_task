@@ -25,7 +25,7 @@ jobs:
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         # run: echo $DATA > /home/runner/work/simplify_the_task/android/app/google-services.json
-        run: touch ./app/google-services.json && echo $GOOGLE_SERVICES_JSON | base64 -d > ./app/google-services.json
+        run: pwd; ls; touch ./android/app/google-services.json && echo $GOOGLE_SERVICES_JSON | base64 -d > ./app/google-services.json
       
       - name: Flutter action
         uses: subosito/flutter-action@v2.10.0
