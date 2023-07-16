@@ -86,8 +86,8 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void saveTask() {
-    // if (inputTask == null) {
-    if (widget.arguments?.onSaveTask != null) {
+    if (inputTask == null) {
+    // if (widget.arguments?.onSaveTask != null) {
       _save();
     } else {
       _update();

@@ -13,24 +13,26 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Simplify the task!',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      routerDelegate: myRouter.router.routerDelegate,
-      routeInformationParser: myRouter.router.routeInformationParser,
-      routeInformationProvider: myRouter.router.routeInformationProvider,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ru'),
-      ],
+    return SafeArea(
+      child: MaterialApp.router(
+        title: 'Simplify the task!',
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        routerDelegate: myRouter.router.routerDelegate,
+        routeInformationParser: myRouter.router.routeInformationParser,
+        routeInformationProvider: myRouter.router.routeInformationProvider,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ru'),
+        ],
+      ),
     );
   }
 }
