@@ -5,12 +5,14 @@ class TaskPopup extends StatelessWidget {
   final List<String> items;
   final int? initItem;
   final Function(dynamic value)? onItemChange;
+  final Color? priorityColor;
 
   const TaskPopup({
     super.key,
     required this.items,
     this.initItem,
     this.onItemChange,
+    this.priorityColor,
   });
 
   @override
@@ -57,14 +59,15 @@ class TaskPopup extends StatelessWidget {
               height: 20,
               child: Text(
                 '!!',
-                style: pageTheme.textTheme.bodyMedium?.apply(
-                  color: Colors.red,
-                ),
+                style: pageTheme.textTheme.bodyMedium
+                    ?.apply(color: priorityColor ?? Colors.red),
               ),
             ),
             Text(
               items[position],
-              style: pageTheme.textTheme.bodyMedium?.apply(color: Colors.red),
+              style: pageTheme.textTheme.bodyMedium?.apply(
+                color: priorityColor ?? Colors.red,
+              ),
             ),
           ],
         ),

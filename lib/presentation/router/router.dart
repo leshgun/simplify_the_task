@@ -1,14 +1,8 @@
-// import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simplify_the_task/data/repositories/repositories.dart';
-import 'package:simplify_the_task/data/repositories/task_list/task_list_isar_repository.dart';
-import 'package:simplify_the_task/data/repositories/task_list/task_list_yandex_repository.dart';
-import 'package:simplify_the_task/domain/di.dart';
-import 'package:simplify_the_task/features/task/task_info_screen.dart';
-import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
-import 'package:simplify_the_task/features/task_list/task_list_screen.dart';
+import 'package:simplify_the_task/di/task_list_di.dart';
+import 'package:simplify_the_task/features/task_info/task_info_route.dart';
+import 'package:simplify_the_task/features/task_list/task_list_route.dart';
 import 'package:simplify_the_task/presentation/widgets/custom_banner.dart';
 
 class Routes {
@@ -21,35 +15,13 @@ class Routes {
 class MyRouter {
   final String? bannerText;
   late GoRouter router;
-  late TaskListArguments taskListArguments;
-  late TaskInfoArguments taskInfoArguments;
 
   MyRouter({this.bannerText}) {
-    _initDI();
     _initRouter();
   }
 
-  void _initDI() {
-    final TaskListYandexRepository yandexRepo = TaskListYandexRepository(
-      token: const String.fromEnvironment('yandex_api_key'),
-    );
-    final TaskListIsarRepository isarRepo = TaskListIsarRepository();
-    final TaskListBloc taskListBloc = TaskListBloc(
-      taskListRepository: TaskListMultiRepository(repositoryList: [
-        isarRepo,
-        yandexRepo,
-      ]),
-      firebaseAnalytics: DI.analytics,
-    );
-    taskListArguments = TaskListArguments(
-      taskListBloc: taskListBloc,
-    );
-    taskInfoArguments = TaskInfoArguments(
-      onSaveTask: (task) => taskListBloc.add(TaskListEvent.add(task: task)),
-    );
-  }
-
   void _initRouter() {
+    final taskListDI = TaskListDI();
     router = GoRouter(
       initialLocation: '/${Routes.taskList}',
       debugLogDiagnostics: true,
@@ -70,12 +42,12 @@ class MyRouter {
             TaskListRoute(
               name: Routes.taskList,
               path: '/${Routes.taskList}',
-              taskListArguments: taskListArguments,
+              taskListArguments: taskListDI.taskListArguments,
               routes: [
                 TaskInfoRoute(
                   name: Routes.task,
                   path: ':id',
-                  taskInfoArguments: taskInfoArguments,
+                  taskInfoArguments: taskListDI.taskInfoArguments,
                   routes: [],
                 ).getRoute(),
               ],

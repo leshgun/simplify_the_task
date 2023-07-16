@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
-import 'package:simplify_the_task/presentation/router/router.dart';
 
 import '../bloc/task_list_bloc.dart';
 import '../widgets/dismiss_background.dart';
 
 class TaskTile extends StatefulWidget {
   final TaskModel task;
+  final Color priorityColor;
+  final Function()? onTaskTileTrailing;
 
   const TaskTile({
     super.key,
     required this.task,
+    this.priorityColor = Colors.green,
+    this.onTaskTileTrailing,
   });
 
   @override
@@ -35,16 +36,9 @@ class _TaskState extends State<TaskTile> {
   }
 
   void _onInfoTap() {
-    context.goNamed(
-      Routes.task,
-      pathParameters: {'id': widget.task.id},
-      // queryParameters: {'task': widget.task.toBase64()},
-      extra: TaskInfoArguments(
-        inputTask: widget.task,
-        onUpdateTask: (task) => _bloc.add(TaskListEvent.update(task: task)),
-        onDeleteTask: (task) => _bloc.add(TaskListEvent.delete(task: task)),
-      ),
-    );
+    if (widget.onTaskTileTrailing != null) {
+      widget.onTaskTileTrailing!();
+    }
   }
 
   void _onDismissUpdate(DismissUpdateDetails details, BuildContext context) {
@@ -62,9 +56,9 @@ class _TaskState extends State<TaskTile> {
 
     final Widget iconBlank;
     if (widget.task.priority != null && widget.task.priority == 2) {
-      iconBlank = const Icon(
+      iconBlank = Icon(
         Icons.check_box_outline_blank,
-        color: Colors.red,
+        color: widget.priorityColor,
       );
     } else {
       iconBlank = const Icon(Icons.check_box_outline_blank);
@@ -142,7 +136,7 @@ class _TaskState extends State<TaskTile> {
           leading = TextSpan(
             text: '!! ',
             style: pageTheme.textTheme.bodyMedium?.apply(
-              color: Colors.red,
+              color: widget.priorityColor,
               fontWeightDelta: 2,
             ),
           );

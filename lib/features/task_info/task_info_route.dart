@@ -1,36 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
+import 'package:simplify_the_task/features/task_info/task_info_screen.dart';
+import 'package:simplify_the_task/presentation/router/router.dart';
 
-import 'task_info.dart';
-
-class TaskInfoScreen extends StatelessWidget {
-  final TaskInfoArguments? arguments;
-
-  const TaskInfoScreen({super.key, this.arguments});
-
-  @override
-  Widget build(BuildContext context) {
-    // final arguments = ModalRoute.of(context)!.settings.arguments;
-    return TaskInfo(
-      arguments: arguments is TaskInfoArguments ? arguments : null,
-    );
-  }
-}
-
-class TaskInfoArguments {
-  final Function(TaskModel task)? onSaveTask;
-  final Function(TaskModel task)? onUpdateTask;
-  final Function(TaskModel task)? onDeleteTask;
-  final TaskModel? inputTask;
-
-  const TaskInfoArguments({
-    this.onSaveTask,
-    this.onUpdateTask,
-    this.onDeleteTask,
-    this.inputTask,
-  });
-}
+export 'task_info_screen.dart';
 
 class TaskInfoRoute {
   final String name;
@@ -58,18 +32,15 @@ class TaskInfoRoute {
       pageBuilder: (context, state) {
         final task = state.queryParameters['task'];
         final extra = state.extra;
-        TaskInfoArguments tia;
-        if (extra == null) {
-          tia = TaskInfoArguments(
-              inputTask: task != null
-                  ? TaskModel.fromBase64(task)
-                      .copyWith(createdAt: DateTime.now())
-                  : null,
-              onSaveTask: taskInfoArguments?.onSaveTask);
-        } else if (extra is TaskInfoArguments) {
-          tia = extra;
-        } else {
-          tia = const TaskInfoArguments();
+        TaskInfoArguments? tia = taskInfoArguments;
+        if ((extra is TaskInfoArguments) && (extra.inputTask != null)) {
+          tia = tia?.copyWith(inputTask: extra.inputTask);
+        } else if (task != null) {
+          tia = tia?.copyWith(
+            inputTask: TaskModel.fromBase64(task).copyWith(
+              createdAt: DateTime.now(),
+            ),
+          );
         }
         return CustomTransitionPage(
           key: state.pageKey,
@@ -85,5 +56,13 @@ class TaskInfoRoute {
         );
       },
     );
+  }
+
+  static void popScreen(BuildContext context) {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.goNamed(Routes.taskList);
+    }
   }
 }

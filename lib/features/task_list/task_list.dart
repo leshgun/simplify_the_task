@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
-import 'package:go_router/go_router.dart';
 
-import 'package:simplify_the_task/features/task/task_info_screen.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
-import 'package:simplify_the_task/presentation/router/router.dart';
 import 'package:simplify_the_task/presentation/widgets/wrapper.dart';
 
-import './bloc/task_list_bloc.dart';
+import './task_list_route.dart';
 import './widgets/task_list_app_bar.dart';
 import './widgets/task_tile.dart';
 
 class TaskList extends StatefulWidget {
-  const TaskList({super.key});
+  const TaskList({super.key, this.args});
+
+  final TaskListArguments? args;
 
   @override
   State<TaskList> createState() => _TaskListState();
@@ -40,15 +39,7 @@ class _TaskListState extends State<TaskList> {
   }
 
   _addNewTask() {
-    context.goNamed(
-      Routes.task,
-      pathParameters: {'id': 'new'},
-      extra: TaskInfoArguments(
-        onSaveTask: (task) => _taskListBloc.add(
-          TaskListEvent.add(task: task),
-        ),
-      ),
-    );
+    TaskListRoute.createNewTask(context);
   }
 
   _syncTaskList() {
@@ -109,8 +100,14 @@ class _TaskListState extends State<TaskList> {
                     shrinkWrap: true,
                     itemBuilder: (_, index) {
                       return TaskTile(
-                        task: taskList[index],
                         key: Key(taskList[index].id),
+                        task: taskList[index],
+                        priorityColor:
+                            widget.args?.taskPriorityColor ?? Colors.amber,
+                        onTaskTileTrailing: () => TaskListRoute.showTaskInfo(
+                          context,
+                          taskList[index],
+                        ),
                       );
                     },
                   ),

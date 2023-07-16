@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
-import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
-import 'package:simplify_the_task/presentation/router/router.dart';
-import 'package:simplify_the_task/presentation/widgets/wrapper.dart';
 import 'package:uuid/uuid.dart';
+
+import 'package:simplify_the_task/presentation/widgets/wrapper.dart';
 import 'package:simplify_the_task/data/models/task/task_model.dart';
 
-import 'task_info_screen.dart';
+import 'task_info_route.dart';
 import 'widgets/delete_button.dart';
 import 'widgets/task_date_picker.dart';
 import 'widgets/task_popup.dart';
@@ -50,7 +49,6 @@ class _TaskInfoState extends State<TaskInfo> {
     if (widget.arguments?.onSaveTask == null) {
       return;
     }
-    // if (inputTask == null) {
     if (task.text.isEmpty) {
       widget.arguments?.onSaveTask!(
         task.copyWith(text: S.of(context)!.taskEmpty),
@@ -59,7 +57,6 @@ class _TaskInfoState extends State<TaskInfo> {
       widget.arguments?.onSaveTask!(task);
     }
   }
-  // }
 
   void _update() {
     if (widget.arguments?.onUpdateTask == null) {
@@ -80,12 +77,7 @@ class _TaskInfoState extends State<TaskInfo> {
   }
 
   void _exit() {
-    // _navigator.pop();
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.goNamed(Routes.taskList);
-    }
+    TaskInfoRoute.popScreen(context);
   }
 
   void deleteTask() {
@@ -134,6 +126,7 @@ class _TaskInfoState extends State<TaskInfo> {
           S.of(context)!.taskPriorityHigh,
         ],
         initItem: taskPriority,
+        priorityColor: widget.arguments?.taskPriorityColor ?? Colors.red,
         onItemChange: (value) {
           setState(() {
             taskPriority = value;
