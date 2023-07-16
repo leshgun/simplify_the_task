@@ -20,7 +20,7 @@
     - отправка некоторых обезличенных данных в _Firebase analytics_;
     - отправка информации об ошибках при неправильной работе приложения в _Firebase crashlytics_;
     - конфигурация синхронизируется с _Firebase remote config_;
-    - распространение через сервис _Firebase app distribution_;
+    - распространение через сервис _Firebase app distribution_; если хотите получать самые свежие релизы <s>(конечно же с багами)</s>, то переходите по [этой ссылке][firebse_ref_link];
 12. Поддерживаются две версии приложения: _production_ и _development_;
 
 ## Installation
@@ -48,6 +48,7 @@
 Это open-source приложение. Оно абсолютно бесплатно, и распространяется под [MIT лицензией][license].
 
 [latest_release]: https://github.com/leshgun/simplify_the_task/releases/latest
+[firebse_ref_link]: https://appdistribution.firebase.dev/i/eb7a812d7e39baca
 [license]: LICENSE
 [screen_task_list]: docs/images/task_list.png
 [screen_task]: docs/images/task.png "Task"
