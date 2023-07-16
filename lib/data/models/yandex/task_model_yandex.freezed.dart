@@ -295,12 +295,10 @@ abstract class _TaskModelYandex implements TaskModelYandex {
       final int? deadline,
       required final bool done,
       final String? color,
-      @JsonKey(name: 'created_at')
-          required final int createdAt,
-      @JsonKey(name: 'changed_at')
-          required final int changedAt,
+      @JsonKey(name: 'created_at') required final int createdAt,
+      @JsonKey(name: 'changed_at') required final int changedAt,
       @JsonKey(name: 'last_updated_by')
-          required final String lastUpdatedBy}) = _$_TaskModelYandex;
+      required final String lastUpdatedBy}) = _$_TaskModelYandex;
 
   factory _TaskModelYandex.fromJson(Map<String, dynamic> json) =
       _$_TaskModelYandex.fromJson;

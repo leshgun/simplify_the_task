@@ -1,46 +1,54 @@
+@Tags(['unit'])
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:simplify_the_task/data/repositories/repositories.dart';
 
 import '../task_list_test_constants.dart';
 
-class MockIsarRepository extends Mock implements IsarRepository {}
-
-class MockYandexRepository extends Mock implements YandexRepository {}
-
 void main() {
-  late MockIsarRepository mockIsarRepository;
-  late MockYandexRepository mockYandexRepository;
-  late TaskListDataRepository sut;
+  late TaskListMultiRepository sut;
+  late TaskListRepositoryMock firstRepo;
+  late TaskListRepositoryMock secondRepo;
 
   void arrangeMockIsarRepository() {
-    when(() => mockIsarRepository.getTaskList()).thenAnswer(
-      (_) async => TaskListTestConstants.isarList,
+    TaskListTestConstants.arrangeTaskListRepositoryMock(
+      firstRepo,
+      taskList: TaskListTestConstants.taskList,
     );
-    when(
-      () => mockIsarRepository.updateTask(any()),
-    ).thenAnswer((_) async {});
+    TaskListTestConstants.arrangeTaskListRepositoryMock(
+      secondRepo,
+      taskList: TaskListTestConstants.taskList,
+    );
   }
 
   setUp(() {
-    registerFallbackValue(TaskListTestConstants.isarList.first);
-    mockIsarRepository = MockIsarRepository();
-    mockYandexRepository = MockYandexRepository();
+    registerFallbackValue(TaskListTestConstants.taskList.first);
+
+    firstRepo = TaskListRepositoryMock();
+    secondRepo = TaskListRepositoryMock();
+
     arrangeMockIsarRepository();
-    sut = TaskListDataRepository(
-      isarRepository: mockIsarRepository,
-      yandexRepository: mockYandexRepository,
+    sut = TaskListMultiRepository(
+      repositoryList: [firstRepo, secondRepo],
     );
   });
 
-  test('GetTaskList', () async {
+  test('TaskList gets from the first repository.', () async {
     final taskList = await sut.getTaskList();
+    verify(() => firstRepo.getTaskList()).called(1);
     expect(taskList, TaskListTestConstants.taskList);
   });
 
-  test('SaveTaskList', () async {
+  test('SaveTask', () async {
     final task = TaskListTestConstants.taskList.first;
     sut.saveTask(task);
-    verify(() => mockIsarRepository.updateTask(any())).called(1);
+    verify(() => firstRepo.saveTask(any())).called(1);
+  });
+
+  test('SaveTaskList', () async {
+    final taskList = TaskListTestConstants.taskList;
+    sut.saveTaskList(taskList);
+    verify(() => firstRepo.saveTaskList(any())).called(1);
   });
 }

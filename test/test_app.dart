@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/S.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simplify_the_task/features/task/task_info_screen.dart';
+import 'package:simplify_the_task/features/task_info/task_info_route.dart';
 import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
-import 'package:simplify_the_task/features/task_list/task_list_screen.dart';
+import 'package:simplify_the_task/features/task_list/task_list_route.dart';
 import 'package:simplify_the_task/presentation/theme/dark_theme.dart';
 import 'package:simplify_the_task/presentation/theme/light_theme.dart';
 
@@ -98,10 +98,10 @@ class TestFullAppNavigator2 {
     );
 
     return MaterialApp.router(
-      title: 'Simplify the task!',
+      title: 'Simplify the test task!',
       debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      // theme: lightTheme,
+      // darkTheme: darkTheme,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,

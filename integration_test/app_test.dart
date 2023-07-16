@@ -1,3 +1,5 @@
+@Tags(['integration'])
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -26,12 +28,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byIcon(Icons.check_box), findsNothing);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 1));
 
       final taskTile = find.byKey(Key('${taskList.first.id}_tile'));
       await tester.tap(taskTile);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 1));
 
       expect(find.byIcon(Icons.check_box), findsOneWidget);
     },
@@ -48,17 +50,17 @@ void main() {
       final taskNum =
           find.byIcon(Icons.check_box_outline_blank).evaluate().length;
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 1));
 
       final addTaskButton = find.byKey(const Key('add_task_btn'));
       await tester.tap(addTaskButton);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 1));
 
       final saveBtn = find.byKey(const Key('save_bth'));
       await tester.tap(saveBtn);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 1));
 
       verify(() => taskListRepositoryMock.saveTask(any())).called(1);
       expect(

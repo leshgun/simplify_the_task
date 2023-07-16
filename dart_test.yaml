@@ -1,0 +1,8 @@
+# This package's tests are very slow. Double the default timeout.
+timeout: 2x
+
+tags:
+  # Integration tests are even slower, so increase the timeout again.
+  integration: {timeout: 2x}
+  unit:
+  widget:

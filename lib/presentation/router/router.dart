@@ -1,11 +1,9 @@
-// import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simplify_the_task/features/task/task_info_screen.dart';
-import 'package:simplify_the_task/features/task_list/bloc/task_list_bloc.dart';
-import 'package:simplify_the_task/features/task_list/repositories/task_list_repository.dart';
-import 'package:simplify_the_task/features/task_list/task_list_screen.dart';
+import 'package:simplify_the_task/di/task_list_di.dart';
+import 'package:simplify_the_task/features/task_info/task_info_route.dart';
+import 'package:simplify_the_task/features/task_list/task_list_route.dart';
+import 'package:simplify_the_task/presentation/widgets/custom_banner.dart';
 
 class Routes {
   static const home = "home";
@@ -15,43 +13,48 @@ class Routes {
 }
 
 class MyRouter {
-  static final TaskListBloc taskListBloc = TaskListBloc(
-    taskListRepository: TaskListRepository(),
-  );
+  final String? bannerText;
+  late GoRouter router;
 
-  static final TaskListArguments taskListArguments = TaskListArguments(
-    taskListBloc: taskListBloc,
-  );
+  MyRouter({this.bannerText}) {
+    _initRouter();
+  }
 
-  static final TaskInfoArguments taskInfoArguments = TaskInfoArguments(
-    onSaveTask: (task) => taskListBloc.add(TaskListEvent.add(task: task)),
-  );
-
-  final GoRouter router = GoRouter(
-    initialLocation: '/${Routes.taskList}',
-    debugLogDiagnostics: true,
-    routes: [
-      GoRoute(
-        name: Routes.home,
-        path: '/',
-        redirect: (context, state) => '/${Routes.taskList}',
-        builder: (context, state) => const Center(
-          child: Text('Hello there...'),
+  void _initRouter() {
+    final taskListDI = TaskListDI();
+    router = GoRouter(
+      initialLocation: '/${Routes.taskList}',
+      debugLogDiagnostics: true,
+      routes: [
+        GoRoute(
+          name: Routes.home,
+          path: '/',
+          redirect: (_, state) => '/${Routes.taskList}',
+          builder: (_, state) => const Center(
+            child: Text('Hello there...'),
+          ),
         ),
-      ),
-      TaskListRoute(
-        name: Routes.taskList,
-        path: '/${Routes.taskList}',
-        taskListArguments: taskListArguments,
-        routes: [
-          TaskInfoRoute(
-            name: Routes.task,
-            path: ':id',
-            taskInfoArguments: taskInfoArguments,
-            routes: [],
-          ).getRoute(),
-        ],
-      ).getRoute()
-    ],
-  );
+        ShellRoute(
+          builder: (_, state, child) {
+            return CustomBanner(text: bannerText, child: child);
+          },
+          routes: [
+            TaskListRoute(
+              name: Routes.taskList,
+              path: '/${Routes.taskList}',
+              taskListArguments: taskListDI.taskListArguments,
+              routes: [
+                TaskInfoRoute(
+                  name: Routes.task,
+                  path: ':id',
+                  taskInfoArguments: taskListDI.taskInfoArguments,
+                  routes: [],
+                ).getRoute(),
+              ],
+            ).getRoute()
+          ],
+        ),
+      ],
+    );
+  }
 }
